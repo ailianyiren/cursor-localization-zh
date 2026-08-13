@@ -85,7 +85,8 @@
         if (!el) return false;
         try {
             return !!(el.closest(
-                '.monaco-menu, .monaco-menu-container, .context-view, [role="menu"], [role="menubar"]'
+                '.monaco-menu, .monaco-menu-container, .context-view, [role="menu"], [role="menubar"], ' +
+                '.ui-menu, .ui-menu__layout, .ui-menu__content, .ui-slash-menu, .ui-slash-menu__content'
             ));
         } catch (e) { return false; }
     }
@@ -97,8 +98,14 @@
         try {
             if (pel.closest('.keybinding, .submenu-indicator, .monaco-keybinding')) return false;
             if (pel.classList && pel.classList.contains('codicon')) return false;
-            if (pel.closest('.action-label')) return true;
-            var item = pel.closest('a.action-menu-item, .action-item, [role="menuitem"], li.action-item');
+            if (pel.closest(
+                '.action-label, .ui-menu__item-title, .ui-menu__item-content, .ui-menu__title, ' +
+                '.ui-menu__section-title, .ui-slash-menu__item-title, .text-dropdown-foreground'
+            )) return true;
+            var item = pel.closest(
+                'a.action-menu-item, .action-item, [role="menuitem"], [role="option"], li.action-item, ' +
+                '.ui-menu__row, .ui-menu__item, [class*="ui-menu__item"]'
+            );
             if (!item) return false;
             if (pel.querySelector && pel.querySelector('.codicon, .keybinding, .submenu-indicator, .action-label')) return false;
             return true;
@@ -210,21 +217,23 @@
             try { XiuZheng_BianJiQi_YouJianCaiDan(); } catch (e) {}
             try { XiuZheng_DaiQueRen_GaiDong_CaiDan(); } catch (e) {}
             try { XiuZheng_LiaoTian_LiShi(); } catch (e) {}
+            try { SaoMiao_SuoYou_CaiDan(); } catch (e) {}
         } finally {
             ZhengZaiPiLiangFanYi = false;
         }
     }
 
-    function YanChi_FanYi_CaiDan() {
+    function YanChi_FanYi_CaiDan(forceRestart) {
+        if (CaiDan_FanYi_Timer && !forceRestart) return;
         if (CaiDan_FanYi_Timer) clearTimeout(CaiDan_FanYi_Timer);
-        CaiDan_FanYi_Retry = 0;
+        if (forceRestart) CaiDan_FanYi_Retry = 0;
         CaiDan_FanYi_Timer = setTimeout(function PaiDui_CaiDan() {
             CaiDan_FanYi_Timer = null;
             ZhiXing_CaiDan_FanYi();
-            if (CaiDan_FanYi_Retry < 6) {
+            if (CaiDan_FanYi_Retry < 8) {
                 CaiDan_FanYi_Retry++;
-                var caiDanYanChi = [80, 200, 400, 700, 1100, 1600];
-                CaiDan_FanYi_Timer = setTimeout(PaiDui_CaiDan, caiDanYanChi[CaiDan_FanYi_Retry - 1] || 1600);
+                var caiDanYanChi = [50, 120, 220, 400, 700, 1100, 1600, 2200];
+                CaiDan_FanYi_Timer = setTimeout(PaiDui_CaiDan, caiDanYanChi[CaiDan_FanYi_Retry - 1] || 2200);
             }
         }, 16);
     }
@@ -232,27 +241,75 @@
     var CaiDan_DongTai_GuanCha = null;
     var CaiDan_DongTai_GuanCha_Root = null;
 
+    function CaiDan_BianYi_XiangGuan(node) {
+        if (!node) return false;
+        var el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
+        if (!el || el.nodeType !== 1) return false;
+        if (Shi_CaiDan_QuYu(el)) return true;
+        return JieDian_You_Context_Menu(el);
+    }
+
     function AnZhuang_CaiDan_DongTai_GuanCha() {
         if (CaiDan_DongTai_GuanCha) return;
-        CaiDan_DongTai_GuanCha = new MutationObserver(function() {
-            YanChi_FanYi_CaiDan();
-        });
-        document.addEventListener('contextmenu', function() {
-            setTimeout(function() {
-                var cv = document.querySelector('.context-view');
-                if (!cv) return;
-                if (CaiDan_DongTai_GuanCha_Root !== cv) {
-                    if (CaiDan_DongTai_GuanCha_Root) {
-                        try { CaiDan_DongTai_GuanCha.disconnect(); } catch (e) {}
+        CaiDan_DongTai_GuanCha = new MutationObserver(function(mutations) {
+            if (ZhengZaiPiLiangFanYi) return;
+            for (var i = 0; i < mutations.length; i++) {
+                var m = mutations[i];
+                var target = m.target;
+                var targetEl = target && (target.nodeType === 1 ? target : target.parentElement);
+                if (m.type === 'characterData') {
+                    if (targetEl && targetEl.closest && targetEl.closest('.view-lines, textarea, input')) continue;
+                    if (CaiDan_BianYi_XiangGuan(target)) {
+                        try { GaiXie_CaiDan_WenBen_JieDian(target); } catch (e5) {}
+                        YanChi_FanYi_CaiDan(false);
+                        return;
                     }
-                    CaiDan_DongTai_GuanCha_Root = cv;
-                    try {
-                        CaiDan_DongTai_GuanCha.observe(cv, { childList: true, subtree: true });
-                    } catch (e) {}
+                    continue;
                 }
-                YanChi_FanYi_CaiDan();
-                try { FanYi_LiuLanQi_Webview(); } catch (e) {}
+                if (CaiDan_BianYi_XiangGuan(target)) {
+                    try { SaoMiao_SuoYou_CaiDan(); } catch (e3) {}
+                    YanChi_FanYi_CaiDan(false);
+                    return;
+                }
+                var added = m.addedNodes;
+                if (!added) continue;
+                for (var j = 0; j < added.length; j++) {
+                    if (CaiDan_BianYi_XiangGuan(added[j])) {
+                        try { SaoMiao_SuoYou_CaiDan(); } catch (e4) {}
+                        YanChi_FanYi_CaiDan(false);
+                        return;
+                    }
+                }
+            }
+        });
+        try {
+            CaiDan_DongTai_GuanCha.observe(document.body || document.documentElement, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+            CaiDan_DongTai_GuanCha_Root = document.body;
+        } catch (e) {}
+        function ChuFa_CaiDan_FanYi() {
+            try { SaoMiao_SuoYou_CaiDan(); } catch (e0) {}
+            setTimeout(function() {
+                try { SaoMiao_SuoYou_CaiDan(); } catch (e1) {}
+                YanChi_FanYi_CaiDan(true);
+                try { FanYi_LiuLanQi_Webview(); } catch (e2) {}
             }, 0);
+        }
+        document.addEventListener('contextmenu', ChuFa_CaiDan_FanYi, true);
+        document.addEventListener('click', function(ev) {
+            var t = ev && ev.target;
+            if (!t || !t.closest) return;
+            if (t.closest('.context-view, .monaco-menu, .ui-menu, [role="menu"]')) {
+                try { SaoMiao_SuoYou_CaiDan(); } catch (e3) {}
+                return;
+            }
+            if (t.closest(
+                '[aria-haspopup], [aria-expanded="true"], [data-state="open"], ' +
+                '[class*="agent"], [class*="chat-history"], [class*="ChatHistory"], [id*="agents"]'
+            )) ChuFa_CaiDan_FanYi();
         }, true);
     }
 
@@ -347,6 +404,8 @@
         ['Archive', '归档'],
         ['Unarchive', '取消归档'],
         ['Fork Chat', '分叉对话'],
+        ['Fork chat', '分叉对话'],
+        ['Forking chat', '正在分叉对话'],
         ['New Chat', '新对话'],
         ['Agent Conversations', '智能体对话'],
         ['Fork Conversation', '分叉对话'],
@@ -392,6 +451,11 @@
         ['Today', '今天'],
         ['Yesterday', '昨天'],
         ['Older', '更早'],
+        ['Last 7 Days', '最近 7 天'],
+        ['Last 14 Days', '最近 14 天'],
+        ['Last 30 Days', '最近 30 天'],
+        ['Last 90 Days', '最近 90 天'],
+        ['All Time', '全部时间'],
         ['Archived', '已归档'],
         ['Show Chat History', '显示聊天历史'],
         ['Chat History', '聊天历史'],
@@ -588,17 +652,154 @@
 
     function FanYi_LiaoTian_CaiDan() {
         var hints = LiaoTian_CaiDan_HINTS;
-        var menus = document.querySelectorAll(
-            '.context-view, .monaco-menu-container, .monaco-menu, [role="menu"], ' +
-            '.ui-menu, .ui-menu__layout, .ui-menu__content'
-        );
+        var menus = ShouJi_CaiDan_Gen();
         for (var m = 0; m < menus.length; m++) {
             FanYi_UI_CaiDan(menus[m]);
-            var labels = menus[m].querySelectorAll('.action-label');
+            var labels = menus[m].querySelectorAll('.action-label, [role="menuitem"], .ui-menu__item-title');
             for (var i = 0; i < labels.length; i++) {
                 GengXin_CaiDan_WenBen(labels[i], hints);
             }
+            SaoMiao_YiGe_CaiDan(menus[m]);
         }
+    }
+
+    var CaiDan_ZhuanYong_YingShe = null;
+    var CaiDan_YiGuanCha = typeof WeakSet !== 'undefined' ? new WeakSet() : null;
+    var CaiDan_ZhengZaiXie = false;
+
+    function HuoQu_CaiDan_YingShe() {
+        if (CaiDan_ZhuanYong_YingShe) return CaiDan_ZhuanYong_YingShe;
+        var map = new Map();
+        var lists = [
+            BianJiQi_CaiDan_HINTS,
+            LiaoTian_CaiDan_HINTS,
+            LiaoTian_LiShi_Extra_HINTS,
+            TongYong_CaiDan_HINTS,
+            TiJi_CaiDan_HINTS
+        ];
+        for (var i = 0; i < lists.length; i++) {
+            var arr = lists[i] || [];
+            for (var j = 0; j < arr.length; j++) {
+                if (arr[j] && arr[j][0] && arr[j][1]) map.set(arr[j][0], arr[j][1]);
+            }
+        }
+        CaiDan_ZhuanYong_YingShe = map;
+        return map;
+    }
+
+    function ChaZhao_CaiDan_ZhuanYong(raw) {
+        if (!raw) return null;
+        var text = GuiYiHua_WenBen(raw);
+        if (!text || !/[A-Za-z]/.test(text) || text.length > 160) return null;
+        var hit = HuoQu_CaiDan_YingShe().get(text);
+        if (hit) return hit;
+        return ChaZhao_FanYi(text) || ChaZhao_FanYi(raw);
+    }
+
+    function GaiXie_CaiDan_WenBen_JieDian(node) {
+        if (!node || node.nodeType !== 3) return false;
+        var pel = node.parentElement;
+        if (!pel) return false;
+        try {
+            if (pel.closest('.keybinding, .monaco-keybinding, .submenu-indicator, .codicon, .view-lines')) return false;
+        } catch (e) {}
+        var raw = node.textContent || '';
+        var trimmed = raw.trim();
+        var tr = ChaZhao_CaiDan_ZhuanYong(trimmed);
+        if (!tr || tr === trimmed) return false;
+        var idx = raw.indexOf(trimmed);
+        CaiDan_ZhengZaiXie = true;
+        try {
+            node.textContent = idx < 0 ? tr : raw.substring(0, idx) + tr + raw.substring(idx + trimmed.length);
+        } finally {
+            CaiDan_ZhengZaiXie = false;
+        }
+        return true;
+    }
+
+    function SaoMiao_YiGe_CaiDan(root) {
+        if (!root) return;
+        try {
+            var items = root.querySelectorAll(
+                'a.action-menu-item, .action-item, [role="menuitem"], [role="option"], ' +
+                '.action-label, .ui-menu__item-title, .ui-menu__row'
+            );
+            for (var i = 0; i < items.length; i++) FanYi_ShuXing(items[i]);
+        } catch (e1) {}
+        var walker;
+        try {
+            walker = (root.ownerDocument || document).createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+        } catch (e2) { return; }
+        var tnode;
+        while ((tnode = walker.nextNode())) GaiXie_CaiDan_WenBen_JieDian(tnode);
+    }
+
+    function ShouJi_CaiDan_Gen() {
+        var out = [];
+        var seen = typeof Set !== 'undefined' ? new Set() : null;
+        function tianJia(node) {
+            if (!node || (seen && seen.has(node))) return;
+            if (seen) seen.add(node);
+            out.push(node);
+        }
+        function caiJi(root) {
+            if (!root || !root.querySelectorAll) return;
+            try {
+                var menus = root.querySelectorAll(
+                    '.context-view, .monaco-menu-container, .monaco-menu, [role="menu"], ' +
+                    '.ui-menu, .ui-menu__layout, .ui-menu__content, .ui-slash-menu, .ui-slash-menu__content'
+                );
+                for (var i = 0; i < menus.length; i++) tianJia(menus[i]);
+            } catch (e) {}
+        }
+        caiJi(document);
+        try {
+            var hosts = document.querySelectorAll(
+                '.monaco-workbench, .context-view, [class*="overlay"], [class*="glass"], [class*="shadow"]'
+            );
+            for (var h = 0; h < hosts.length; h++) {
+                if (hosts[h].shadowRoot) caiJi(hosts[h].shadowRoot);
+            }
+        } catch (e2) {}
+        return out;
+    }
+
+    function SaoMiao_SuoYou_CaiDan() {
+        var menus = ShouJi_CaiDan_Gen();
+        for (var i = 0; i < menus.length; i++) {
+            SaoMiao_YiGe_CaiDan(menus[i]);
+            ZhuCe_DanGe_CaiDan_GuanCha(menus[i]);
+        }
+    }
+
+    function ZhuCe_DanGe_CaiDan_GuanCha(menu) {
+        if (!menu) return;
+        try {
+            if (CaiDan_YiGuanCha) {
+                if (CaiDan_YiGuanCha.has(menu)) return;
+                CaiDan_YiGuanCha.add(menu);
+            }
+        } catch (e) {}
+        var obs = new MutationObserver(function(mutations) {
+            if (CaiDan_ZhengZaiXie) return;
+            for (var i = 0; i < mutations.length; i++) {
+                var m = mutations[i];
+                if (m.type === 'characterData') {
+                    GaiXie_CaiDan_WenBen_JieDian(m.target);
+                    continue;
+                }
+                var added = m.addedNodes;
+                if (!added) continue;
+                for (var j = 0; j < added.length; j++) {
+                    var n = added[j];
+                    if (n.nodeType === 3) GaiXie_CaiDan_WenBen_JieDian(n);
+                    else if (n.nodeType === 1) SaoMiao_YiGe_CaiDan(n);
+                }
+            }
+        });
+        try {
+            obs.observe(menu, { childList: true, subtree: true, characterData: true });
+        } catch (e2) {}
     }
 
     function FanYi_TiJiao_PingFen_WenBen(text) {
@@ -1449,7 +1650,7 @@
             try { XiuZheng_BianJiQi_XuanZe(); } catch (e) {}
         }
         if (contextMenu) {
-            try { YanChi_FanYi_CaiDan(); } catch (e) {}
+            try { YanChi_FanYi_CaiDan(true); } catch (e) {}
             try { XiuZheng_BianJiQi_YouJianCaiDan(); } catch (e) {}
             try { XiuZheng_LiaoTian_LiShi(); } catch (e) {}
             setTimeout(function() {
@@ -1519,18 +1720,30 @@
             if (el.querySelector('input, textarea, select, button, [role="button"], [role="switch"], [contenteditable="true"]')) return false;
             var xiala = el.closest('[role="combobox"], .monaco-select-box, [class*="select-box"]');
             if (xiala && (el === xiala || el.childElementCount > 0)) return false;
-            var caiDan = el.closest('.monaco-menu, .context-view, [role="menu"], [role="menubar"]');
+            var caiDan = el.closest(
+                '.monaco-menu, .context-view, [role="menu"], [role="menubar"], ' +
+                '.ui-menu, .ui-menu__content, .ui-slash-menu, [role="listbox"]'
+            );
             if (caiDan) {
                 var shiDingBuBiaoTi = !!(el.classList && (
                     el.classList.contains('menubar-menu-title') ||
                     el.classList.contains('menubar-menu-button')
                 )) || !!(el.closest && el.closest('.menubar-menu-title'));
-                var shiBiaoQian = el.classList && (
+                var clsName = el.className ? String(el.className) : '';
+                var shiBiaoQian = !!(el.classList && (
                     el.classList.contains('action-label') ||
-                    (el.className && String(el.className).indexOf('action-label') >= 0)
-                );
+                    el.classList.contains('ui-menu__item-title') ||
+                    el.classList.contains('ui-menu__item-content') ||
+                    el.classList.contains('ui-menu__title') ||
+                    el.classList.contains('text-dropdown-foreground') ||
+                    clsName.indexOf('action-label') >= 0 ||
+                    clsName.indexOf('ui-menu__item') >= 0
+                ));
                 var shiYeZi = !el.querySelector || !el.querySelector('*');
-                var shiCaiDanXiang = !!(el.closest && el.closest('[role="menuitem"], a.action-menu-item, li.action-item'));
+                var shiCaiDanXiang = !!(el.closest && el.closest(
+                    '[role="menuitem"], [role="option"], a.action-menu-item, li.action-item, ' +
+                    '.ui-menu__row, .ui-menu__item, [class*="ui-menu__item"]'
+                ));
                 if (!shiDingBuBiaoTi && !shiBiaoQian && !(shiYeZi && shiCaiDanXiang)) return false;
             }
         } catch (e) {}
@@ -1765,6 +1978,151 @@
             skipChildQuery: 'button, .ui-alert-dialog-action',
             allowTags: ['BUTTON']
         });
+    }
+
+    // 「关于」等 supplemental 辅助窗口：通过 window.open('about:blank') 创建，
+    // CSP 为 script-src 'none'，主窗口 MutationObserver 无法覆盖，需跨文档翻译。
+    var FuZhu_ChuangKou_YiZhuCe = typeof WeakSet !== 'undefined' ? new WeakSet() : null;
+    var FuZhu_ChuangKou_LieBiao = [];
+
+    function FanYi_FuZhu_WenBen_Zhi(raw) {
+        if (!raw) return null;
+        var trimmed = GuiYiHua_WenBen(raw);
+        if (!trimmed || !/[A-Za-z]/.test(trimmed)) return null;
+        var tr = ChaZhao_FanYi(trimmed) || ChaZhao_FanYi(raw);
+        if (tr && tr !== trimmed && tr !== raw) return tr;
+        for (var i = 0; i < MoShi_FanYi.length; i++) {
+            var pair = MoShi_FanYi[i];
+            if (pair[0].test(trimmed)) {
+                var neo = trimmed.replace(pair[0], pair[1]);
+                if (neo && neo !== trimmed) return neo;
+            }
+        }
+        return TiHuan_BuFen_WenBen(trimmed);
+    }
+
+    function FanYi_FuZhu_WenDang(doc) {
+        if (!doc || !doc.body) return;
+        try {
+            var attrs = ['title', 'aria-label', 'placeholder', 'aria-placeholder'];
+            var els = doc.querySelectorAll(
+                'button, [role="button"], span, div, p, h1, h2, h3, label, a, ' +
+                '[data-component^="glass-about-dialog"]'
+            );
+            for (var i = 0; i < els.length; i++) {
+                var el = els[i];
+                for (var a = 0; a < attrs.length; a++) {
+                    var av = el.getAttribute(attrs[a]);
+                    if (!av) continue;
+                    var atr = FanYi_FuZhu_WenBen_Zhi(av);
+                    if (atr && atr !== av) el.setAttribute(attrs[a], atr);
+                }
+                if (el.childElementCount > 0) {
+                    // 仅翻译纯文本子节点，保留图标等元素
+                    var nodes = el.childNodes;
+                    for (var n = 0; n < nodes.length; n++) {
+                        var tn = nodes[n];
+                        if (!tn || tn.nodeType !== 3) continue;
+                        var raw = tn.textContent || '';
+                        var tr = FanYi_FuZhu_WenBen_Zhi(raw);
+                        if (tr) {
+                            var trimmed = raw.trim();
+                            var idx = raw.indexOf(trimmed);
+                            if (idx < 0) tn.textContent = tr;
+                            else tn.textContent = raw.substring(0, idx) + tr + raw.substring(idx + trimmed.length);
+                        }
+                    }
+                    continue;
+                }
+                var text = el.textContent || '';
+                var ttr = FanYi_FuZhu_WenBen_Zhi(text);
+                if (ttr) {
+                    var ttrim = text.trim();
+                    var tidx = text.indexOf(ttrim);
+                    if (tidx < 0) el.textContent = ttr;
+                    else el.textContent = text.substring(0, tidx) + ttr + text.substring(tidx + ttrim.length);
+                }
+            }
+        } catch (e) {}
+    }
+
+    function ZhuCe_FuZhu_ChuangKou(win, features) {
+        if (!win) return;
+        try {
+            if (FuZhu_ChuangKou_YiZhuCe) {
+                if (FuZhu_ChuangKou_YiZhuCe.has(win)) return;
+                FuZhu_ChuangKou_YiZhuCe.add(win);
+            } else if (FuZhu_ChuangKou_LieBiao.indexOf(win) >= 0) {
+                return;
+            } else {
+                FuZhu_ChuangKou_LieBiao.push(win);
+            }
+        } catch (e) {}
+
+        var obs = null;
+        var timer = null;
+        var ticks = 0;
+
+        function fanYi() {
+            try {
+                if (!win || win.closed) {
+                    if (timer) clearInterval(timer);
+                    if (obs) try { obs.disconnect(); } catch (e2) {}
+                    return;
+                }
+                FanYi_FuZhu_WenDang(win.document);
+            } catch (e3) {}
+        }
+
+        function anZhuangGuanCha() {
+            try {
+                if (!win.document || !win.document.documentElement) return false;
+                if (obs) return true;
+                obs = new MutationObserver(function() { fanYi(); });
+                obs.observe(win.document.documentElement, {
+                    childList: true,
+                    subtree: true,
+                    characterData: true,
+                    attributes: true,
+                    attributeFilter: ['aria-label', 'title', 'disabled']
+                });
+                fanYi();
+                return true;
+            } catch (e4) {
+                return false;
+            }
+        }
+
+        try {
+            if (win.document && win.document.readyState === 'complete') anZhuangGuanCha();
+            else if (win.addEventListener) win.addEventListener('load', function() { anZhuangGuanCha(); fanYi(); });
+        } catch (e5) {}
+
+        timer = setInterval(function() {
+            ticks++;
+            anZhuangGuanCha();
+            fanYi();
+            try {
+                if (ticks > 60 || !win || win.closed) clearInterval(timer);
+            } catch (e6) {
+                clearInterval(timer);
+            }
+        }, 100);
+    }
+
+    function AnZhuang_FuZhu_ChuangKou_FanYi() {
+        if (window.__cursor_zh_aux_open_patched) return;
+        window.__cursor_zh_aux_open_patched = true;
+        var yuanOpen = window.open;
+        if (typeof yuanOpen !== 'function') return;
+        window.open = function(url, name, features) {
+            var ret = yuanOpen.apply(this, arguments);
+            try {
+                var win = ret && ret.window ? ret.window : ret;
+                if (win) ZhuCe_FuZhu_ChuangKou(win, features);
+            } catch (e) {}
+            return ret;
+        };
     }
 
     function XiuZheng_GuangGao_TanChuang() {
@@ -3209,10 +3567,16 @@
             '.monaco-menu, .monaco-menu-container, [role="menu"], [role="menuitem"]'
         );
         BianLi_XiaLa_WenBen(scopes, false);
-        var caiDanGen = document.querySelectorAll('.context-view, .monaco-menu-container, .monaco-menu');
+        var caiDanGen = document.querySelectorAll(
+            '.context-view, .monaco-menu-container, .monaco-menu, [role="menu"], ' +
+            '.ui-menu, .ui-menu__layout, .ui-menu__content, [role="listbox"]'
+        );
         for (var cg = 0; cg < caiDanGen.length; cg++) {
             try { FanYi_Monaco_CaiDan(caiDanGen[cg]); } catch (e) {}
+            try { FanYi_BianJiQi_CaiDan_TiaoMu(caiDanGen[cg]); } catch (e) {}
+            try { FanYi_UI_CaiDan(caiDanGen[cg]); } catch (e) {}
         }
+        try { FanYi_LiaoTian_CaiDan(); } catch (e) {}
         if (Shi_Cursor_SheZhi_QuYu()) {
             var settingScopes = document.querySelectorAll(
                 '[class*="cursor-settings"] [role="combobox"], [class*="cursor-settings"] .monaco-select-box, ' +

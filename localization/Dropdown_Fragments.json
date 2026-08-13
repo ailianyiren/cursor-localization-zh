@@ -1087,6 +1087,42 @@
       "在新标签页中打开"
     ],
     [
+      "Pin",
+      "固定"
+    ],
+    [
+      "Unpin",
+      "取消固定"
+    ],
+    [
+      "Fork Chat",
+      "分叉对话"
+    ],
+    [
+      "Mark as Unread",
+      "标记为未读"
+    ],
+    [
+      "Mark as Read",
+      "标记为已读"
+    ],
+    [
+      "Last 30 Days",
+      "最近 30 天"
+    ],
+    [
+      "Last 7 Days",
+      "最近 7 天"
+    ],
+    [
+      "Last 90 Days",
+      "最近 90 天"
+    ],
+    [
+      "All Time",
+      "全部时间"
+    ],
+    [
       "Restore",
       "恢复"
     ],
@@ -1245,6 +1281,54 @@
     [
       "Draft: ",
       "草稿："
+    ],
+    [
+      "Check for updates",
+      "检查更新"
+    ],
+    [
+      "Copy version info",
+      "复制版本信息"
+    ],
+    [
+      "Copy version",
+      "复制版本号"
+    ],
+    [
+      "Copy build date",
+      "复制构建日期"
+    ],
+    [
+      "Copied",
+      "已复制"
+    ],
+    [
+      "Checking…",
+      "正在检查…"
+    ],
+    [
+      "No updates available",
+      "已是最新版本"
+    ],
+    [
+      "Install update",
+      "安装更新"
+    ],
+    [
+      "Installing",
+      "正在安装"
+    ],
+    [
+      "system setup",
+      "系统安装"
+    ],
+    [
+      "user setup",
+      "用户安装"
+    ],
+    [
+      "Copyright © 2026 Anysphere. All rights reserved.",
+      "版权所有 © 2026 Anysphere。保留所有权利。"
     ]
   ]
 }

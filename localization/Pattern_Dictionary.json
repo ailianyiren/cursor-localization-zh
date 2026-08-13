@@ -38,9 +38,34 @@
       "replacement": "$1 个警告"
     },
     {
+      "regex": "^Version (.+) \\(system setup\\)$",
+      "flags": "i",
+      "replacement": "版本 $1（系统安装）"
+    },
+    {
+      "regex": "^Version (.+) \\(user setup\\)$",
+      "flags": "i",
+      "replacement": "版本 $1（用户安装）"
+    },
+    {
       "regex": "^Version (.+)$",
       "flags": "i",
       "replacement": "版本 $1"
+    },
+    {
+      "regex": "^\\(system setup\\)$",
+      "flags": "i",
+      "replacement": "（系统安装）"
+    },
+    {
+      "regex": "^\\(user setup\\)$",
+      "flags": "i",
+      "replacement": "（用户安装）"
+    },
+    {
+      "regex": "^Copyright © (\\d+) Anysphere\\. All rights reserved\\.?$",
+      "flags": "i",
+      "replacement": "版权所有 © $1 Anysphere。保留所有权利。"
     },
     {
       "regex": "^(\\d+) tools?$",
@@ -126,6 +151,11 @@
       "regex": "^Insert Table$",
       "flags": "i",
       "replacement": "插入表格"
+    },
+    {
+      "regex": "^Last (\\d+) Days?$",
+      "flags": "i",
+      "replacement": "最近 $1 天"
     },
     {
       "regex": "^(\\d+) Uncommitted Changes$",
@@ -406,6 +436,26 @@
       "regex": "^(\\d+) days? ago$",
       "flags": "i",
       "replacement": "$1 天前"
+    },
+    {
+      "regex": "^(\\d+) months? ago$",
+      "flags": "i",
+      "replacement": "$1 个月前"
+    },
+    {
+      "regex": "^(\\d+) years? ago$",
+      "flags": "i",
+      "replacement": "$1 年前"
+    },
+    {
+      "regex": "^\\((\\d+) months? ago\\)$",
+      "flags": "i",
+      "replacement": "（$1 个月前）"
+    },
+    {
+      "regex": "^\\((\\d+) years? ago\\)$",
+      "flags": "i",
+      "replacement": "（$1 年前）"
     },
     {
       "regex": "^Reason: Not in allowlist: (.+)$",

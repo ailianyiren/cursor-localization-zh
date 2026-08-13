@@ -6801,6 +6801,26 @@
           "归档较早的对话"
         ],
         [
+          "Last 7 Days",
+          "最近 7 天"
+        ],
+        [
+          "Last 14 Days",
+          "最近 14 天"
+        ],
+        [
+          "Last 30 Days",
+          "最近 30 天"
+        ],
+        [
+          "Last 90 Days",
+          "最近 90 天"
+        ],
+        [
+          "All Time",
+          "全部时间"
+        ],
+        [
           "Unread",
           "未读"
         ],
@@ -7511,8 +7531,72 @@
           "检查更新"
         ],
         [
+          "Check for updates",
+          "检查更新"
+        ],
+        [
           "Check for &&Updates...",
           "检查更新..."
+        ],
+        [
+          "Copy version info",
+          "复制版本信息"
+        ],
+        [
+          "Copy Version Info",
+          "复制版本信息"
+        ],
+        [
+          "Copy version",
+          "复制版本号"
+        ],
+        [
+          "Copy build date",
+          "复制构建日期"
+        ],
+        [
+          "Copied",
+          "已复制"
+        ],
+        [
+          "Checking…",
+          "正在检查…"
+        ],
+        [
+          "Checking...",
+          "正在检查..."
+        ],
+        [
+          "No updates available",
+          "已是最新版本"
+        ],
+        [
+          "Install update",
+          "安装更新"
+        ],
+        [
+          "Installing",
+          "正在安装"
+        ],
+        [
+          "system setup",
+          "系统安装"
+        ],
+        [
+          "user setup",
+          "用户安装"
+        ],
+        [
+          "Copyright © 2026 Anysphere. All rights reserved.",
+          "版权所有 © 2026 Anysphere。保留所有权利。"
+        ],
+        [
+          "Copyright © 2025 Anysphere. All rights reserved.",
+          "版权所有 © 2025 Anysphere。保留所有权利。"
+        ],
+        [
+          "All rights reserved.",
+          "保留所有权利。"
         ],
         [
           "Checking for Updates...",
