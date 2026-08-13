@@ -51,6 +51,10 @@
           "索引与文档"
         ],
         [
+          "Code Intelligence",
+          "代码智能"
+        ],
+        [
           "Network",
           "网络"
         ],
@@ -91,6 +95,18 @@
           "搜索设置"
         ],
         [
+          "Search Settings",
+          "搜索设置"
+        ],
+        [
+          "Search Cursor settings...",
+          "搜索 Cursor 设置..."
+        ],
+        [
+          "Search Cursor Settings...",
+          "搜索 Cursor 设置..."
+        ],
+        [
           "Review diffs.",
           "查看差异。"
         ],
@@ -119,8 +135,8 @@
           "优化 Cursor 启动器启动路径"
         ],
         [
-          "5 files changed",
-          "已更改 5 个文件"
+          "1 File Changed",
+          "已更改 1 个文件"
         ],
         [
           "5 files changed, 3450 insertions(+)",
@@ -225,12 +241,40 @@
           "Pro 已包含"
         ],
         [
+          "Included in",
+          "套餐包含"
+        ],
+        [
+          "Personal Usage",
+          "个人用量"
+        ],
+        [
+          "Handle",
+          "用户名"
+        ],
+        [
           "Included In Pro",
           "Pro 已包含"
         ],
         [
           "Resets on",
           "重置日期"
+        ],
+        [
+          "Included Usage",
+          "包含用量"
+        ],
+        [
+          "Adjust Plan",
+          "调整计划"
+        ],
+        [
+          "Usage limits reset on",
+          "用量限额重置于"
+        ],
+        [
+          "Resets",
+          "重置"
         ],
         [
           "Agent",
@@ -271,6 +315,26 @@
         [
           "Additional usage beyond limits consumes on-demand spend. Your plan includes at least $20 of API usage.",
           "超出限额的额外用量会产生按需消费。您的计划至少包含 20 美元 API 用量。"
+        ],
+        [
+          "Cursor Models",
+          "Cursor 模型"
+        ],
+        [
+          "Other Models",
+          "其他模型"
+        ],
+        [
+          "Cursor Models · Includes Cursor Grok 4.5 and Composer 2.5",
+          "Cursor 模型 · 包含 Cursor Grok 4.5 和 Composer 2.5"
+        ],
+        [
+          "Includes Cursor Grok 4.5 and Composer 2.5",
+          "包含 Cursor Grok 4.5 和 Composer 2.5"
+        ],
+        [
+          "Additional usage beyond limits consumes Other Models quota or on-demand spend.",
+          "超出限额的额外用量会消耗「其他模型」配额或按需消费。"
         ],
         [
           "Upgrade",
@@ -463,6 +527,62 @@
         [
           "Show rotating tips on the empty screen.",
           "在空白屏幕上显示轮播提示。"
+        ],
+        [
+          "Window Restoration",
+          "窗口还原"
+        ],
+        [
+          "Controls which windows Cursor restores on startup",
+          "控制启动时 Cursor 还原哪些窗口"
+        ],
+        [
+          "Controls which windows Cursor restores on startup.",
+          "控制启动时 Cursor 还原哪些窗口。"
+        ],
+        [
+          "Last Used Windows",
+          "上次使用的窗口"
+        ],
+        [
+          "No commit has been scored yet",
+          "尚未对任何提交评分"
+        ],
+        [
+          "No commit scored",
+          "暂无已评分提交"
+        ],
+        [
+          "Agent Stats",
+          "智能体统计"
+        ],
+        [
+          "Agent AI Stats",
+          "智能体 AI 统计"
+        ],
+        [
+          "Tab Stats",
+          "Tab 统计"
+        ],
+        [
+          "Tab AI Stats",
+          "Tab AI 统计"
+        ],
+        [
+          "Most Recent Commit Scored:",
+          "最近评分的提交："
+        ],
+        [
+          "Most Recent Commit Scored",
+          "最近评分的提交"
+        ],
+        [
+          "AI-Generated:",
+          "AI 生成："
+        ],
+        [
+          "Total Changes:",
+          "总变更："
         ],
         [
           "Privacy Mode",
@@ -667,6 +787,30 @@
         [
           "Follow System",
           "跟随系统"
+        ],
+        [
+          "High Contrast",
+          "高对比度"
+        ],
+        [
+          "Follow System High Contrast",
+          "跟随系统高对比度"
+        ],
+        [
+          "Switch to a high contrast theme when your OS is in a high contrast mode",
+          "当操作系统处于高对比度模式时切换到高对比度主题"
+        ],
+        [
+          "Fun",
+          "趣味"
+        ],
+        [
+          "Give the Agent a Confetti Cannon",
+          "为智能体配备彩纸炮"
+        ],
+        [
+          "Allow the agent to celebrate with a shower of confetti",
+          "允许智能体用彩纸庆祝"
         ],
         [
           "Editor",
@@ -1031,6 +1175,10 @@
         [
           "Inside Cursor",
           "在 Cursor 内"
+        ],
+        [
+          "Default Browser",
+          "默认浏览器"
         ],
         [
           "Import Settings from VS Code",
@@ -1667,6 +1815,14 @@
           "选择 Explore 子智能体用于初步研究的模型。"
         ],
         [
+          "Choose which models appear in the model picker",
+          "选择在模型选择器中显示的模型"
+        ],
+        [
+          "Choose a model or use the cost- and availability-aware default",
+          "选择模型，或使用兼顾成本与可用性的默认项"
+        ],
+        [
           "Auto-Run Mode",
           "自动运行模式"
         ],
@@ -1887,6 +2043,14 @@
           "清除对话"
         ],
         [
+          "New Chat",
+          "新对话"
+        ],
+        [
+          "Agent Conversations",
+          "智能体对话"
+        ],
+        [
           "After periods of inactivity, open the Agent Pane to a new conversation",
           "闲置一段时间后，打开 Agent 面板时开始新对话"
         ],
@@ -1901,6 +2065,14 @@
         [
           "When enabled, Ctrl + Enter submits chat and Enter inserts a newline",
           "启用后，Ctrl + Enter 提交对话，Enter 插入换行"
+        ],
+        [
+          "Ctrl+Enter submits chat, Enter inserts a newline, and primary actions move to Ctrl+Alt+Enter",
+          "Ctrl+Enter 提交对话，Enter 插入换行，主要操作改为 Ctrl+Alt+Enter"
+        ],
+        [
+          "Ctrl + Enter submits chat, Enter inserts a newline, and primary actions move to Ctrl+Alt+Enter",
+          "Ctrl+Enter 提交对话，Enter 插入换行，主要操作改为 Ctrl+Alt+Enter"
         ],
         [
           "When enabled, Ctrl + Enter sends chat and Enter inserts a newline",
@@ -1985,6 +2157,18 @@
         [
           "Send after current message",
           "在当前消息之后发送"
+        ],
+        [
+          "Send After Current Message",
+          "在当前消息之后发送"
+        ],
+        [
+          "Send Right Away",
+          "立即发送"
+        ],
+        [
+          "Send right away",
+          "立即发送"
         ],
         [
           "Send now",
@@ -2443,6 +2627,14 @@
           "自动在浏览器标签页中打开 localhost 链接"
         ],
         [
+          "Open Local Links in Cursor Browser",
+          "在 Cursor 浏览器中打开本地链接"
+        ],
+        [
+          "Open Web Links in Cursor Browser",
+          "在 Cursor 浏览器中打开网页链接"
+        ],
+        [
           "Browser automation disabled",
           "浏览器自动化已禁用"
         ],
@@ -2715,12 +2907,32 @@
           "新智能体默认的启动环境。"
         ],
         [
+          "Default Model",
+          "默认模型"
+        ],
+        [
+          "What model new agents use by default",
+          "新智能体默认使用的模型"
+        ],
+        [
+          "What model new agents use by default.",
+          "新智能体默认使用的模型。"
+        ],
+        [
+          "Cursor Default",
+          "Cursor 默认"
+        ],
+        [
           "Last used",
           "上次使用"
         ],
         [
           "Last Used",
           "上次使用"
+        ],
+        [
+          "Last Used Windows",
+          "上次使用的窗口"
         ],
         [
           "Remote Control",
@@ -2733,6 +2945,14 @@
         [
           "Allow agents on this machine to be controlled remotely from mobile and web.",
           "允许从手机和网页远程控制此计算机上的智能体。"
+        ],
+        [
+          "Control agents on this machine from your phone, web, and other devices",
+          "通过手机、网页和其他设备控制此计算机上的智能体"
+        ],
+        [
+          "Control agents on this machine from your phone, web, and other devices.",
+          "通过手机、网页和其他设备控制此计算机上的智能体。"
         ],
         [
           "Keep This Computer Awake",
@@ -2969,12 +3189,92 @@
           "包含第三方插件、技能和其他配置"
         ],
         [
+          "Include Third-Party Plugins, Skills, and Other Configs",
+          "包含第三方插件、技能和其他配置"
+        ],
+        [
+          "Third-Party Imports",
+          "第三方导入"
+        ],
+        [
+          "Import Claude Code Conversations",
+          "导入 Claude Code 对话"
+        ],
+        [
+          "Sync chats and continue them in Cursor",
+          "同步对话并在 Cursor 中继续"
+        ],
+        [
           "Automatically import agent configs from other tools",
           "自动从其他工具导入智能体配置"
         ],
         [
           "Browse Marketplace",
           "浏览市场"
+        ],
+        [
+          "Data Science",
+          "数据科学"
+        ],
+        [
+          "Debuggers",
+          "调试器"
+        ],
+        [
+          "Extension Packs",
+          "扩展包"
+        ],
+        [
+          "Education",
+          "教育"
+        ],
+        [
+          "Formatters",
+          "格式化程序"
+        ],
+        [
+          "Keymaps",
+          "键映射"
+        ],
+        [
+          "Language Packs",
+          "语言包"
+        ],
+        [
+          "Linters",
+          "代码检查器"
+        ],
+        [
+          "Machine Learning",
+          "机器学习"
+        ],
+        [
+          "Notebooks",
+          "笔记本"
+        ],
+        [
+          "Programming Languages",
+          "编程语言"
+        ],
+        [
+          "SCM Providers",
+          "SCM 提供程序"
+        ],
+        [
+          "Snippets",
+          "代码片段"
+        ],
+        [
+          "Testing",
+          "测试"
+        ],
+        [
+          "Themes",
+          "主题"
+        ],
+        [
+          "Visualization",
+          "可视化"
         ],
         [
           "Plugin MCP Servers",
@@ -3175,6 +3475,14 @@
           "暂无规则"
         ],
         [
+          "Guide Agent with Rules",
+          "使用规则引导智能体"
+        ],
+        [
+          "Rules give Agent persistent, system-level instructions for your coding standards and workflows.",
+          "规则为智能体提供持久的系统级指令，用于您的编码规范和工作流。"
+        ],
+        [
           "Delete Rule",
           "删除规则"
         ],
@@ -3207,6 +3515,18 @@
           "暂无技能"
         ],
         [
+          "Teach Cursor New Skills",
+          "教 Cursor 新技能"
+        ],
+        [
+          "Skills package domain-specific knowledge and workflows that Agent applies automatically when relevant.",
+          "技能将领域特定的知识和工作流打包，智能体在相关时会自动应用。"
+        ],
+        [
+          "Skills package domain-specific knowledge and workflows that Agent applies automatically when relevant",
+          "技能将领域特定的知识和工作流打包，智能体在相关时会自动应用"
+        ],
+        [
           "New Skill",
           "新建技能"
         ],
@@ -3231,6 +3551,14 @@
           "暂无子智能体"
         ],
         [
+          "Delegate Work to Subagents",
+          "将工作委派给子智能体"
+        ],
+        [
+          "Subagents are specialized assistants that run in their own context window so Agent can parallelize and stay focused.",
+          "子智能体是在独立上下文窗口中运行的专用助手，使智能体可以并行处理并保持专注。"
+        ],
+        [
           "New Subagent",
           "新建子智能体"
         ],
@@ -3253,6 +3581,14 @@
         [
           "No Commands Yet",
           "暂无命令"
+        ],
+        [
+          "Create Reusable Commands",
+          "创建可复用命令"
+        ],
+        [
+          "Commands are reusable prompts you invoke with /name to standardize common workflows across your team.",
+          "命令是可复用的提示词，可通过 /name 调用，用于在团队中标准化常见工作流。"
         ],
         [
           "Loading Rules...",
@@ -3327,6 +3663,14 @@
         [
           "MCP servers",
           "MCP 服务器"
+        ],
+        [
+          "Connect External Tools with MCP",
+          "使用 MCP 连接外部工具"
+        ],
+        [
+          "Model Context Protocol servers connect Cursor to external tools and data sources like Linear, Figma, and Notion.",
+          "MCP 服务器将 Cursor 连接到 Linear、Figma、Notion 等外部工具和数据源。"
         ],
         [
           "Configure MCP servers in the dashboard to make them available in Cursor on desktop and in the cloud.",
@@ -3561,6 +3905,18 @@
           "启动 Cursor 时默认打开智能体窗口。"
         ],
         [
+          "Continue interrupted agents on relaunch",
+          "重新启动时继续被中断的智能体"
+        ],
+        [
+          "When Cursor closes while an agent is working, pick the agent back up the next time you open Cursor.",
+          "若 Cursor 关闭时智能体仍在工作，下次打开时将继续该智能体。"
+        ],
+        [
+          "When Cursor closes while an agent is working, pick the agent back up the next time you open Cursor",
+          "若 Cursor 关闭时智能体仍在工作，下次打开时将继续该智能体"
+        ],
+        [
           "Open Codex Sidebar",
           "打开 Codex 侧边栏"
         ],
@@ -3627,6 +3983,62 @@
         [
           "Give Feedback...",
           "提供反馈..."
+        ],
+        [
+          "Send Feedback",
+          "发送反馈"
+        ],
+        [
+          "Report Issue",
+          "报告问题"
+        ],
+        [
+          "Idea",
+          "想法"
+        ],
+        [
+          "Feature request",
+          "功能建议"
+        ],
+        [
+          "Something is off",
+          "有些不对"
+        ],
+        [
+          "Urgent",
+          "紧急"
+        ],
+        [
+          "Can't use Cursor",
+          "无法使用 Cursor"
+        ],
+        [
+          "Bug",
+          "缺陷"
+        ],
+        [
+          "Describe the issue...",
+          "描述问题..."
+        ],
+        [
+          "Attach screenshot",
+          "附加截图"
+        ],
+        [
+          "Response A is Better",
+          "回复 A 更好"
+        ],
+        [
+          "Response B is Better",
+          "回复 B 更好"
+        ],
+        [
+          "Response A is better",
+          "回复 A 更好"
+        ],
+        [
+          "Response B is better",
+          "回复 B 更好"
         ],
         [
           "How did the agent do?",
@@ -3851,6 +4263,18 @@
           "钩子允许您在智能体执行的特定时间点运行自定义脚本，以修改行为、强制执行策略或添加自定义日志。"
         ],
         [
+          "Automate with Hooks",
+          "使用钩子实现自动化"
+        ],
+        [
+          "Hooks run custom scripts at lifecycle events to observe, control, and extend the agent loop.",
+          "钩子在生命周期事件中运行自定义脚本，用于观察、控制和扩展智能体循环。"
+        ],
+        [
+          "Hooks that run during the agent's loop will show up here.",
+          "在智能体循环期间运行的钩子会显示在这里。"
+        ],
+        [
           "Note that paths are relative to the hooks.json file",
           "注意路径相对于 hooks.json 文件"
         ],
@@ -3962,6 +4386,18 @@
         ],
         [
           "Cursor-managed worktrees",
+          "Cursor 管理的工作树"
+        ],
+        [
+          "Max Worktrees",
+          "最大工作树数量"
+        ],
+        [
+          "Max Total Size (GB)",
+          "最大总大小（GB）"
+        ],
+        [
+          "Cursor-Managed Worktrees",
           "Cursor 管理的工作树"
         ],
         [
@@ -4103,6 +4539,46 @@
         [
           "⚠️ Use with caution. Skip symlinks during .cursorignore file discovery. Only enable if your repository has many symlinks and all .cursorignore files are reachable without them (controlled by admin). Changing this setting will require a restart of Cursor.",
           "⚠️ 谨慎使用。在 .cursorignore 文件发现期间跳过符号链接。仅在您的仓库有很多符号链接且所有 .cursorignore 文件无需它们即可访问时启用（由管理员控制）。更改此设置需要重启 Cursor。"
+        ],
+        [
+          "Use with caution. Skip symlinks during .cursorignore file discovery. Enable only when all .cursorignore files are reachable without symlinks. Changing this setting requires restarting Cursor.",
+          "谨慎使用。在发现 .cursorignore 文件时跳过符号链接。仅当所有 .cursorignore 文件无需通过符号链接即可访问时启用。更改此设置需要重启 Cursor。"
+        ],
+        [
+          "LSP",
+          "语言服务器"
+        ],
+        [
+          "Enable LSPs",
+          "启用 LSP"
+        ],
+        [
+          "Enable language server by default to provide code intelligence in workspaces",
+          "默认启用语言服务器，以便在工作区中提供代码智能"
+        ],
+        [
+          "Enable LSPs for Worktrees",
+          "为工作树启用 LSP"
+        ],
+        [
+          "Enable language server by default to provide code intelligence in agent worktree workspaces",
+          "默认启用语言服务器，以便在智能体工作树工作区中提供代码智能"
+        ],
+        [
+          "Maximum Local LSP Workspaces",
+          "本地 LSP 工作区上限"
+        ],
+        [
+          "Maximum local workspaces that can run language servers at the same time",
+          "可同时运行语言服务器的本地工作区最大数量"
+        ],
+        [
+          "Maximum Remote LSP Workspaces",
+          "远程 LSP 工作区上限"
+        ],
+        [
+          "Maximum remote workspaces that can run language servers at the same time",
+          "可同时运行语言服务器的远程工作区最大数量"
         ],
         [
           "Configure Ignored Files",
@@ -4275,6 +4751,18 @@
           "搜索用户插件..."
         ],
         [
+          "Search Plugins, Skills, MCPs...",
+          "搜索插件、技能、MCP..."
+        ],
+        [
+          "Browse 市场",
+          "浏览市场"
+        ],
+        [
+          "Search Skills for User...",
+          "搜索用户技能..."
+        ],
+        [
           "Search or Paste Link",
           "搜索或粘贴链接"
         ],
@@ -4403,6 +4891,14 @@
           "后台 Agent"
         ],
         [
+          "Background agents only work in folders with a git repository. Please open a folder that contains a git repository to use this feature.",
+          "后台智能体仅在包含 Git 仓库的文件夹中可用。请打开包含 Git 仓库的文件夹以使用此功能。"
+        ],
+        [
+          "Background agents only work in folders with a git repository. Please open a folder that contains a git repository to use this feature",
+          "后台智能体仅在包含 Git 仓库的文件夹中可用。请打开包含 Git 仓库的文件夹以使用此功能"
+        ],
+        [
           "Bug Finder",
           "Bug 查找器"
         ],
@@ -4431,6 +4927,10 @@
         [
           "API Key",
           "API 密钥"
+        ],
+        [
+          "Choose which models appear in the model picker",
+          "选择在模型选择器中显示的模型"
         ],
         [
           "API Keys",
@@ -4663,6 +5163,10 @@
         [
           "Open Web Links in Browser",
           "在浏览器中打开网页链接"
+        ],
+        [
+          "Open Web Links in Cursor Browser",
+          "在 Cursor 浏览器中打开网页链接"
         ],
         [
           "Automatically open http and https links in the Browser Tab",
@@ -5605,6 +6109,22 @@
           "当前 Cursor Grok 4.5 需求量很大。请切换到 Auto、其他模型，或稍后再试"
         ],
         [
+          "We're experiencing high demand right now. Please upgrade to Pro or try again in a few moments.",
+          "当前需求量很大。请升级到专业版，或稍后再试。"
+        ],
+        [
+          "We're experiencing high demand right now. Please upgrade to Pro or try again in a few moments",
+          "当前需求量很大。请升级到专业版，或稍后再试"
+        ],
+        [
+          "We're experiencing high demand right now. Please try again in a few moments.",
+          "当前需求量很大。请稍后再试。"
+        ],
+        [
+          "We're experiencing high demand right now. Please try again in a few moments",
+          "当前需求量很大。请稍后再试"
+        ],
+        [
           "Extension host terminated unexpectedly 3 times within the last 5 minutes.",
           "扩展宿主在过去 5 分钟内意外终止了 3 次。"
         ],
@@ -5845,8 +6365,56 @@
           "初始化仓库"
         ],
         [
+          "The folder currently open doesn't have a Git repository. You can initialize a repository which will enable source control features powered by Git.",
+          "当前打开的文件夹没有 Git 仓库。您可以初始化一个仓库，以启用由 Git 提供支持的源代码管理功能。"
+        ],
+        [
+          "To learn more about how to use Git and source control in VS Code [read our docs].",
+          "若想进一步了解如何在 VS Code 中使用 Git 和源代码管理，请阅读我们的文档。"
+        ],
+        [
+          "You can directly publish this folder to a GitHub repository. Once published, you'll have access to source control features powered by Git and GitHub.",
+          "您可以直接将此文件夹发布到 GitHub 仓库。发布后即可使用由 Git 和 GitHub 提供支持的源代码管理功能。"
+        ],
+        [
+          "Publish to GitHub",
+          "发布到 GitHub"
+        ],
+        [
+          "No git repository found.",
+          "未找到 Git 仓库。"
+        ],
+        [
+          "No git repository found",
+          "未找到 Git 仓库"
+        ],
+        [
+          "Run on",
+          "运行于"
+        ],
+        [
+          "Remote Machines",
+          "远程计算机"
+        ],
+        [
+          "Search Remote Machines...",
+          "搜索远程计算机..."
+        ],
+        [
+          "No remote machines yet.",
+          "暂无远程计算机。"
+        ],
+        [
+          "No remote machines yet",
+          "暂无远程计算机"
+        ],
+        [
           "Connect GitHub",
           "连接 GitHub"
+        ],
+        [
+          "Connect Your Repos",
+          "连接您的仓库"
         ],
         [
           "Connect GitHub/GitLab, manage team and user settings, and configure environments",
@@ -5855,6 +6423,22 @@
         [
           "Connect GitHub to create, update, and merge pull requests directly in Cursor.",
           "连接 GitHub，以便直接在 Cursor 中创建、更新和合并拉取请求。"
+        ],
+        [
+          "Connect GitHub to Cursor",
+          "将 GitHub 连接到 Cursor"
+        ],
+        [
+          "Let agents work with your Repos",
+          "让智能体使用您的仓库"
+        ],
+        [
+          "Run durable, parallel agents in the cloud, automate code review with Bugbot, and steer agents from your phone.",
+          "在云端运行持久、并行的智能体，用 Bugbot 自动审查代码，并在手机上操控智能体。"
+        ],
+        [
+          "Run durable, parallel agents in the cloud, automate code review with Bugbot, and steer agents from your phone",
+          "在云端运行持久、并行的智能体，用 Bugbot 自动审查代码，并在手机上操控智能体"
         ],
         [
           "Review PRs, fix CI, address comments, and more directly from Cursor",
@@ -5899,6 +6483,22 @@
         [
           "Commit & Create PR",
           "提交并创建 PR"
+        ],
+        [
+          "Create Branch & Commit",
+          "创建分支并提交"
+        ],
+        [
+          "Create Branch, 提交并推送",
+          "创建分支、提交并推送"
+        ],
+        [
+          "Create Branch",
+          "创建分支"
+        ],
+        [
+          "Create PR",
+          "创建 PR"
         ],
         [
           "Push",
@@ -6159,6 +6759,22 @@
         [
           "Fork Chat",
           "分叉对话"
+        ],
+        [
+          "Move to",
+          "移动到"
+        ],
+        [
+          "Last Agent Turn",
+          "上次智能体回合"
+        ],
+        [
+          "Expand",
+          "展开"
+        ],
+        [
+          "Checked out",
+          "已检出"
         ],
         [
           "Fork",
@@ -6545,6 +7161,10 @@
           "关闭窗格"
         ],
         [
+          "Close Panel",
+          "关闭面板"
+        ],
+        [
           "Close Pane (Ctrl+F4)",
           "关闭窗格 (Ctrl+F4)"
         ],
@@ -6645,6 +7265,14 @@
           "编辑器为空时自动隐藏"
         ],
         [
+          "Auto-Hide Editor When Empty",
+          "编辑器为空时自动隐藏"
+        ],
+        [
+          "Open Chat as Editor Tabs",
+          "以编辑器标签页打开对话"
+        ],
+        [
           "When all editors are closed, hide the editor area and maximize chat",
           "当所有编辑器关闭时，隐藏编辑器区域并最大化聊天"
         ],
@@ -6679,6 +7307,14 @@
         [
           "Play a sound when Agent completes or needs attention",
           "当智能体完成或需要关注时播放提示音"
+        ],
+        [
+          "Play a sound when agents finish or need attention",
+          "当智能体完成或需要关注时播放提示音"
+        ],
+        [
+          "Play a sound when agents finish or need attention.",
+          "当智能体完成或需要关注时播放提示音。"
         ],
         [
           "Approvals & Execution for commands, MCP and more",
@@ -7251,6 +7887,14 @@
           "显示所有命令"
         ],
         [
+          "Report Issue",
+          "报告问题"
+        ],
+        [
+          "Show Release Notes",
+          "显示发行说明"
+        ],
+        [
           "Editor Playground",
           "编辑器演练场"
         ],
@@ -7665,6 +8309,50 @@
           "打开自定义"
         ],
         [
+          "Open Plugins",
+          "打开插件"
+        ],
+        [
+          "Open MCPs",
+          "打开 MCP"
+        ],
+        [
+          "Open Skills",
+          "打开技能"
+        ],
+        [
+          "Open Subagents",
+          "打开子智能体"
+        ],
+        [
+          "Open Rules",
+          "打开规则"
+        ],
+        [
+          "Open Commands",
+          "打开命令"
+        ],
+        [
+          "Open Hooks",
+          "打开钩子"
+        ],
+        [
+          "Toggle Git Blame",
+          "切换 Git Blame"
+        ],
+        [
+          "Toggle Search in Files",
+          "切换在文件中搜索"
+        ],
+        [
+          "Open Canvas",
+          "打开画布"
+        ],
+        [
+          "Show Apps Panel",
+          "显示应用面板"
+        ],
+        [
           "Customize is the new home for managing this page",
           "「自定义」现已成为此页面的管理入口"
         ],
@@ -7687,6 +8375,18 @@
         [
           "Hooks are moving to Customize",
           "Hooks 已迁移至「自定义」"
+        ],
+        [
+          "Plugins, MCPs, Skills, and Rules have moved to Customize",
+          "插件、MCP、技能和规则已移至「自定义」"
+        ],
+        [
+          "We've introduced a new home for all the ways to customize Cursor.",
+          "我们为 Cursor 的各种自定义方式提供了新入口。"
+        ],
+        [
+          "We've introduced a new home for all the ways to customize Cursor",
+          "我们为 Cursor 的各种自定义方式提供了新入口"
         ],
         [
           "Workspaces",
@@ -7801,6 +8501,38 @@
         [
           "Ready to receive CSS changes from Inspecta",
           "已准备好接收来自 Inspecta 的 CSS 更改"
+        ],
+        [
+          "CSS changes processed by Cursor AI successfully!",
+          "Cursor AI 已成功处理 CSS 更改！"
+        ],
+        [
+          "CSS changes processed by Cursor AI successfully",
+          "Cursor AI 已成功处理 CSS 更改"
+        ],
+        [
+          "CSS changes sent to Cursor AI!",
+          "CSS 更改已发送至 Cursor AI！"
+        ],
+        [
+          "CSS changes sent to Cursor AI",
+          "CSS 更改已发送至 Cursor AI"
+        ],
+        [
+          "The AI will implement the changes automatically.",
+          "AI 将自动实施这些更改。"
+        ],
+        [
+          "The AI will implement the changes automatically",
+          "AI 将自动实施这些更改"
+        ],
+        [
+          "CSS changes sent to Cursor AI! The AI will implement the changes automatically.",
+          "CSS 更改已发送至 Cursor AI！AI 将自动实施这些更改。"
+        ],
+        [
+          "View Changes",
+          "查看更改"
         ]
       ]
     },
@@ -7895,6 +8627,18 @@
         [
           "Recent Agents",
           "最近智能体"
+        ],
+        [
+          "Open Cursor",
+          "打开 Cursor"
+        ],
+        [
+          "Clear All Notifications",
+          "清除所有通知"
+        ],
+        [
+          "View More",
+          "查看更多"
         ],
         [
           "Agent Mode",
@@ -8031,6 +8775,34 @@
         [
           "Ask Cursor questions about your codebase",
           "就代码库向 Cursor 提问"
+        ],
+        [
+          "Generate an implementation plan",
+          "生成实现计划"
+        ],
+        [
+          "Pinpoint the root cause of an issue",
+          "定位问题的根本原因"
+        ],
+        [
+          "pinpoint the root cause of an issue",
+          "定位问题的根本原因"
+        ],
+        [
+          "固定point the root cause of an issue",
+          "定位问题的根本原因"
+        ],
+        [
+          "Orchestrate multiple subagents in parallel",
+          "并行编排多个子智能体"
+        ],
+        [
+          "Answer questions without making edits",
+          "回答问题但不进行编辑"
+        ],
+        [
+          "Search skills, context, chats...",
+          "搜索技能、上下文、对话..."
         ],
         [
           "Plan, search, make edits, run commands",
@@ -8387,6 +9159,18 @@
           "连接错误"
         ],
         [
+          "Connection failed",
+          "连接失败"
+        ],
+        [
+          "The connection failed 10 times. Please check your network connection and try again.",
+          "连接失败了 10 次。请检查网络连接后重试。"
+        ],
+        [
+          "The connection failed 10 times. Please check your network connection and try again",
+          "连接失败了 10 次。请检查网络连接后重试"
+        ],
+        [
           "Connection failed. Please try again, or contact support if the issue persists.",
           "连接失败。请重试，或在问题持续存在时联系支持。"
         ],
@@ -8579,6 +9363,22 @@
           "我们将 Cursor Grok 4.5 促销活动再延长一周。截至 7 月 21 日，在桌面端、网页、iOS、CLI 和 SDK 上享双倍用量。"
         ],
         [
+          "Plan Update",
+          "计划更新"
+        ],
+        [
+          "2x Included Usage",
+          "2 倍包含用量"
+        ],
+        [
+          "Your plan now includes 2x usage for all Cursor models: Composer 2.5 and Cursor Grok 4.5.",
+          "您的套餐现包含所有 Cursor 模型 2 倍用量：Composer 2.5 和 Cursor Grok 4.5。"
+        ],
+        [
+          "Your plan now includes 2x usage for all Cursor models: Composer 2.5 and Cursor Grok 4.5",
+          "您的套餐现包含所有 Cursor 模型 2 倍用量：Composer 2.5 和 Cursor Grok 4.5"
+        ],
+        [
           "Trained jointly with SpaceXAI, Grok 4.5 can handle long-running tasks beyond coding",
           "与 SpaceXAI 联合训练，Grok 4.5 可处理超出编码范围的长时任务"
         ],
@@ -8690,6 +9490,10 @@
       "entries": [
         [
           "Connection Failed",
+          "连接失败"
+        ],
+        [
+          "Connection failed",
           "连接失败"
         ],
         [
@@ -9871,6 +10675,10 @@
           "显示更多"
         ],
         [
+          "Show less",
+          "显示更少"
+        ],
+        [
           "Show 1 more",
           "再显示 1 条"
         ],
@@ -9915,6 +10723,14 @@
           "重新加载窗口"
         ],
         [
+          "Extensions have been modified on disk. Please reload the window.",
+          "扩展已在磁盘上被修改。请重新加载窗口。"
+        ],
+        [
+          "Extensions have been modified on disk. Please reload the window",
+          "扩展已在磁盘上被修改。请重新加载窗口"
+        ],
+        [
           "Something went wrong.",
           "出错了。"
         ],
@@ -9933,6 +10749,14 @@
         [
           "Developer: Open Logs Folder",
           "开发者：打开日志文件夹"
+        ],
+        [
+          "Debug: Open Skill Publishing Logs",
+          "调试：打开技能发布日志"
+        ],
+        [
+          "Start File Watch Recording",
+          "开始文件监视录制"
         ],
         [
           "Open Developer Tools for Extension Host",
@@ -10071,6 +10895,50 @@
         [
           "Let's kick something off",
           "让我们开始吧"
+        ],
+        [
+          "Search Cursor settings...",
+          "搜索 Cursor 设置..."
+        ],
+        [
+          "Describe the issue...",
+          "描述问题..."
+        ],
+        [
+          "Search Plugins, Skills, MCPs...",
+          "搜索插件、技能、MCP..."
+        ],
+        [
+          "Search files...",
+          "搜索文件..."
+        ],
+        [
+          "Search branches...",
+          "搜索分支..."
+        ],
+        [
+          "Search MCPs...",
+          "搜索 MCP..."
+        ],
+        [
+          "No MCPs Found",
+          "未找到 MCP"
+        ],
+        [
+          "Search skills, context, chats...",
+          "搜索技能、上下文、对话..."
+        ],
+        [
+          "Recent Workspaces",
+          "最近工作区"
+        ],
+        [
+          "Getting Started",
+          "开始使用"
+        ],
+        [
+          "Search Skills for User...",
+          "搜索用户技能..."
         ]
       ]
     }

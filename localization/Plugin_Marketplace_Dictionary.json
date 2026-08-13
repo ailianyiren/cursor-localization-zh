@@ -100,7 +100,24 @@
     "Search skills, rules, subagents": "搜索技能、规则与子智能体",
     "Search or Paste Link": "搜索或粘贴链接",
     "claude-plugins-official": "Claude 官方插件源",
-    "Remove Marketplace": "移除市场"
+    "Remove Marketplace": "移除市场",
+    "Data Science": "数据科学",
+    "Debuggers": "调试器",
+    "Extension Packs": "扩展包",
+    "Education": "教育",
+    "Formatters": "格式化程序",
+    "Keymaps": "键映射",
+    "Language Packs": "语言包",
+    "Linters": "代码检查器",
+    "Machine Learning": "机器学习",
+    "Notebooks": "笔记本",
+    "Programming Languages": "编程语言",
+    "SCM Providers": "SCM 提供程序",
+    "Snippets": "代码片段",
+    "Testing": "测试",
+    "Themes": "主题",
+    "Visualization": "可视化",
+    "Other": "其他"
   },
   "uiFragments": [
     [

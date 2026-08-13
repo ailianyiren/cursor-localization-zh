@@ -357,6 +357,7 @@
         try {
             if (el.closest('.monaco-editor')) return true;
             if (el.closest('webview')) return true;
+            if (el.closest('.menubar, [role="menubar"], .menubar-menu-title, .menubar-menu-button')) return true;
             if (el.matches && el.matches(
                 '.view-lines, .editor-scrollable, .overflow-guard, .inputarea, .margin, .minimap'
             )) return true;

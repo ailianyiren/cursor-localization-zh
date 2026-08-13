@@ -17,6 +17,7 @@ Cursor 汉化工具
 广告弹窗翻译单独维护于 localization/Ad_Popup_Dictionary.json，注入时自动合并进词典。
 插件市场翻译单独维护于 localization/Plugin_Marketplace_Dictionary.json，注入时自动生成市场页 JS 词典。
 通用界面主词典与正则规则位于 localization/Core_Dictionary.json、localization/Pattern_Dictionary.json。
+系统托盘右键菜单通过替换 out/main.js 中的固定标签实现，词条见 localization/Tray_Dictionary.json。
 注入脚本由 localization/runtime/*.js 组装生成；片段词典见 localization/Partial_Fragments.json、localization/Dropdown_Fragments.json、localization/Cursor_Settings_Fragments.json。
 """
 
@@ -742,6 +743,92 @@ def HuoQu_JS_LuJing():
 def HuoQu_BeiFen_LuJing():
     """获取备份文件路径"""
     return HuoQu_HTML_LuJing() + BEI_FEN_HOU_ZHUI
+
+
+def HuoQu_Main_JS_LuJing():
+    """获取 Cursor 主进程 out/main.js（系统托盘菜单所在文件）。"""
+    return os.path.join(HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING), "out", "main.js")
+
+
+TRAY_DICTIONARY_FILE = os.path.join(LOCALIZATION_DIR, "Tray_Dictionary.json")
+
+
+def DuQu_TuoPan_TiHuan():
+    """读取托盘菜单唯一字符串替换表 [[en, zh], ...]。"""
+    if not os.path.isfile(TRAY_DICTIONARY_FILE):
+        return []
+    with open(TRAY_DICTIONARY_FILE, "r", encoding="utf-8") as WenJian:
+        ShuJu = json.load(WenJian)
+    JieGuo = []
+    for Xiang in ShuJu.get("replacements") or []:
+        if isinstance(Xiang, (list, tuple)) and len(Xiang) >= 2 and Xiang[0] and Xiang[1]:
+            JieGuo.append([str(Xiang[0]), str(Xiang[1])])
+    return JieGuo
+
+
+def YingYong_TuoPan_TiHuan(NeiRong, FanXiang=False):
+    """在 main.js 文本上应用或还原托盘标签替换。返回 (新文本, 替换次数)。"""
+    CiShu = 0
+    for YingWen, ZhongWen in DuQu_TuoPan_TiHuan():
+        Yuan, MuBiao = (ZhongWen, YingWen) if FanXiang else (YingWen, ZhongWen)
+        if Yuan not in NeiRong:
+            continue
+        NeiRong = NeiRong.replace(Yuan, MuBiao)
+        CiShu += 1
+    return NeiRong, CiShu
+
+
+def ZhuRu_TuoPan_HanHua():
+    """替换主进程托盘右键菜单中的固定英文标签。"""
+    LuJing = HuoQu_Main_JS_LuJing()
+    if not os.path.isfile(LuJing):
+        print(f"[托盘] 未找到 main.js，跳过: {LuJing}")
+        return False
+    try:
+        NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(LuJing)
+    except OSError as CuoWu:
+        print(f"[托盘] 无法读取 main.js: {CuoWu}")
+        return False
+    XinWenBen, CiShu = YingYong_TuoPan_TiHuan(NeiRong, FanXiang=False)
+    if CiShu == 0:
+        if "最近智能体" in NeiRong or "清除所有通知" in NeiRong:
+            print("[托盘] 菜单文案已是中文，跳过")
+            return True
+        print("[托盘] 未匹配到托盘菜单英文标签（Cursor 版本可能已改结构），跳过")
+        return False
+    try:
+        XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinWenBen, HuanHang)
+    except PermissionError:
+        print("[错误] 无法写入 main.js：权限不足（托盘菜单汉化需要写主进程文件）")
+        TiShi_JiaoYan_QuanXian_BuZu(LuJing)
+        return False
+    except OSError as CuoWu:
+        print(f"[错误] 无法写入 main.js: {CuoWu}")
+        return False
+    print(f"[托盘] 已替换 {CiShu} 处系统托盘菜单文案")
+    return True
+
+
+def HuiFu_TuoPan_HanHua():
+    """把托盘菜单中文标签还原为英文。"""
+    LuJing = HuoQu_Main_JS_LuJing()
+    if not os.path.isfile(LuJing):
+        return False
+    try:
+        NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(LuJing)
+    except OSError as CuoWu:
+        print(f"[托盘] 无法读取 main.js: {CuoWu}")
+        return False
+    XinWenBen, CiShu = YingYong_TuoPan_TiHuan(NeiRong, FanXiang=True)
+    if CiShu == 0:
+        return False
+    try:
+        XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinWenBen, HuanHang)
+    except OSError as CuoWu:
+        print(f"[托盘] 无法还原 main.js: {CuoWu}")
+        return False
+    print(f"[托盘] 已还原 {CiShu} 处系统托盘菜单文案")
+    return True
 
 
 # ============================================================
@@ -1512,6 +1599,8 @@ def HuiFu_YuanShi():
         XieRu_WenBen_BaoLiu_HuanHang(LuJing_Html, ''.join(XinHang), HuanHang)
         print(f"[恢复] 已手动移除注入内容")
 
+    HuiFu_TuoPan_HanHua()
+
     HuiFu_JiaoYan_Zhi()
 
     ShanChu_SuoYou_ZhuRu_JS()
@@ -1572,6 +1661,7 @@ def ZhuChengXu():
         ShengJi_HTML_ZhuRu_If_Needed()
         XieRu_FanYi_JS()
         ShanChu_JiuBan_JS()
+        ZhuRu_TuoPan_HanHua()
         GengXin_JiaoYan_Zhi()
         print("\n[完成] 语言包与脚本已更新！请完全退出并重启 Cursor 生效。")
         return
@@ -1583,6 +1673,7 @@ def ZhuChengXu():
 
     print("[步骤 4/4] 注入 HTML 引用...")
     ZhuRu_HTML()
+    ZhuRu_TuoPan_HanHua()
 
     print("\n" + "=" * 60)
     print("  [完成] 语言包安装与汉化注入成功！")

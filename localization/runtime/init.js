@@ -19,10 +19,13 @@
         try { AnZhuang_Monaco_Hover_FanYi(); } catch (e) {}
         try { AnZhuang_LiuLanQi_Webview_GuanCha(); } catch (e) {}
         try { AnZhuang_CaiDan_DongTai_GuanCha(); } catch (e) {}
+        try { AnZhuang_DingBu_CaiDan_GuanCha(); } catch (e) {}
 
         setTimeout(function() {
             if (document.body) {
                 try { FanYi_ZiShu_QuYu(); } catch (e) {}
+                try { PaiDui_DingBu_CaiDanTiao(); } catch (e) {}
+                try { XiuZheng_TiJiao_PingFen(); } catch (e) {}
                 PaiDui_QuanJuXiuZheng(true);
             }
         }, 500);
@@ -30,6 +33,7 @@
         setTimeout(function() {
             if (document.body) {
                 try { FanYi_ZiShu_QuYu(); } catch (e) {}
+                try { XiuZheng_TiJiao_PingFen(); } catch (e) {}
                 PaiDui_QuanJuXiuZheng(true);
             }
         }, 2500);

@@ -308,6 +308,16 @@
         ['Paste', '粘贴']
     ];
 
+    var DingBu_CaiDan_HINTS = [
+        ['File', '文件'],
+        ['Edit', '编辑'],
+        ['Selection', '选择'],
+        ['View', '查看'],
+        ['Go', '转到'],
+        ['Terminal', '终端'],
+        ['Help', '帮助']
+    ];
+
     var BianJiQi_CaiDan_HINTS = [
         ['Add Symbol to Current Chat', '将符号添加到当前对话'],
         ['Add Symbol to Current Chat...', '将符号添加到当前对话...'],
@@ -337,6 +347,8 @@
         ['Archive', '归档'],
         ['Unarchive', '取消归档'],
         ['Fork Chat', '分叉对话'],
+        ['New Chat', '新对话'],
+        ['Agent Conversations', '智能体对话'],
         ['Fork Conversation', '分叉对话'],
         ['Fork', '分叉'],
         ['Export Chat', '导出对话'],
@@ -384,7 +396,10 @@
         ['Show Chat History', '显示聊天历史'],
         ['Chat History', '聊天历史'],
         ['Show more', '显示更多'],
-        ['Show 1 more', '再显示 1 条']
+        ['Show less', '显示更少'],
+        ['Show 1 more', '再显示 1 条'],
+        ['New Chat', '新对话'],
+        ['Agent Conversations', '智能体对话']
     ];
 
     var Agent_BianGeng_GongYong_HINTS = [
@@ -440,10 +455,15 @@
         ['Close Chat', '关闭对话'],
         ['Close Other Chats', '关闭其他对话'],
         ['How did the agent do?', '智能体表现如何？'],
+        ['Response A is Better', '回复 A 更好'],
+        ['Response B is Better', '回复 B 更好'],
         ['New Agent (Ctrl+N)', '新建智能体 (Ctrl+N)'],
         ['[Alt] Replace Agent', '[Alt] 替换智能体'],
         ['Voice Input', '语音输入'],
         ['Send now', '立即发送'],
+        ['Send After Current Message', '在当前消息之后发送'],
+        ['Send after current message', '在当前消息之后发送'],
+        ['Send Right Away', '立即发送'],
         ['Edit queued message', '编辑排队消息'],
         ['Editing queued message', '正在编辑排队消息'],
         ['Editing queued message...', '正在编辑排队消息...'],
@@ -581,11 +601,41 @@
         }
     }
 
+    function FanYi_TiJiao_PingFen_WenBen(text) {
+        if (!text || !/[A-Za-z]/.test(text)) return null;
+        if (!/(?:Most Recent Commit Scored|AI-Generated:|Total Changes:|Agent Stats:|Tab Stats:|Agent AI Stats|Tab AI Stats|% AI\b)/i.test(text)) {
+            return null;
+        }
+        var result = text;
+        result = result.replace(/Most Recent Commit Scored:/g, '最近评分的提交：');
+        result = result.replace(/AI-Generated:\s*([\d.]+)%\s*\((\d+)\s*lines?\)/gi, 'AI 生成：$1%（$2 行）');
+        result = result.replace(/AI-Generated:/g, 'AI 生成：');
+        result = result.replace(/- Tab:\s*([\d,]+)\s*lines?\s*\(([\d,]+)\s*added,\s*([\d,]+)\s*deleted\)/gi, '- Tab：$1 行（新增 $2，删除 $3）');
+        result = result.replace(/- Composer:\s*([\d,]+)\s*lines?\s*\(([\d,]+)\s*added,\s*([\d,]+)\s*deleted\)/gi, '- Composer：$1 行（新增 $2，删除 $3）');
+        result = result.replace(/Total Changes:\s*([\d,]+)\s*added,\s*([\d,]+)\s*deleted/gi, '总变更：新增 $1，删除 $2');
+        result = result.replace(/Agent AI Stats \(Today\):\s*([\d,]+)\/([\d,]+)(?:\s*lines)?\s*\((\d+)%\)/gi, '智能体 AI 统计（今日）：$1/$2（$3%）');
+        result = result.replace(/Agent Stats:\s*([\d,]+)\/([\d,]+)\s*\((\d+)%\)/gi, '智能体统计：$1/$2（$3%）');
+        result = result.replace(/Tab AI Stats \(Today\):\s*([\d,]+)\/([\d,]+)(?:\s*lines)?\s*\((\d+)%\)/gi, 'Tab AI 统计（今日）：$1/$2（$3%）');
+        result = result.replace(/Tab Stats:\s*([\d,]+)\/([\d,]+)\s*\((\d+)%\)/gi, 'Tab 统计：$1/$2（$3%）');
+        result = result.replace(/Agent AI Stats \(Today\):/g, '智能体 AI 统计（今日）：');
+        result = result.replace(/Agent Stats:/g, '智能体统计：');
+        result = result.replace(/Tab AI Stats \(Today\):/g, 'Tab AI 统计（今日）：');
+        result = result.replace(/Tab Stats:/g, 'Tab 统计：');
+        if (/最近评分的提交|AI 生成：/.test(result)) {
+            result = result.replace(/Repo:\s*([^\n\r]+)/g, '仓库：$1');
+            result = result.replace(/Branch:\s*([^\n\r]+)/g, '分支：$1');
+        }
+        result = result.replace(/\b([a-f0-9]{7,40})\s+([\d.]+)%\s*AI\b/gi, '$1 $2% 由 AI 生成');
+        return result !== text ? result : null;
+    }
+
     function FanYi_WenBen_JieDian(node) {
         var text = node.textContent;
         if (!text) return;
         var trimmed = text.trim();
-        if (!trimmed || trimmed.length > 500) return;
+        if (!trimmed) return;
+        var pingFenWen = /(?:Most Recent Commit Scored|AI-Generated:|Total Changes:)/i.test(trimmed);
+        if (trimmed.length > (pingFenWen ? 800 : 500)) return;
         if (/^[\d\s.,;:!?@#$%^&*()\-+=<>\\/|~`'"[\]{}]+$/.test(trimmed)) return;
         try {
             if (node.parentElement && Shi_CaiDan_QuYu(node.parentElement) && !Shi_CaiDan_WenBen_JieDian(node)) return;
@@ -611,6 +661,7 @@
         }
 
         var result = ChaZhao_FanYi(text);
+        if (!result) result = FanYi_TiJiao_PingFen_WenBen(text) || FanYi_TiJiao_PingFen_WenBen(trimmed);
         if (result) {
             var prefix = text.substring(0, text.indexOf(trimmed));
             var suffix = text.substring(text.indexOf(trimmed) + trimmed.length);
@@ -638,6 +689,8 @@
             }
             if (agentNeo !== val) return agentNeo;
         }
+        var pingFen = FanYi_TiJiao_PingFen_WenBen(val) || FanYi_TiJiao_PingFen_WenBen(normalized);
+        if (pingFen) return pingFen;
         return TiHuan_BuFen_WenBen(val);
     }
 
@@ -676,8 +729,8 @@
                     var text = tnode.textContent;
                     if (!text) continue;
                     var trimmed = text.trim();
-                    if (!trimmed || trimmed.length > 120) continue;
-                    var tr = ChaZhao_FanYi(trimmed);
+                    if (!trimmed || trimmed.length > 800) continue;
+                    var tr = ChaZhao_FanYi(trimmed) || FanYi_TiJiao_PingFen_WenBen(text) || FanYi_TiJiao_PingFen_WenBen(trimmed);
                     if (!tr) {
                         for (var j = 0; j < Agent_TiShi_WenBen.length; j++) {
                             if (trimmed === Agent_TiShi_WenBen[j][0]) {
@@ -698,9 +751,9 @@
                 var leaf = leaves[n];
                 if (!leaf || (leaf.querySelector && leaf.querySelector('div, span, p, label'))) continue;
                 var raw = (leaf.textContent || '').trim();
-                if (!raw || raw.length > 120) continue;
+                if (!raw || raw.length > 800) continue;
                 var plain = GuiYiHua_WenBen(raw);
-                var ltr = ChaZhao_FanYi(plain);
+                var ltr = ChaZhao_FanYi(plain) || FanYi_TiJiao_PingFen_WenBen(raw) || FanYi_TiJiao_PingFen_WenBen(plain);
                 if (!ltr) {
                     for (var k = 0; k < Agent_TiShi_WenBen.length; k++) {
                         if (plain === Agent_TiShi_WenBen[k][0]) { ltr = Agent_TiShi_WenBen[k][1]; break; }
@@ -771,7 +824,7 @@
                     var text = tnode.textContent;
                     if (!text) continue;
                     var trimmed = GuiYiHua_WenBen(text);
-                    if (!trimmed || trimmed.length > 280) continue;
+                    if (!trimmed || trimmed.length > 800) continue;
                     var tr = FanYi_TiShi_WenBen(text) || FanYi_TiShi_WenBen(trimmed);
                     if (tr && tr !== text) {
                         var idx = text.indexOf(trimmed);
@@ -789,7 +842,7 @@
                 if (leaf.querySelector && leaf.querySelector('span, div, p, label')) continue;
                 FanYi_ShuXing(leaf);
                 var raw = leaf.textContent || '';
-                if (!raw || raw.length > 280) continue;
+                if (!raw || raw.length > 800) continue;
                 var plain = GuiYiHua_WenBen(raw);
                 var ltr = FanYi_TiShi_WenBen(raw) || FanYi_TiShi_WenBen(plain);
                 if (ltr && ltr !== raw) KeYi_AnQuan_GaiXie_WenBen(leaf, ltr, [plain.slice(0, 12)]);
@@ -1073,6 +1126,9 @@
             if (JieDian_You_LiuLanQi(el)) mask |= QX_LIU_LAN_QI;
             if (JieDian_You_ShiJianXian(el)) mask |= QX_SHI_JIAN_XIAN;
             if (JieDian_You_Monaco_Hover(el)) mask |= QX_HOVER | QX_XIA_LA;
+            if (el.closest && el.closest('.statusbar, .part.statusbar, .statusbar-item, [id="workbench.parts.statusbar"]')) {
+                mask |= QX_HOVER;
+            }
             if (el.closest && el.closest('[class*="composer"], [class*="aichat"], [class*="agent-changes"], [class*="chat-input"]')) {
                 mask |= QX_COMPOSER;
             }
@@ -1150,8 +1206,10 @@
         run(QX_HOVER, function() {
             FanYi_Monaco_Hover_Content(document.body);
             FanYi_Cursor_Hover_Widget(document.body);
+            XiuZheng_TiJiao_PingFen();
         });
         try { XiuZheng_YinCang_DuiHua_SheZhi(); } catch (e) {}
+        try { XiuZheng_TiJiao_PingFen(); } catch (e) {}
     }
 
     function TianJia_DaiChuLi(node) {
@@ -1227,6 +1285,21 @@
             return !!(node.querySelector && node.querySelector(
                 '.context-view .monaco-menu, .context-view [role="menu"], .monaco-menu-container, ' +
                 '.ui-menu, .ui-menu__layout, .ui-menu__content, .ui-slash-menu, .ui-slash-menu__content'
+            ));
+        } catch (e) { return false; }
+    }
+
+    function JieDian_You_DingBu_CaiDan(node) {
+        if (!node || node.nodeType !== Node.ELEMENT_NODE) return false;
+        if (node.classList) {
+            if (node.classList.contains('menubar') ||
+                node.classList.contains('menubar-menu-button') ||
+                node.classList.contains('menubar-menu-title') ||
+                node.classList.contains('titlebar')) return true;
+        }
+        try {
+            return !!(node.closest && node.closest(
+                '.menubar, [role="menubar"], .titlebar, .part.titlebar, .menubar-menu-button, .menubar-menu-title'
             ));
         } catch (e) { return false; }
     }
@@ -1337,6 +1410,7 @@
         var uiDuiHua = false;
         var cursorSheZhi = false;
         var cssInspector = false;
+        var dingBuCaiDan = false;
         var huiDiaoQiZhi = 0;
         for (var i = 0; i < mutations.length; i++) {
             var m = mutations[i];
@@ -1358,11 +1432,18 @@
                     if (!uiDuiHua && JieDian_You_UI_DuiHua(node)) uiDuiHua = true;
                     if (!cursorSheZhi && JieDian_You_Cursor_SheZhi(node)) cursorSheZhi = true;
                     if (!cssInspector && JieDian_You_Css_Inspector(node)) cssInspector = true;
+                    if (!dingBuCaiDan) {
+                        var dingBuJieDian = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+                        if (JieDian_You_DingBu_CaiDan(dingBuJieDian)) dingBuCaiDan = true;
+                    }
                     if (!piLiang && (node.nodeType === Node.ELEMENT_NODE || node.nodeType === Node.TEXT_NODE)) {
                         TianJia_DaiChuLi(node);
                     }
                 }
             }
+        }
+        if (dingBuCaiDan) {
+            try { PaiDui_DingBu_CaiDanTiao(); } catch (e) {}
         }
         if (xuanZeGongJu) {
             try { XiuZheng_BianJiQi_XuanZe(); } catch (e) {}
@@ -1440,13 +1521,17 @@
             if (xiala && (el === xiala || el.childElementCount > 0)) return false;
             var caiDan = el.closest('.monaco-menu, .context-view, [role="menu"], [role="menubar"]');
             if (caiDan) {
+                var shiDingBuBiaoTi = !!(el.classList && (
+                    el.classList.contains('menubar-menu-title') ||
+                    el.classList.contains('menubar-menu-button')
+                )) || !!(el.closest && el.closest('.menubar-menu-title'));
                 var shiBiaoQian = el.classList && (
                     el.classList.contains('action-label') ||
                     (el.className && String(el.className).indexOf('action-label') >= 0)
                 );
                 var shiYeZi = !el.querySelector || !el.querySelector('*');
                 var shiCaiDanXiang = !!(el.closest && el.closest('[role="menuitem"], a.action-menu-item, li.action-item'));
-                if (!shiBiaoQian && !(shiYeZi && shiCaiDanXiang)) return false;
+                if (!shiDingBuBiaoTi && !shiBiaoQian && !(shiYeZi && shiCaiDanXiang)) return false;
             }
         } catch (e) {}
         var parent = el.parentElement;
@@ -1719,8 +1804,19 @@
             ['Try Grok 4.5', '试用 Grok 4.5'],
             ['Extending 50% Off Cursor Grok 4.5', '延长 Cursor Grok 4.5 五折优惠'],
             ["We're extending the Cursor Grok 4.5 promotion for another week. Enjoy double usage through July 21 across desktop, web, iOS, CLI, and our SDK.", '我们将 Cursor Grok 4.5 促销活动再延长一周。截至 7 月 21 日，在桌面端、网页、iOS、CLI 和 SDK 上享双倍用量。'],
+            ['2x Included Usage', '2 倍包含用量'],
+            ['Your plan now includes 2x usage for all Cursor models: Composer 2.5 and Cursor Grok 4.5.', '您的套餐现包含所有 Cursor 模型 2 倍用量：Composer 2.5 和 Cursor Grok 4.5。'],
+            ['Plan Update', '计划更新'],
             ['High Load', '高负载'],
             ["We're experiencing high demand for Cursor Grok 4.5 right now. Please switch to Auto, another model, or try again in a few moments.", '当前 Cursor Grok 4.5 需求量很大。请切换到 Auto、其他模型，或稍后再试。'],
+            ["We're experiencing high demand right now. Please upgrade to Pro or try again in a few moments.", '当前需求量很大。请升级到专业版，或稍后再试。'],
+            ["We're experiencing high demand right now. Please try again in a few moments.", '当前需求量很大。请稍后再试。'],
+            ['Plugins, MCPs, Skills, and Rules have moved to Customize', '插件、MCP、技能和规则已移至「自定义」'],
+            ["We've introduced a new home for all the ways to customize Cursor.", '我们为 Cursor 的各种自定义方式提供了新入口。'],
+            ['Connection failed', '连接失败'],
+            ['Connect GitHub to Cursor', '将 GitHub 连接到 Cursor'],
+            ['Let agents work with your Repos', '让智能体使用您的仓库'],
+            ['Run durable, parallel agents in the cloud, automate code review with Bugbot, and steer agents from your phone.', '在云端运行持久、并行的智能体，用 Bugbot 自动审查代码，并在手机上操控智能体。'],
             ['Extension host terminated unexpectedly 3 times within the last 5 minutes.', '扩展宿主在过去 5 分钟内意外终止了 3 次。'],
             ['Restart Extension Host', '重启扩展宿主'],
             ['Start Extension Bisect', '启动扩展二分排查'],
@@ -1760,6 +1856,15 @@
             ['Open Project', '打开项目'],
             ['Clone Repository', '克隆仓库'],
             ['Connect via SSH', '通过 SSH 连接'],
+            ['Remote Machines', '远程计算机'],
+            ['Search Remote Machines...', '搜索远程计算机...'],
+            ['No remote machines yet.', '暂无远程计算机。'],
+            ['Run on', '运行于'],
+            ['Publish to GitHub', '发布到 GitHub'],
+            ['No git repository found.', '未找到 Git 仓库。'],
+            ['Report Issue', '报告问题'],
+            ['Send Feedback', '发送反馈'],
+            ['Code Intelligence', '代码智能'],
             ['Repositories', '仓库'],
             ['Browse Files', '浏览文件'],
             ['Message Cursor', '向 Cursor 发送消息'],
@@ -1782,6 +1887,19 @@
             ['Memories', '记忆'],
             ['Extend Cursor with Plugins', '通过插件扩展 Cursor'],
             ['Search Plugins for User...', '搜索用户插件...'],
+            ['Search Plugins, Skills, MCPs...', '搜索插件、技能、MCP...'],
+            ['Browse 市场', '浏览市场'],
+            ['Open Plugins', '打开插件'],
+            ['Open MCPs', '打开 MCP'],
+            ['Open Skills', '打开技能'],
+            ['Recent Workspaces', '最近工作区'],
+            ['Teach Cursor New Skills', '教 Cursor 新技能'],
+            ['Skills package domain-specific knowledge and workflows that Agent applies automatically when relevant.', '技能将领域特定的知识和工作流打包，智能体在相关时会自动应用。'],
+            ['Getting Started', '开始使用'],
+            ['Last Used Windows', '上次使用的窗口'],
+            ['Window Restoration', '窗口还原'],
+            ['Extensions have been modified on disk. Please reload the window.', '扩展已在磁盘上被修改。请重新加载窗口。'],
+            ['Background agents only work in folders with a git repository. Please open a folder that contains a git repository to use this feature.', '后台智能体仅在包含 Git 仓库的文件夹中可用。请打开包含 Git 仓库的文件夹以使用此功能。'],
             ['Click to import all local VS Code extensions', '点击以导入所有本地 VS Code 扩展'],
             ['Click to import all local VS Code extensions.', '点击以导入所有本地 VS Code 扩展。'],
             ["(don't show again)", '（不再显示）'],
@@ -1894,7 +2012,24 @@
             ['Upgrade for extended usage & faster responses', '升级以获取扩展用量和更快响应'],
             ['Upgrade for 3x usage & faster responses', '升级以获取 3 倍用量和更快响应'],
             ['Upgrade to a Pro account', '升级到专业版账户'],
-            ['Upgrade to Pro', '升级到专业版']
+            ['Upgrade to Pro', '升级到专业版'],
+            ['Included Usage', '包含用量'],
+            ['Plan Update', '计划更新'],
+            ['Window Restoration', '窗口还原'],
+            ['Last Used Windows', '上次使用的窗口'],
+            ['Controls which windows Cursor restores on startup', '控制启动时 Cursor 还原哪些窗口'],
+            ['Play a sound when agents finish or need attention', '当智能体完成或需要关注时播放提示音'],
+            ['Cursor Models', 'Cursor 模型'],
+            ['Other Models', '其他模型'],
+            ['Default Model', '默认模型'],
+            ['Cursor Default', 'Cursor 默认'],
+            ['No commit has been scored yet', '尚未对任何提交评分'],
+            ['No commit scored', '暂无已评分提交'],
+            ['Agent AI Stats (Today):', '智能体 AI 统计（今日）：'],
+            ['Agent Stats:', '智能体统计：'],
+            ['Tab AI Stats (Today):', 'Tab AI 统计（今日）：'],
+            ['Tab Stats:', 'Tab 统计：'],
+            ['Search Cursor settings...', '搜索 Cursor 设置...']
         ];
         FanYi_Gen_List_Substring_Hints(
             document.querySelectorAll('.monaco-hover, .monaco-hover-content, .upgrade-pro-button, .glass-sidebar-upgrade-pro-cta, div, span, p'),
@@ -2128,6 +2263,8 @@
     function XiuZheng_ZhiNengTi_FanKui() {
         var hints = [
             ['How did the agent do?', '智能体表现如何？'],
+        ['Response A is Better', '回复 A 更好'],
+        ['Response B is Better', '回复 B 更好'],
             ['Did the agent understand what you wanted?', '智能体是否理解您的需求？'],
             ['Misunderstood task', '误解了任务'],
             ['Ignored constraint', '忽略了约束'],
@@ -2405,6 +2542,161 @@
         }
     }
 
+    var ZhengZai_DingBu_FanYi = false;
+    var DingBu_CaiDan_Raf = 0;
+
+    function JieXi_DingBu_CaiDan_BiaoQian(text) {
+        var norm = GuiYiHua_WenBen(text || '');
+        if (!norm) return null;
+        if (/^运行(\([A-Za-z]\))?$/.test(norm)) return null;
+        var m = /^(File|Edit|Selection|View|Go|Terminal|Help)(?:\s*\(([A-Za-z])\))?$/.exec(norm);
+        if (!m) return null;
+        var zh = null;
+        for (var i = 0; i < DingBu_CaiDan_HINTS.length; i++) {
+            if (DingBu_CaiDan_HINTS[i][0] === m[1]) {
+                zh = DingBu_CaiDan_HINTS[i][1];
+                break;
+            }
+        }
+        if (!zh) return null;
+        return m[2] ? (zh + '(' + m[2] + ')') : zh;
+    }
+
+    function XiuZheng_DingBu_CaiDanTiao() {
+        if (ZhengZai_DingBu_FanYi) return;
+        ZhengZai_DingBu_FanYi = true;
+        try {
+            var bars;
+            try {
+                bars = document.querySelectorAll(
+                    '.menubar, [role="menubar"], .titlebar .menubar, .part.titlebar [role="menubar"]'
+                );
+            } catch (e) { return; }
+            if (!bars.length) return;
+            var seen = new Set();
+            for (var b = 0; b < bars.length; b++) {
+                var bar = bars[b];
+                if (!bar || seen.has(bar)) continue;
+                seen.add(bar);
+                var buttons;
+                try {
+                    buttons = bar.querySelectorAll('.menubar-menu-button, [role="menuitem"]');
+                } catch (e) { continue; }
+                if (!buttons.length) {
+                    try { buttons = bar.querySelectorAll('.menubar-menu-title'); } catch (e2) { continue; }
+                }
+                for (var i = 0; i < buttons.length; i++) {
+                    var el = buttons[i];
+                    if (!el) continue;
+                    var titleEl = el;
+                    try {
+                        var inner = el.querySelector && el.querySelector('.menubar-menu-title');
+                        if (inner) titleEl = inner;
+                    } catch (e3) {}
+                    var raw = GuiYiHua_WenBen(titleEl.textContent || '');
+                    if (/[\u4e00-\u9fff]/.test(raw)) continue;
+                    var tr = JieXi_DingBu_CaiDan_BiaoQian(raw);
+                    if (tr && tr !== raw) {
+                        try { titleEl.textContent = tr; } catch (e4) {}
+                    }
+                    try {
+                        var aria = el.getAttribute && el.getAttribute('aria-label');
+                        if (aria && !/[\u4e00-\u9fff]/.test(aria)) {
+                            var atr = JieXi_DingBu_CaiDan_BiaoQian(aria);
+                            if (atr && atr !== aria) el.setAttribute('aria-label', atr);
+                        }
+                    } catch (e5) {}
+                }
+            }
+        } finally {
+            ZhengZai_DingBu_FanYi = false;
+        }
+    }
+
+    function PaiDui_DingBu_CaiDanTiao() {
+        try { XiuZheng_DingBu_CaiDanTiao(); } catch (e) {}
+        if (DingBu_CaiDan_Raf) return;
+        var times = 0;
+        function zhuiZong() {
+            DingBu_CaiDan_Raf = 0;
+            try { XiuZheng_DingBu_CaiDanTiao(); } catch (e) {}
+            times++;
+            if (times < 2) {
+                DingBu_CaiDan_Raf = requestAnimationFrame(zhuiZong);
+            }
+        }
+        DingBu_CaiDan_Raf = requestAnimationFrame(zhuiZong);
+    }
+
+    function AnZhuang_DingBu_CaiDan_GuanCha() {
+        if (window.__cursorMenubarI18n) return;
+        window.__cursorMenubarI18n = true;
+        var obs = null;
+        function bangDing(bar) {
+            if (!bar || bar.__cursorMenubarBound) return;
+            bar.__cursorMenubarBound = true;
+            if (!obs) {
+                obs = new MutationObserver(function() {
+                    PaiDui_DingBu_CaiDanTiao();
+                });
+            }
+            try {
+                obs.observe(bar, { childList: true, subtree: true, characterData: true });
+            } catch (e) {}
+        }
+        function saoMiao() {
+            try {
+                var bars = document.querySelectorAll('.menubar, [role="menubar"]');
+                for (var i = 0; i < bars.length; i++) bangDing(bars[i]);
+            } catch (e) {}
+            PaiDui_DingBu_CaiDanTiao();
+        }
+        saoMiao();
+        setTimeout(saoMiao, 400);
+        window.addEventListener('focus', function() {
+            PaiDui_DingBu_CaiDanTiao();
+        }, true);
+    }
+
+    function XiuZheng_TiJiao_PingFen() {
+        var roots = [];
+        var seen = new Set();
+        function pushRoot(el) {
+            if (!el || seen.has(el)) return;
+            seen.add(el);
+            roots.push(el);
+        }
+        try {
+            var sb = document.querySelectorAll(
+                '.part.statusbar, .statusbar, [id="workbench.parts.statusbar"], .statusbar-item'
+            );
+            for (var i = 0; i < sb.length; i++) pushRoot(sb[i]);
+            var hovers = document.querySelectorAll(XuanFu_TiShi_XuanZeQi);
+            for (var h = 0; h < hovers.length; h++) {
+                var t = hovers[h].textContent || '';
+                if (/Most Recent Commit Scored|AI-Generated:|Agent Stats:|Tab Stats:|Total Changes:|最近评分的提交|AI 生成：|智能体统计：/.test(t)) {
+                    pushRoot(hovers[h]);
+                }
+            }
+        } catch (e) { return; }
+        for (var r = 0; r < roots.length; r++) {
+            var root = roots[r];
+            try { FanYi_ShuXing(root); } catch (e2) {}
+            var walker;
+            try { walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null); } catch (e3) { continue; }
+            var tnode;
+            while ((tnode = walker.nextNode())) {
+                try {
+                    if (tnode.parentElement && tnode.parentElement.closest('.monaco-editor .view-lines')) continue;
+                } catch (e4) {}
+                var text = tnode.textContent;
+                if (!text) continue;
+                var tr = FanYi_TiJiao_PingFen_WenBen(text) || ChaZhao_FanYi(text) || TiHuan_BuFen_WenBen(text);
+                if (tr && tr !== text) tnode.textContent = tr;
+            }
+        }
+    }
+
     function XiuZheng_BianJiQi_YouJianCaiDan() {
         var menus = document.querySelectorAll(
             '.context-view, .monaco-menu-container, .monaco-menu, [role="menu"]'
@@ -2440,7 +2732,7 @@
             'Search Agents', 'Chat History', 'Today', 'Yesterday', 'Older', 'Archived',
             'Open in New Tab', 'Rename Chat', 'Restore', 'Pin', 'Keep All', 'Undo All', 'Draft',
             'Fork Chat', 'Mark as Unread', 'Archive Prior Chats', 'Delete', 'Rename',
-            'Show more', 'Show 1 more',
+            'Show more', 'Show less', 'Show 1 more', 'New Chat', 'Agent Conversations',
             '已归档', '聊天历史', '搜索智能体', '今天', '昨天', '更早', '固定', '恢复', '草稿', '再显示',
             '分叉对话', '标记为未读', '归档较早的对话', '全部保留', '全部撤销', '在新标签页中打开'
         ];
@@ -2513,6 +2805,12 @@
             ['Systematically diagnose and fix bugs using runtime traces', '使用运行时追踪系统诊断并修复缺陷'],
             ['Run and coordinate multiple tasks in parallel', '并行运行并协调多个任务'],
             ['Ask Cursor questions about your codebase', '就代码库向 Cursor 提问'],
+            ['Generate an implementation plan', '生成实现计划'],
+            ['Pinpoint the root cause of an issue', '定位问题的根本原因'],
+            ['固定point the root cause of an issue', '定位问题的根本原因'],
+            ['Orchestrate multiple subagents in parallel', '并行编排多个子智能体'],
+            ['Answer questions without making edits', '回答问题但不进行编辑'],
+            ['Search skills, context, chats...', '搜索技能、上下文、对话...'],
             ['Plan, search, make edits, run commands', '规划、搜索、编辑、运行命令'],
             ['Using terminal selections', '使用终端选区'],
             ['Using image', '使用图像'],
@@ -2754,7 +3052,9 @@
         if (!hasBrowserUi && !QuanJu_BaoHan_GuanJianCi_BiaoQian('LIU_LAN_QI_CUO_WU')) return;
         var hints = [
             ['Connection Failed', '连接失败'],
+            ['Connection failed', '连接失败'],
             ['Connection Error', '连接错误'],
+            ['The connection failed 10 times. Please check your network connection and try again.', '连接失败了 10 次。请检查网络连接后重试。'],
             ['Connection failed. Please try again, or contact support if the issue persists.', '连接失败。请重试，或在问题持续存在时联系支持。'],
             ['Connection failed. Please try again, or contact support if the issue persists', '连接失败。请重试，或在问题持续存在时联系支持'],
             ["Don't Open", '不要打开'],
@@ -2806,6 +3106,9 @@
         var hints = [
             ['Queued', '已排队'],
             ['Send now', '立即发送'],
+            ['Send After Current Message', '在当前消息之后发送'],
+            ['Send after current message', '在当前消息之后发送'],
+            ['Send Right Away', '立即发送'],
             ['Edit queued message', '编辑排队消息'],
             ['Editing queued message', '正在编辑排队消息'],
             ['Editing queued message...', '正在编辑排队消息...'],
