@@ -1,6 +1,6 @@
 {
   "description": "动态文本正则替换（MoShi_FanYi）。",
-  "updatedAt": "2026-07-09",
+  "updatedAt": "2026-08-13",
   "patterns": [
     {
       "regex": "^(\\d+) requests? remaining$",
@@ -526,6 +526,11 @@
       "regex": "^Are you sure you want to delete [\"'](.+?)[\"']\\? This action cannot be undone\\.?$",
       "flags": "",
       "replacement": "确定要删除「$1」吗？此操作无法撤销。"
+    },
+    {
+      "regex": "^Edited (\\d+) files?, ran (\\d+) commands?$",
+      "flags": "i",
+      "replacement": "已编辑 $1 个文件，运行了 $2 条命令"
     },
     {
       "regex": "^Worked for (\\d+)s$",

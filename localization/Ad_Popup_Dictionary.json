@@ -178,6 +178,8 @@
     ["Skills package domain-specific knowledge and workflows that Agent applies automatically when relevant.", "技能将领域特定的知识和工作流打包，智能体在相关时会自动应用。"],
     ["Getting Started", "开始使用"],
     ["Background agents only work in folders with a git repository. Please open a folder that contains a git repository to use this feature.", "后台智能体仅在包含 Git 仓库的文件夹中可用。请打开包含 Git 仓库的文件夹以使用此功能。"],
+    ["Please open a folder to use background agents.", "请打开文件夹以使用后台智能体。"],
+    ["Please open a folder to use background agents", "请打开文件夹以使用后台智能体"],
     ["Review my code", "审查我的代码"]
   ]
 }

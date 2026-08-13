@@ -795,6 +795,14 @@
       "请打开包含 Git 仓库的文件夹以使用此功能。"
     ],
     [
+      "Please open a folder to use background agents.",
+      "请打开文件夹以使用后台智能体。"
+    ],
+    [
+      "Please open a folder to use background agents",
+      "请打开文件夹以使用后台智能体"
+    ],
+    [
       "We're experiencing high demand right now. Please try again in a few moments.",
       "当前需求量很大。请稍后再试。"
     ],

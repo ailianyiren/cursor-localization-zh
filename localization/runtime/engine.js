@@ -1900,6 +1900,8 @@
             ['Window Restoration', '窗口还原'],
             ['Extensions have been modified on disk. Please reload the window.', '扩展已在磁盘上被修改。请重新加载窗口。'],
             ['Background agents only work in folders with a git repository. Please open a folder that contains a git repository to use this feature.', '后台智能体仅在包含 Git 仓库的文件夹中可用。请打开包含 Git 仓库的文件夹以使用此功能。'],
+            ['Please open a folder to use background agents.', '请打开文件夹以使用后台智能体。'],
+            ['Please open a folder to use background agents', '请打开文件夹以使用后台智能体'],
             ['Click to import all local VS Code extensions', '点击以导入所有本地 VS Code 扩展'],
             ['Click to import all local VS Code extensions.', '点击以导入所有本地 VS Code 扩展。'],
             ["(don't show again)", '（不再显示）'],

@@ -4899,6 +4899,14 @@
           "后台智能体仅在包含 Git 仓库的文件夹中可用。请打开包含 Git 仓库的文件夹以使用此功能"
         ],
         [
+          "Please open a folder to use background agents.",
+          "请打开文件夹以使用后台智能体。"
+        ],
+        [
+          "Please open a folder to use background agents",
+          "请打开文件夹以使用后台智能体"
+        ],
+        [
           "Bug Finder",
           "Bug 查找器"
         ],
