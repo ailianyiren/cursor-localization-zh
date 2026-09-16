@@ -847,12 +847,38 @@ def ZhuRu_Glass_YongLiang_ZhuangTai():
         print(f"[智能体用量] 无法读取 workbench.glass.main.js: {CuoWu}")
         return False
 
-    Yuan = "showUsageStatusBar:b=!1"
-    MuBiao = "showUsageStatusBar:b=!0"
-    if MuBiao in NeiRong:
-        print("[智能体用量] 智能体窗口实时用量状态栏已激活")
-        return True
-    if Yuan not in NeiRong:
+    # 1. 基础开关：将 showUsageStatusBar 默认值置为 true
+    Yuan_KaiGuan = "showUsageStatusBar:b=!1"
+    MuBiao_KaiGuan = "showUsageStatusBar:b=!0"
+
+    # 2. 互斥解除：官方代码中 $Fw 默认将 showComposerUsageStatusBar 与 glassShowChatStatusBar (master/此电脑状态栏) 设置为互斥 (t && !e)
+    # 当底部环境/分支状态栏开启时，用量栏会被强制隐藏。将其解除互斥以支持共存显示。
+    Yuan_HuChi = "function $Fw({showUsageStatusBar:t,chatStatusBarEnabled:e}){return{showComposerUsageStatusBar:t&&!e,showChatStatusBar:e}}"
+    MuBiao_HuChi = "function $Fw({showUsageStatusBar:t,chatStatusBarEnabled:e}){return{showComposerUsageStatusBar:!0,showChatStatusBar:e}}"
+
+    # 3. 额度阈值解除：官方 X7S 默认当用量低于 50% 时隐藏用量状态栏，解除限制以始终实时展示
+    Yuan_YuZhi = 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;if(t==="always")return i!==null;if(!i)return!1;const a=i.displayThreshold??50;'
+    MuBiao_YuZhi = 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;return i!==null;const a=0;'
+
+    GaiDong = False
+    XinNeiRong = NeiRong
+
+    if Yuan_KaiGuan in XinNeiRong:
+        XinNeiRong = XinNeiRong.replace(Yuan_KaiGuan, MuBiao_KaiGuan, 1)
+        GaiDong = True
+
+    if Yuan_HuChi in XinNeiRong:
+        XinNeiRong = XinNeiRong.replace(Yuan_HuChi, MuBiao_HuChi, 1)
+        GaiDong = True
+
+    if Yuan_YuZhi in XinNeiRong:
+        XinNeiRong = XinNeiRong.replace(Yuan_YuZhi, MuBiao_YuZhi, 1)
+        GaiDong = True
+
+    if not GaiDong:
+        if MuBiao_HuChi in NeiRong:
+            print("[智能体用量] 智能体窗口实时用量状态栏已激活")
+            return True
         print("[智能体用量] 未匹配到目标用量开关特征（可能版本不同），跳过")
         return False
 
@@ -864,10 +890,9 @@ def ZhuRu_Glass_YongLiang_ZhuangTai():
         except OSError:
             pass
 
-    XinNeiRong = NeiRong.replace(Yuan, MuBiao, 1)
     try:
         XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinNeiRong, HuanHang)
-        print("[智能体用量] 已成功开启智能体窗口底部实时用量状态栏")
+        print("[智能体用量] 已成功开启智能体窗口底部实时用量状态栏（已解除与分支状态栏互斥及50%阈值隐藏）")
         return True
     except Exception as CuoWu:
         print(f"[错误] 无法写入 workbench.glass.main.js: {CuoWu}")
@@ -884,11 +909,30 @@ def HuiFu_Glass_YongLiang_ZhuangTai():
     except OSError:
         return False
 
-    Yuan = "showUsageStatusBar:b=!0"
-    MuBiao = "showUsageStatusBar:b=!1"
-    if Yuan not in NeiRong:
+    XinNeiRong = NeiRong
+    GaiDong = False
+
+    MuBiao_KaiGuan = "showUsageStatusBar:b=!1"
+    Yuan_KaiGuan = "showUsageStatusBar:b=!0"
+
+    MuBiao_HuChi = "function $Fw({showUsageStatusBar:t,chatStatusBarEnabled:e}){return{showComposerUsageStatusBar:t&&!e,showChatStatusBar:e}}"
+    Yuan_HuChi = "function $Fw({showUsageStatusBar:t,chatStatusBarEnabled:e}){return{showComposerUsageStatusBar:!0,showChatStatusBar:e}}"
+
+    MuBiao_YuZhi = 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;if(t==="always")return i!==null;if(!i)return!1;const a=i.displayThreshold??50;'
+    Yuan_YuZhi = 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;return i!==null;const a=0;'
+
+    if Yuan_KaiGuan in XinNeiRong:
+        XinNeiRong = XinNeiRong.replace(Yuan_KaiGuan, MuBiao_KaiGuan, 1)
+        GaiDong = True
+    if Yuan_HuChi in XinNeiRong:
+        XinNeiRong = XinNeiRong.replace(Yuan_HuChi, MuBiao_HuChi, 1)
+        GaiDong = True
+    if Yuan_YuZhi in XinNeiRong:
+        XinNeiRong = XinNeiRong.replace(Yuan_YuZhi, MuBiao_YuZhi, 1)
+        GaiDong = True
+
+    if not GaiDong:
         return False
-    XinNeiRong = NeiRong.replace(Yuan, MuBiao, 1)
     try:
         XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinNeiRong, HuanHang)
         print("[智能体用量] 已还原智能体窗口用量状态栏开关")
