@@ -2933,6 +2933,634 @@
         [
           "Cursor is still starting up. Try again in a moment",
           "Cursor 正在启动中，请稍后重试"
+        ],
+        [
+          "Produces canvases",
+          "生成画布"
+        ],
+        [
+          "Marketplace Access",
+          "插件市场访问权限"
+        ],
+        [
+          "Select who can see and use plugins from this team marketplace",
+          "选择谁可以查看并使用此团队市场的插件"
+        ],
+        [
+          "Enable Auto Refresh",
+          "启用自动刷新"
+        ],
+        [
+          "Automatically update plugins when changes are pushed to the repository",
+          "当更改推送到仓库时自动更新插件"
+        ],
+        [
+          "Allow Members to Publish",
+          "允许成员发布"
+        ],
+        [
+          "Let any team member publish plugins to this marketplace. When off, only team admins can publish.",
+          "允许任何团队成员向此市场发布插件。关闭时仅团队管理员可发布。"
+        ],
+        [
+          "Let any team member publish plugins to this marketplace. When off, only team admins can publish",
+          "允许任何团队成员向此市场发布插件。关闭时仅团队管理员可发布"
+        ],
+        [
+          "Serve Marketplace From Cursor",
+          "通过 Cursor 托管市场"
+        ],
+        [
+          "Cursor keeps a synced copy of this repository and serves plugins from it, so team members do not need repo access.",
+          "Cursor 会保留此仓库的同步副本并从中提供插件，因此团队成员无需拥有仓库访问权限。"
+        ],
+        [
+          "Cursor keeps a synced copy of this repository and serves plugins from it, so team members do not need repo access",
+          "Cursor 会保留此仓库的同步副本并从中提供插件，因此团队成员无需拥有仓库访问权限"
+        ],
+        [
+          "Plugin Repository",
+          "插件仓库"
+        ],
+        [
+          "Fetch marketplace plugins from the GitHub repository",
+          "从 GitHub 仓库获取市场插件"
+        ],
+        [
+          "Remove Marketplace",
+          "移除市场"
+        ],
+        [
+          "This marketplace and its access settings will be removed. The source repository will remain untouched.",
+          "此市场及其访问设置将被移除。源仓库将保持不变。"
+        ],
+        [
+          "This marketplace and its access settings will be removed. The source repository will remain untouched",
+          "此市场及其访问设置将被移除。源仓库将保持不变"
+        ],
+        [
+          "New MCP Configuration",
+          "新建 MCP 配置"
+        ],
+        [
+          "Creates a new MCP configuration with example servers",
+          "创建包含示例服务器的新 MCP 配置"
+        ],
+        [
+          "Stash Changes",
+          "贮藏更改"
+        ],
+        [
+          "Stash changes",
+          "暂存更改"
+        ],
+        [
+          "Save changes to a stash and restore them later",
+          "将更改保存到贮藏区，稍后再恢复"
+        ],
+        [
+          "Save your changes and restore them later",
+          "保存您的更改并稍后恢复"
+        ],
+        [
+          "Commit Changes",
+          "提交更改"
+        ],
+        [
+          "Create a checkpoint commit with your current changes",
+          "使用您当前的更改创建检查点提交"
+        ],
+        [
+          "Permanently discard your current changes before switching branches",
+          "在切换分支之前永久放弃您当前的更改"
+        ],
+        [
+          "Cancel the checkout operation",
+          "取消检出操作"
+        ],
+        [
+          "Production",
+          "生产环境"
+        ],
+        [
+          "Use production environment",
+          "使用生产环境"
+        ],
+        [
+          "Development",
+          "开发环境"
+        ],
+        [
+          "Use development environment",
+          "使用开发环境"
+        ],
+        [
+          "Full Local",
+          "完整本地环境"
+        ],
+        [
+          "Use full local environment (non-VM running locally)",
+          "使用完整本地环境（本地运行的非虚拟机环境）"
+        ],
+        [
+          "Set a fixed amount or make on-demand usage unlimited",
+          "设置固定额度或将按需用量设为无限制"
+        ],
+        [
+          "Wait indefinitely; otherwise skip prompts after 30 seconds",
+          "无限制等待；否则在 30 秒后跳过提示"
+        ],
+        [
+          "Read Access",
+          "读取访问权限"
+        ],
+        [
+          "Control whether agents can read files outside the workspace without approval.",
+          "控制智能体是否可以在未经批准的情况下读取工作区外部的文件。"
+        ],
+        [
+          "Control whether agents can read files outside the workspace without approval",
+          "控制智能体是否可以在未经批准的情况下读取工作区外部的文件"
+        ],
+        [
+          "Read Allowlist",
+          "读取白名单"
+        ],
+        [
+          "File paths and glob patterns agents can read without approval.",
+          "智能体无需批准即可读取的文件路径和 Glob 模式。"
+        ],
+        [
+          "File paths and glob patterns agents can read without approval",
+          "智能体无需批准即可读取的文件路径和 Glob 模式"
+        ],
+        [
+          "Use legacy terminal tool on unsupported shells",
+          "在不受支持的 Shell 上使用旧版终端工具"
+        ],
+        [
+          "Automatically parse links pasted into Quick Edit",
+          "粘贴到“快速编辑”时自动解析链接"
+        ],
+        [
+          "Choose the model used by Explore subagent for initial research",
+          "选择 Explore 子智能体用于初始调研的模型"
+        ],
+        [
+          "Prefix for new Agent branches",
+          "新建智能体分支的前缀"
+        ],
+        [
+          "Hierarchical Cursor Ignore",
+          "层级 Cursor 忽略规则"
+        ],
+        [
+          "Apply .cursorignore files to subdirectories",
+          "将 .cursorignore 文件应用到子目录"
+        ],
+        [
+          "Skip symlinks during discovery",
+          "在检索期间跳过符号链接"
+        ],
+        [
+          "Ignore Symlinks in Cursor Ignore Search",
+          "在 Cursor 忽略规则搜索中忽略符号链接"
+        ],
+        [
+          "Allow agent to switch to modes without asking. When off, skips if unanswered within 15 seconds.",
+          "允许智能体在不询问的情况下自动切换模式。关闭时，若 15 秒内未回应则跳过。"
+        ],
+        [
+          "Allow agent to switch to modes without asking. When off, skips if unanswered within 15 seconds",
+          "允许智能体在不询问的情况下自动切换模式。关闭时，若 15 秒内未回应则跳过"
+        ],
+        [
+          "Configure HTTP compatibility for proxies and VPNs",
+          "为代理和 VPN 配置 HTTP 兼容性"
+        ],
+        [
+          "Domains required for Cursor",
+          "Cursor 所需的域名"
+        ],
+        [
+          "Check connectivity to all Cursor services",
+          "检查与所有 Cursor 服务的连通性"
+        ],
+        [
+          "Ignore branch difference",
+          "忽略分支差异"
+        ],
+        [
+          "Proceed anyway (changes might not apply correctly)",
+          "仍然继续（更改可能无法正确应用）"
+        ],
+        [
+          "Abort the operation",
+          "中止操作"
+        ],
+        [
+          "Always Apply",
+          "始终应用"
+        ],
+        [
+          "Apply to every chat and cmd-k session",
+          "应用到每个对话和 cmd-k 会话"
+        ],
+        [
+          "Apply Intelligently",
+          "智能应用"
+        ],
+        [
+          "When Agent decides it's relevant based on description",
+          "当智能体根据描述判断相关时应用"
+        ],
+        [
+          "When Agent decides it’s relevant based on description",
+          "当智能体根据描述判断相关时应用"
+        ],
+        [
+          "Apply to Specific Files",
+          "应用到特定文件"
+        ],
+        [
+          "When file matches a specified pattern",
+          "当文件匹配特定模式时应用"
+        ],
+        [
+          "Apply Manually",
+          "手动应用"
+        ],
+        [
+          "When @-mentioned",
+          "当被 @ 提及呼叫时应用"
+        ],
+        [
+          "Local Trace Mode",
+          "本地跟踪模式"
+        ],
+        [
+          "Mirror VS Code RPCs into the DevTools Network tab and record local performance marks. Adds overhead, so leave it off unless you're debugging.",
+          "将 VS Code RPC 镜像到 DevTools 网络标签页并记录本地性能标记。会产生额外开销，除非正在调试否则请保持关闭。"
+        ],
+        [
+          "Mirror VS Code RPCs into the DevTools Network tab and record local performance marks. Adds overhead, so leave it off unless you’re debugging.",
+          "将 VS Code RPC 镜像到 DevTools 网络标签页并记录本地性能标记。会产生额外开销，除非正在调试否则请保持关闭。"
+        ],
+        [
+          "RPC Log Folder",
+          "RPC 日志文件夹"
+        ],
+        [
+          "Optional folder for RPC logs (defaults to logs/exthost).",
+          "RPC 日志的可选文件夹（默认为 logs/exthost）。"
+        ],
+        [
+          "Optional folder for RPC logs (defaults to logs/exthost)",
+          "RPC 日志的可选文件夹（默认为 logs/exthost）"
+        ],
+        [
+          "Continuous RPC File Recording",
+          "持续 RPC 文件记录"
+        ],
+        [
+          "Disposable Tracking",
+          "可释放对象跟踪"
+        ],
+        [
+          "Report disposables that are garbage-collected without being disposed. On by default in development builds; it captures a creation stack per disposable, so turn it off when profiling.",
+          "报告在未被释放的情况下被垃圾回收的可释放对象。开发版本中默认开启；它会捕获每个可释放对象的创建调用栈，因此在分析性能时请将其关闭。"
+        ],
+        [
+          "Control which network requests are allowed when commands run in the sandbox. Edit allowed/denied domains in sandbox.json in your workspace.",
+          "控制在沙盒中运行命令时允许哪些网络请求。在工作区的 sandbox.json 中编辑允许/拒绝的域名。"
+        ],
+        [
+          "Follow-Up Prompt Suggestions",
+          "后续提示词建议"
+        ],
+        [
+          "Suggest a follow-up for the Agent",
+          "为智能体推荐后续提示词"
+        ],
+        [
+          "Voice",
+          "语音"
+        ],
+        [
+          "Voice used for spoken replies. Changing the voice plays a short sample.",
+          "用于语音回复的音色。更改音色会播放简短示例。"
+        ],
+        [
+          "Voice used for spoken replies. Changing the voice plays a short sample",
+          "用于语音回复的音色。更改音色会播放简短示例"
+        ],
+        [
+          "Speed",
+          "语速"
+        ],
+        [
+          "How quickly spoken replies are read. Faster is the default.",
+          "语音回复的朗读速度。默认为较快。"
+        ],
+        [
+          "How quickly spoken replies are read. Faster is the default",
+          "语音回复的朗读速度。默认为较快"
+        ],
+        [
+          "Secret saved",
+          "密钥已保存"
+        ],
+        [
+          "Use OpenAI API Key",
+          "使用 OpenAI API 密钥"
+        ],
+        [
+          "AWS region used by your team's Bedrock configuration.",
+          "您的团队 Bedrock 配置所使用的 AWS 区域。"
+        ],
+        [
+          "AWS region used by your team’s Bedrock configuration.",
+          "您的团队 Bedrock 配置所使用的 AWS 区域。"
+        ],
+        [
+          "OpenAI-compatible API base URL for the local agent.",
+          "本地智能体的 OpenAI 兼容 API 基础 URL。"
+        ],
+        [
+          "API key used for requests to your gateway.",
+          "用于请求您的网关的 API 密钥。"
+        ],
+        [
+          "Spend limits for team plans are managed by team admins in the dashboard",
+          "团队计划的消费限额由团队管理员在仪表盘中管理"
+        ],
+        [
+          "Checkout Branch",
+          "检出分支"
+        ],
+        [
+          "Stashing changes...",
+          "正在暂存更改..."
+        ],
+        [
+          "Revert Files",
+          "还原文件"
+        ],
+        [
+          "Keep Files",
+          "保留文件"
+        ],
+        [
+          "Revert files to this message?",
+          "将文件还原至此消息状态？"
+        ],
+        [
+          "Create Pull Request",
+          "创建拉取请求 (PR)"
+        ],
+        [
+          "Self-Driving PRs",
+          "自动驾驶 PR"
+        ],
+        [
+          "Merge",
+          "合并"
+        ],
+        [
+          "Merge manually",
+          "手动合并"
+        ],
+        [
+          "Incorrect Branch",
+          "错误的分支"
+        ],
+        [
+          "Git Required",
+          "需要 Git 仓库"
+        ],
+        [
+          "Grant repository access",
+          "授予仓库访问权限"
+        ],
+        [
+          "Score Commit for AI Content",
+          "评分提交的 AI 生成内容"
+        ],
+        [
+          "Fix with Agent",
+          "使用智能体修复"
+        ],
+        [
+          "Fix in Agent",
+          "使用智能体修复"
+        ],
+        [
+          "View Plan",
+          "查看计划"
+        ],
+        [
+          "Open Agent",
+          "打开智能体"
+        ],
+        [
+          "Add to Home",
+          "添加到主页"
+        ],
+        [
+          "Continue Anyway",
+          "仍然继续"
+        ],
+        [
+          "Generating",
+          "正在生成"
+        ],
+        [
+          "Applying",
+          "正在应用"
+        ],
+        [
+          "Use Multiple Models",
+          "使用多个模型"
+        ],
+        [
+          "Share Transcript",
+          "分享对话记录"
+        ],
+        [
+          "Failed to start Cloud Agent",
+          "启动云端智能体失败"
+        ],
+        [
+          "Retry cloud agent request",
+          "重试云端智能体请求"
+        ],
+        [
+          "Agent connection lost",
+          "智能体连接已断开"
+        ],
+        [
+          "Submission blocked by hook",
+          "提交已被钩子（Hook）阻止"
+        ],
+        [
+          "Failed to enqueue follow-up",
+          "将后续操作加入队列失败"
+        ],
+        [
+          "Chat Too Old",
+          "对话时间过早"
+        ],
+        [
+          "Import Chat",
+          "导入对话"
+        ],
+        [
+          "Runs",
+          "运行记录"
+        ],
+        [
+          "Add Workspace",
+          "添加工作区"
+        ],
+        [
+          "Workspace Not Found",
+          "未找到工作区"
+        ],
+        [
+          "Data Sharing",
+          "数据共享"
+        ],
+        [
+          "Team Access",
+          "团队访问权限"
+        ],
+        [
+          "Open in Web",
+          "在网页中打开"
+        ],
+        [
+          "Dedicated Agent Runtime",
+          "专用智能体运行时"
+        ],
+        [
+          "Help Improve Cursor",
+          "协助改进 Cursor"
+        ],
+        [
+          "Upgrade to Ultra",
+          "升级到 Ultra"
+        ],
+        [
+          "Needs authentication",
+          "需要身份验证"
+        ],
+        [
+          "View Details",
+          "查看详情"
+        ],
+        [
+          "Refresh Status",
+          "刷新状态"
+        ],
+        [
+          "Proceed",
+          "继续"
+        ],
+        [
+          "Decline",
+          "拒绝"
+        ],
+        [
+          "Loading Canvas",
+          "正在加载画布"
+        ],
+        [
+          "Connect your Repos to Cursor",
+          "将您的仓库连接到 Cursor"
+        ],
+        [
+          "Actions Palette",
+          "操作面板"
+        ],
+        [
+          "Active workspace",
+          "活动工作区"
+        ],
+        [
+          "Add Environment",
+          "添加环境"
+        ],
+        [
+          "Add Link",
+          "添加链接"
+        ],
+        [
+          "Add Marketplace",
+          "添加插件市场"
+        ],
+        [
+          "Add Repositories",
+          "添加仓库"
+        ],
+        [
+          "Add Secrets",
+          "添加密钥"
+        ],
+        [
+          "Add Skills",
+          "添加技能"
+        ],
+        [
+          "Add to Side Chat",
+          "添加到侧边聊天"
+        ],
+        [
+          "Add to Team",
+          "添加到团队"
+        ],
+        [
+          "Add your own MCP server",
+          "添加您自己的 MCP 服务器"
+        ],
+        [
+          "Agent Edit",
+          "智能体编辑"
+        ],
+        [
+          "Agent Name",
+          "智能体名称"
+        ],
+        [
+          "Agent artifacts",
+          "智能体产物"
+        ],
+        [
+          "Abort Agent and Restore Query",
+          "中止智能体并恢复查询"
+        ],
+        [
+          "Abort Chat",
+          "中止对话"
+        ],
+        [
+          "Accept All",
+          "全部接受"
+        ],
+        [
+          "Accept Edits",
+          "接受编辑"
+        ],
+        [
+          "Accept Partial Edit",
+          "接受部分编辑"
+        ],
+        [
+          "Accept Mode Switch",
+          "接受模式切换"
+        ],
+        [
+          "Accept Cursor Tab Suggestion",
+          "接受 Cursor 代码补全建议"
         ]
       ]
     },

@@ -1361,6 +1361,410 @@
     [
       "Stop and send",
       "停止并发送"
+    ],
+    [
+      "Produces canvases",
+      "生成画布"
+    ],
+    [
+      "Marketplace Access",
+      "插件市场访问权限"
+    ],
+    [
+      "Enable Auto Refresh",
+      "启用自动刷新"
+    ],
+    [
+      "Allow Members to Publish",
+      "允许成员发布"
+    ],
+    [
+      "Serve Marketplace From Cursor",
+      "通过 Cursor 托管市场"
+    ],
+    [
+      "Plugin Repository",
+      "插件仓库"
+    ],
+    [
+      "New MCP Configuration",
+      "新建 MCP 配置"
+    ],
+    [
+      "Stash Changes",
+      "贮藏更改"
+    ],
+    [
+      "Stash changes",
+      "暂存更改"
+    ],
+    [
+      "Commit Changes",
+      "提交更改"
+    ],
+    [
+      "Cancel the checkout operation",
+      "取消检出操作"
+    ],
+    [
+      "Production",
+      "生产环境"
+    ],
+    [
+      "Use production environment",
+      "使用生产环境"
+    ],
+    [
+      "Development",
+      "开发环境"
+    ],
+    [
+      "Use development environment",
+      "使用开发环境"
+    ],
+    [
+      "Full Local",
+      "完整本地环境"
+    ],
+    [
+      "Read Access",
+      "读取访问权限"
+    ],
+    [
+      "Read Allowlist",
+      "读取白名单"
+    ],
+    [
+      "Explore Subagent Model",
+      "Explore 子智能体模型"
+    ],
+    [
+      "Branch Prefix",
+      "分支前缀"
+    ],
+    [
+      "Hierarchical Cursor Ignore",
+      "层级 Cursor 忽略规则"
+    ],
+    [
+      "Skip symlinks during discovery",
+      "在检索期间跳过符号链接"
+    ],
+    [
+      "Domains required for Cursor",
+      "Cursor 所需的域名"
+    ],
+    [
+      "Ignore branch difference",
+      "忽略分支差异"
+    ],
+    [
+      "Abort the operation",
+      "中止操作"
+    ],
+    [
+      "Always Apply",
+      "始终应用"
+    ],
+    [
+      "Apply Intelligently",
+      "智能应用"
+    ],
+    [
+      "Apply to Specific Files",
+      "应用到特定文件"
+    ],
+    [
+      "Apply Manually",
+      "手动应用"
+    ],
+    [
+      "When @-mentioned",
+      "当被 @ 提及呼叫时应用"
+    ],
+    [
+      "Local Trace Mode",
+      "本地跟踪模式"
+    ],
+    [
+      "RPC Log Folder",
+      "RPC 日志文件夹"
+    ],
+    [
+      "Continuous RPC File Recording",
+      "持续 RPC 文件记录"
+    ],
+    [
+      "Disposable Tracking",
+      "可释放对象跟踪"
+    ],
+    [
+      "Auto-Run Network Access",
+      "自动运行网络访问权限"
+    ],
+    [
+      "Follow-Up Prompt Suggestions",
+      "后续提示词建议"
+    ],
+    [
+      "Voice",
+      "语音"
+    ],
+    [
+      "Speed",
+      "语速"
+    ],
+    [
+      "Secret saved",
+      "密钥已保存"
+    ],
+    [
+      "Use OpenAI API Key",
+      "使用 OpenAI API 密钥"
+    ],
+    [
+      "Checkout Branch",
+      "检出分支"
+    ],
+    [
+      "Stashing changes...",
+      "正在暂存更改..."
+    ],
+    [
+      "Revert Files",
+      "还原文件"
+    ],
+    [
+      "Keep Files",
+      "保留文件"
+    ],
+    [
+      "Create Pull Request",
+      "创建拉取请求 (PR)"
+    ],
+    [
+      "Self-Driving PRs",
+      "自动驾驶 PR"
+    ],
+    [
+      "Merge",
+      "合并"
+    ],
+    [
+      "Merge manually",
+      "手动合并"
+    ],
+    [
+      "Incorrect Branch",
+      "错误的分支"
+    ],
+    [
+      "Git Required",
+      "需要 Git 仓库"
+    ],
+    [
+      "Grant repository access",
+      "授予仓库访问权限"
+    ],
+    [
+      "Fix with Agent",
+      "使用智能体修复"
+    ],
+    [
+      "Fix in Agent",
+      "使用智能体修复"
+    ],
+    [
+      "View Plan",
+      "查看计划"
+    ],
+    [
+      "Open Agent",
+      "打开智能体"
+    ],
+    [
+      "Add to Home",
+      "添加到主页"
+    ],
+    [
+      "Continue Anyway",
+      "仍然继续"
+    ],
+    [
+      "Generating",
+      "正在生成"
+    ],
+    [
+      "Applying",
+      "正在应用"
+    ],
+    [
+      "Use Multiple Models",
+      "使用多个模型"
+    ],
+    [
+      "Share Transcript",
+      "分享对话记录"
+    ],
+    [
+      "Retry cloud agent request",
+      "重试云端智能体请求"
+    ],
+    [
+      "Agent connection lost",
+      "智能体连接已断开"
+    ],
+    [
+      "Submission blocked by hook",
+      "提交已被钩子（Hook）阻止"
+    ],
+    [
+      "Failed to enqueue follow-up",
+      "将后续操作加入队列失败"
+    ],
+    [
+      "Chat Too Old",
+      "对话时间过早"
+    ],
+    [
+      "Import Chat",
+      "导入对话"
+    ],
+    [
+      "Runs",
+      "运行记录"
+    ],
+    [
+      "Add Workspace",
+      "添加工作区"
+    ],
+    [
+      "Workspace Not Found",
+      "未找到工作区"
+    ],
+    [
+      "Data Sharing",
+      "数据共享"
+    ],
+    [
+      "Team Access",
+      "团队访问权限"
+    ],
+    [
+      "Open in Web",
+      "在网页中打开"
+    ],
+    [
+      "Dedicated Agent Runtime",
+      "专用智能体运行时"
+    ],
+    [
+      "Help Improve Cursor",
+      "协助改进 Cursor"
+    ],
+    [
+      "Upgrade to Ultra",
+      "升级到 Ultra"
+    ],
+    [
+      "Needs authentication",
+      "需要身份验证"
+    ],
+    [
+      "View Details",
+      "查看详情"
+    ],
+    [
+      "Refresh Status",
+      "刷新状态"
+    ],
+    [
+      "Proceed",
+      "继续"
+    ],
+    [
+      "Decline",
+      "拒绝"
+    ],
+    [
+      "Loading Canvas",
+      "正在加载画布"
+    ],
+    [
+      "Actions Palette",
+      "操作面板"
+    ],
+    [
+      "Active workspace",
+      "活动工作区"
+    ],
+    [
+      "Add Environment",
+      "添加环境"
+    ],
+    [
+      "Add Link",
+      "添加链接"
+    ],
+    [
+      "Add Marketplace",
+      "添加插件市场"
+    ],
+    [
+      "Add Repositories",
+      "添加仓库"
+    ],
+    [
+      "Add Secrets",
+      "添加密钥"
+    ],
+    [
+      "Add Skills",
+      "添加技能"
+    ],
+    [
+      "Add to Side Chat",
+      "添加到侧边聊天"
+    ],
+    [
+      "Add to Team",
+      "添加到团队"
+    ],
+    [
+      "Agent Edit",
+      "智能体编辑"
+    ],
+    [
+      "Agent Name",
+      "智能体名称"
+    ],
+    [
+      "Agent artifacts",
+      "智能体产物"
+    ],
+    [
+      "Abort Chat",
+      "中止对话"
+    ],
+    [
+      "Accept All",
+      "全部接受"
+    ],
+    [
+      "Accept Edits",
+      "接受编辑"
+    ],
+    [
+      "Accept Partial Edit",
+      "接受部分编辑"
+    ],
+    [
+      "Accept Mode Switch",
+      "接受模式切换"
+    ],
+    [
+      "Accept Cursor Tab Suggestion",
+      "接受 Cursor 代码补全建议"
     ]
   ]
 }
