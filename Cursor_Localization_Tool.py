@@ -1102,6 +1102,45 @@ def HuiFu_PingHua_GunDong():
             pass
 
 
+def BiKou_WanZhengXing_JianCha():
+    """屏蔽 VS Code / Cursor 内核的「安装似乎已损坏」伪告警。"""
+    Yuan = 'isPure(){return this.isPurePromise}async _compute(){'
+    MuBiao = 'isPure(){return Promise.resolve({isPure:!0})}async _compute(){return;'
+
+    AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
+    for JsMing in ("workbench.glass.main.js", "workbench.desktop.main.js"):
+        JsLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", JsMing)
+        if not os.path.isfile(JsLuJing):
+            continue
+        try:
+            NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(JsLuJing)
+            if Yuan in NeiRong:
+                XinNeiRong = NeiRong.replace(Yuan, MuBiao, 1)
+                XieRu_WenBen_BaoLiu_HuanHang(JsLuJing, XinNeiRong, HuanHang)
+                print(f"[完整性] 已为 {JsMing} 屏蔽「安装已损坏」提示")
+        except Exception:
+            pass
+
+
+def HuiFu_WanZhengXing_JianCha():
+    """还原完整性校验检查。"""
+    MuBiao = 'isPure(){return this.isPurePromise}async _compute(){'
+    Yuan = 'isPure(){return Promise.resolve({isPure:!0})}async _compute(){return;'
+
+    AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
+    for JsMing in ("workbench.glass.main.js", "workbench.desktop.main.js"):
+        JsLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", JsMing)
+        if not os.path.isfile(JsLuJing):
+            continue
+        try:
+            NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(JsLuJing)
+            if Yuan in NeiRong:
+                XinNeiRong = NeiRong.replace(Yuan, MuBiao, 1)
+                XieRu_WenBen_BaoLiu_HuanHang(JsLuJing, XinNeiRong, HuanHang)
+        except Exception:
+            pass
+
+
 
 # ============================================================
 # ★★★ 注入与恢复函数 ★★★
@@ -1875,6 +1914,7 @@ def HuiFu_YuanShi():
     HuiFu_Glass_YongLiang_ZhuangTai()
     HuiFu_Glass_DuiHua_XiaoDiTu()
     HuiFu_PingHua_GunDong()
+    HuiFu_WanZhengXing_JianCha()
 
     HuiFu_JiaoYan_Zhi()
 
@@ -1940,6 +1980,7 @@ def ZhuChengXu():
         ZhuRu_Glass_YongLiang_ZhuangTai()
         ZhuRu_Glass_DuiHua_XiaoDiTu()
         YouHua_PingHua_GunDong()
+        BiKou_WanZhengXing_JianCha()
         GengXin_JiaoYan_Zhi()
         print("\n[完成] 语言包与脚本已更新！请完全退出并重启 Cursor 生效。")
         return
@@ -1955,6 +1996,7 @@ def ZhuChengXu():
     ZhuRu_Glass_YongLiang_ZhuangTai()
     ZhuRu_Glass_DuiHua_XiaoDiTu()
     YouHua_PingHua_GunDong()
+    BiKou_WanZhengXing_JianCha()
 
     print("\n" + "=" * 60)
     print("  [完成] 语言包安装与汉化注入成功！")
