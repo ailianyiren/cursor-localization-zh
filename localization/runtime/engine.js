@@ -868,6 +868,7 @@
                 if (comboStop && /send\s+right\s+away/i.test(comboStop.textContent || '')) return;
             } catch (e) {}
         }
+        if (/^Cursor Models:\s*[\d.]+%?\s*used/i.test(trimmed)) return;
         if (trimmed === 'IDE') {
             try {
                 var ctaBtn = node.parentElement && node.parentElement.closest('[data-component="open-editor-window-cta"], button[aria-label="IDE"]');

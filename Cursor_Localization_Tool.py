@@ -830,6 +830,73 @@ def HuiFu_TuoPan_HanHua():
     print(f"[托盘] 已还原 {CiShu} 处系统托盘菜单文案")
     return True
 
+def HuoQu_Glass_Main_JS_LuJing():
+    """获取 Cursor Glass 智能体工作台文件（workbench.glass.main.js）。"""
+    return os.path.join(HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING), "out", "vs", "workbench", "workbench.glass.main.js")
+
+
+def ZhuRu_Glass_YongLiang_ZhuangTai():
+    """在智能体（Glass）窗口会话底部激活官方内置的实时用量状态栏显示。"""
+    LuJing = HuoQu_Glass_Main_JS_LuJing()
+    if not os.path.isfile(LuJing):
+        print(f"[智能体用量] 未找到 workbench.glass.main.js，跳过: {LuJing}")
+        return False
+    try:
+        NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(LuJing)
+    except OSError as CuoWu:
+        print(f"[智能体用量] 无法读取 workbench.glass.main.js: {CuoWu}")
+        return False
+
+    Yuan = "showUsageStatusBar:b=!1"
+    MuBiao = "showUsageStatusBar:b=!0"
+    if MuBiao in NeiRong:
+        print("[智能体用量] 智能体窗口实时用量状态栏已激活")
+        return True
+    if Yuan not in NeiRong:
+        print("[智能体用量] 未匹配到目标用量开关特征（可能版本不同），跳过")
+        return False
+
+    BeiFenLuJing = LuJing + ".bak"
+    if not os.path.exists(BeiFenLuJing):
+        try:
+            import shutil
+            shutil.copy2(LuJing, BeiFenLuJing)
+        except OSError:
+            pass
+
+    XinNeiRong = NeiRong.replace(Yuan, MuBiao, 1)
+    try:
+        XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinNeiRong, HuanHang)
+        print("[智能体用量] 已成功开启智能体窗口底部实时用量状态栏")
+        return True
+    except Exception as CuoWu:
+        print(f"[错误] 无法写入 workbench.glass.main.js: {CuoWu}")
+        return False
+
+
+def HuiFu_Glass_YongLiang_ZhuangTai():
+    """还原智能体（Glass）窗口用量状态栏开关。"""
+    LuJing = HuoQu_Glass_Main_JS_LuJing()
+    if not os.path.isfile(LuJing):
+        return False
+    try:
+        NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(LuJing)
+    except OSError:
+        return False
+
+    Yuan = "showUsageStatusBar:b=!0"
+    MuBiao = "showUsageStatusBar:b=!1"
+    if Yuan not in NeiRong:
+        return False
+    XinNeiRong = NeiRong.replace(Yuan, MuBiao, 1)
+    try:
+        XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinNeiRong, HuanHang)
+        print("[智能体用量] 已还原智能体窗口用量状态栏开关")
+        return True
+    except OSError:
+        return False
+
+
 
 # ============================================================
 # ★★★ 注入与恢复函数 ★★★
@@ -1600,6 +1667,7 @@ def HuiFu_YuanShi():
         print(f"[恢复] 已手动移除注入内容")
 
     HuiFu_TuoPan_HanHua()
+    HuiFu_Glass_YongLiang_ZhuangTai()
 
     HuiFu_JiaoYan_Zhi()
 
@@ -1662,6 +1730,7 @@ def ZhuChengXu():
         XieRu_FanYi_JS()
         ShanChu_JiuBan_JS()
         ZhuRu_TuoPan_HanHua()
+        ZhuRu_Glass_YongLiang_ZhuangTai()
         GengXin_JiaoYan_Zhi()
         print("\n[完成] 语言包与脚本已更新！请完全退出并重启 Cursor 生效。")
         return
@@ -1674,6 +1743,7 @@ def ZhuChengXu():
     print("[步骤 4/4] 注入 HTML 引用...")
     ZhuRu_HTML()
     ZhuRu_TuoPan_HanHua()
+    ZhuRu_Glass_YongLiang_ZhuangTai()
 
     print("\n" + "=" * 60)
     print("  [完成] 语言包安装与汉化注入成功！")
