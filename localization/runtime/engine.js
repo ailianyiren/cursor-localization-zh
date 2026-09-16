@@ -362,7 +362,11 @@
         ['Select All', '全选'],
         ['Search with Google', '使用 Google 搜索'],
         ['Cut', '剪切'],
-        ['Paste', '粘贴']
+        ['Paste', '粘贴'],
+        ['Check for Updates...', '检查更新...'],
+        ['Check for Updates', '检查更新'],
+        ['Checking for Updates...', '正在检查更新...'],
+        ['About Cursor', '关于 Cursor']
     ];
 
     var DingBu_CaiDan_HINTS = [
