@@ -1031,6 +1031,77 @@ def HuiFu_Glass_DuiHua_XiaoDiTu():
         return False
 
 
+def YouHua_PingHua_GunDong():
+    """开启官方核心平滑滚动配置并为长对话流注入 GPU 硬件加速合成。"""
+    # 1. 写入 settings.json
+    UserMuLu = os.path.join(CURSOR_SHU_JU_LU_JING, "User")
+    os.makedirs(UserMuLu, exist_ok=True)
+    SettingsLuJing = os.path.join(UserMuLu, "settings.json")
+    try:
+        PeiZhi = {}
+        if os.path.isfile(SettingsLuJing):
+            with open(SettingsLuJing, "r", encoding="utf-8") as f:
+                PeiZhi = json.load(f)
+
+        GaiDong = False
+        GaoJiSheZhi = {
+            "editor.smoothScrolling": True,
+            "workbench.list.smoothScrolling": True,
+            "terminal.integrated.smoothScrolling": True,
+            "editor.cursorSmoothCaretAnimation": "on",
+            "editor.mouseWheelScrollSensitivity": 1,
+            "workbench.list.mouseWheelScrollSensitivity": 1,
+        }
+        for k, v in GaoJiSheZhi.items():
+            if PeiZhi.get(k) != v:
+                PeiZhi[k] = v
+                GaiDong = True
+        if GaiDong:
+            with open(SettingsLuJing, "w", encoding="utf-8") as f:
+                json.dump(PeiZhi, f, indent=2, ensure_ascii=False)
+                f.write("\n")
+            print("[平滑滚动] 已在用户设置中开启官方平滑滚动与呼吸光标动画")
+    except Exception as CuoWu:
+        print(f"[警告] 写入平滑滚动设置失败: {CuoWu}")
+
+    # 2. 注入 GPU 硬件加速样式到 workbench.glass.main.css 与 workbench.desktop.main.css
+    Yuan_Css = '.virtualized-composer-messages-scroll-container{height:100%;overflow:auto;overflow-anchor:none;scrollbar-color:var(--vscode-scrollbarSlider-background) transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin}'
+    MuBiao_Css = '.virtualized-composer-messages-scroll-container{height:100%;overflow:auto;overflow-anchor:none;scrollbar-color:var(--vscode-scrollbarSlider-background) transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin;scroll-behavior:smooth;will-change:scroll-position;transform:translateZ(0)}'
+
+    AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
+    for CssMing in ("workbench.glass.main.css", "workbench.desktop.main.css"):
+        CssLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", CssMing)
+        if not os.path.isfile(CssLuJing):
+            continue
+        try:
+            NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(CssLuJing)
+            if Yuan_Css in NeiRong:
+                XinNeiRong = NeiRong.replace(Yuan_Css, MuBiao_Css, 1)
+                XieRu_WenBen_BaoLiu_HuanHang(CssLuJing, XinNeiRong, HuanHang)
+                print(f"[平滑滚动] 已为 {CssMing} 注入 GPU 硬件加速与平滑滚动图层")
+        except Exception:
+            pass
+
+
+def HuiFu_PingHua_GunDong():
+    """还原平滑滚动注入的 CSS 样式。"""
+    Yuan_Css = '.virtualized-composer-messages-scroll-container{height:100%;overflow:auto;overflow-anchor:none;scrollbar-color:var(--vscode-scrollbarSlider-background) transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin}'
+    MuBiao_Css = '.virtualized-composer-messages-scroll-container{height:100%;overflow:auto;overflow-anchor:none;scrollbar-color:var(--vscode-scrollbarSlider-background) transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin;scroll-behavior:smooth;will-change:scroll-position;transform:translateZ(0)}'
+
+    AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
+    for CssMing in ("workbench.glass.main.css", "workbench.desktop.main.css"):
+        CssLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", CssMing)
+        if not os.path.isfile(CssLuJing):
+            continue
+        try:
+            NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(CssLuJing)
+            if MuBiao_Css in NeiRong:
+                XinNeiRong = NeiRong.replace(MuBiao_Css, Yuan_Css, 1)
+                XieRu_WenBen_BaoLiu_HuanHang(CssLuJing, XinNeiRong, HuanHang)
+        except Exception:
+            pass
+
+
 
 # ============================================================
 # ★★★ 注入与恢复函数 ★★★
@@ -1803,6 +1874,7 @@ def HuiFu_YuanShi():
     HuiFu_TuoPan_HanHua()
     HuiFu_Glass_YongLiang_ZhuangTai()
     HuiFu_Glass_DuiHua_XiaoDiTu()
+    HuiFu_PingHua_GunDong()
 
     HuiFu_JiaoYan_Zhi()
 
@@ -1867,6 +1939,7 @@ def ZhuChengXu():
         ZhuRu_TuoPan_HanHua()
         ZhuRu_Glass_YongLiang_ZhuangTai()
         ZhuRu_Glass_DuiHua_XiaoDiTu()
+        YouHua_PingHua_GunDong()
         GengXin_JiaoYan_Zhi()
         print("\n[完成] 语言包与脚本已更新！请完全退出并重启 Cursor 生效。")
         return
@@ -1881,6 +1954,7 @@ def ZhuChengXu():
     ZhuRu_TuoPan_HanHua()
     ZhuRu_Glass_YongLiang_ZhuangTai()
     ZhuRu_Glass_DuiHua_XiaoDiTu()
+    YouHua_PingHua_GunDong()
 
     print("\n" + "=" * 60)
     print("  [完成] 语言包安装与汉化注入成功！")
