@@ -860,24 +860,38 @@ def ZhuRu_Glass_YongLiang_ZhuangTai():
     Yuan_YuZhi = 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;if(t==="always")return i!==null;if(!i)return!1;const a=i.displayThreshold??50;'
     MuBiao_YuZhi = 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;return i!==null;const a=0;'
 
+    # 4. 位置重构：将用量条从上方单独一行平移到底栏「此电脑」右侧同一行，避免占用额外纵向高度
+    Yuan_WeiZhi_Gow = 'Ae.kind==="readonly"?QY(dOw,{compact:d,environmentIcon:Ae.icon,environmentLabel:Ae.label}):Ae.kind==="standard"?QY(eOw,{agentHeader:t,compact:d,environmentIcon:le,environmentLabel:ae,environmentTooltip:oe,followupMigrationStatus:a,onMigrationRequest:s,repoUrls:p},t.id):null]}'
+    MuBiao_WeiZhi_Gow = 'Ae.kind==="readonly"?QY(dOw,{compact:d,environmentIcon:Ae.icon,environmentLabel:Ae.label}):Ae.kind==="standard"?QY(eOw,{agentHeader:t,compact:d,environmentIcon:le,environmentLabel:ae,environmentTooltip:oe,followupMigrationStatus:a,onMigrationRequest:s,repoUrls:p},t.id):null,QY(SOw,{collapsed:!1,onUsageCardOpen:u,workspace:F})]}'
+
+    Yuan_Zn_Sow = 'children:[U.showComposerUsageStatusBar?ZY(SOw,{collapsed:!An,onUsageCardOpen:jr,workspace:L}):null,'
+    MuBiao_Zn_Sow = 'children:[null,'
+
+    Yuan_Bow_Width = 'b={display:"flex",minHeight:1,width:"100%"}'
+    MuBiao_Bow_Width = 'b={display:"flex",minHeight:1,width:"fit-content"}'
+
+    Yuan_M8m_Margin = 'marginTop:"6px"'
+    MuBiao_M8m_Margin = 'marginTop:"0px",marginLeft:"6px"'
+
     GaiDong = False
     XinNeiRong = NeiRong
 
-    if Yuan_KaiGuan in XinNeiRong:
-        XinNeiRong = XinNeiRong.replace(Yuan_KaiGuan, MuBiao_KaiGuan, 1)
-        GaiDong = True
-
-    if Yuan_HuChi in XinNeiRong:
-        XinNeiRong = XinNeiRong.replace(Yuan_HuChi, MuBiao_HuChi, 1)
-        GaiDong = True
-
-    if Yuan_YuZhi in XinNeiRong:
-        XinNeiRong = XinNeiRong.replace(Yuan_YuZhi, MuBiao_YuZhi, 1)
-        GaiDong = True
+    for Yuan_Text, MuBiao_Text in [
+        (Yuan_KaiGuan, MuBiao_KaiGuan),
+        (Yuan_HuChi, MuBiao_HuChi),
+        (Yuan_YuZhi, MuBiao_YuZhi),
+        (Yuan_WeiZhi_Gow, MuBiao_WeiZhi_Gow),
+        (Yuan_Zn_Sow, MuBiao_Zn_Sow),
+        (Yuan_Bow_Width, MuBiao_Bow_Width),
+        (Yuan_M8m_Margin, MuBiao_M8m_Margin),
+    ]:
+        if Yuan_Text in XinNeiRong:
+            XinNeiRong = XinNeiRong.replace(Yuan_Text, MuBiao_Text, 1)
+            GaiDong = True
 
     if not GaiDong:
-        if MuBiao_HuChi in NeiRong:
-            print("[智能体用量] 智能体窗口实时用量状态栏已激活")
+        if MuBiao_WeiZhi_Gow in NeiRong:
+            print("[智能体用量] 智能体窗口实时用量状态栏已就绪（已放置在「此电脑」右侧同排）")
             return True
         print("[智能体用量] 未匹配到目标用量开关特征（可能版本不同），跳过")
         return False
@@ -892,7 +906,7 @@ def ZhuRu_Glass_YongLiang_ZhuangTai():
 
     try:
         XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinNeiRong, HuanHang)
-        print("[智能体用量] 已成功开启智能体窗口底部实时用量状态栏（已解除与分支状态栏互斥及50%阈值隐藏）")
+        print("[智能体用量] 已成功开启智能体窗口实时用量（已平移至「此电脑」右侧同一行并解除阈值限制）")
         return True
     except Exception as CuoWu:
         print(f"[错误] 无法写入 workbench.glass.main.js: {CuoWu}")
@@ -900,7 +914,7 @@ def ZhuRu_Glass_YongLiang_ZhuangTai():
 
 
 def HuiFu_Glass_YongLiang_ZhuangTai():
-    """还原智能体（Glass）窗口用量状态栏开关。"""
+    """还原智能体（Glass）窗口用量状态栏开关与位置。"""
     LuJing = HuoQu_Glass_Main_JS_LuJing()
     if not os.path.isfile(LuJing):
         return False
@@ -912,30 +926,106 @@ def HuiFu_Glass_YongLiang_ZhuangTai():
     XinNeiRong = NeiRong
     GaiDong = False
 
-    MuBiao_KaiGuan = "showUsageStatusBar:b=!1"
-    Yuan_KaiGuan = "showUsageStatusBar:b=!0"
-
-    MuBiao_HuChi = "function $Fw({showUsageStatusBar:t,chatStatusBarEnabled:e}){return{showComposerUsageStatusBar:t&&!e,showChatStatusBar:e}}"
-    Yuan_HuChi = "function $Fw({showUsageStatusBar:t,chatStatusBarEnabled:e}){return{showComposerUsageStatusBar:!0,showChatStatusBar:e}}"
-
-    MuBiao_YuZhi = 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;if(t==="always")return i!==null;if(!i)return!1;const a=i.displayThreshold??50;'
-    Yuan_YuZhi = 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;return i!==null;const a=0;'
-
-    if Yuan_KaiGuan in XinNeiRong:
-        XinNeiRong = XinNeiRong.replace(Yuan_KaiGuan, MuBiao_KaiGuan, 1)
-        GaiDong = True
-    if Yuan_HuChi in XinNeiRong:
-        XinNeiRong = XinNeiRong.replace(Yuan_HuChi, MuBiao_HuChi, 1)
-        GaiDong = True
-    if Yuan_YuZhi in XinNeiRong:
-        XinNeiRong = XinNeiRong.replace(Yuan_YuZhi, MuBiao_YuZhi, 1)
-        GaiDong = True
+    for MuBiao_Text, Yuan_Text in [
+        ("showUsageStatusBar:b=!1", "showUsageStatusBar:b=!0"),
+        ("function $Fw({showUsageStatusBar:t,chatStatusBarEnabled:e}){return{showComposerUsageStatusBar:t&&!e,showChatStatusBar:e}}", "function $Fw({showUsageStatusBar:t,chatStatusBarEnabled:e}){return{showComposerUsageStatusBar:!0,showChatStatusBar:e}}"),
+        ('function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;if(t==="always")return i!==null;if(!i)return!1;const a=i.displayThreshold??50;', 'function X7S({displayMode:t,hasExpiredPromoReminder:e,usageDisplayEnabled:n,planUsage:i,spendLimitUsage:r,isInSeparateUsageBarsGroup:s,isAutoModelSelected:o}){if(t==="never")return!1;if(e)return!0;if(n===!1)return!1;return i!==null;const a=0;'),
+        ('Ae.kind==="readonly"?QY(dOw,{compact:d,environmentIcon:Ae.icon,environmentLabel:Ae.label}):Ae.kind==="standard"?QY(eOw,{agentHeader:t,compact:d,environmentIcon:le,environmentLabel:ae,environmentTooltip:oe,followupMigrationStatus:a,onMigrationRequest:s,repoUrls:p},t.id):null]}', 'Ae.kind==="readonly"?QY(dOw,{compact:d,environmentIcon:Ae.icon,environmentLabel:Ae.label}):Ae.kind==="standard"?QY(eOw,{agentHeader:t,compact:d,environmentIcon:le,environmentLabel:ae,environmentTooltip:oe,followupMigrationStatus:a,onMigrationRequest:s,repoUrls:p},t.id):null,QY(SOw,{collapsed:!1,onUsageCardOpen:u,workspace:F})]}'),
+        ('children:[U.showComposerUsageStatusBar?ZY(SOw,{collapsed:!An,onUsageCardOpen:jr,workspace:L}):null,', 'children:[null,'),
+        ('b={display:"flex",minHeight:1,width:"100%"}', 'b={display:"flex",minHeight:1,width:"fit-content"}'),
+        ('marginTop:"6px"', 'marginTop:"0px",marginLeft:"6px"'),
+    ]:
+        if Yuan_Text in XinNeiRong:
+            XinNeiRong = XinNeiRong.replace(Yuan_Text, MuBiao_Text, 1)
+            GaiDong = True
 
     if not GaiDong:
         return False
     try:
         XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinNeiRong, HuanHang)
-        print("[智能体用量] 已还原智能体窗口用量状态栏开关")
+        print("[智能体用量] 已还原智能体窗口用量状态栏位置与开关")
+        return True
+    except OSError:
+        return False
+
+
+def ZhuRu_Glass_DuiHua_XiaoDiTu():
+    """解锁 Cursor 智能体对话大纲与小地图（Minimap）。"""
+    LuJing = HuoQu_Glass_Main_JS_LuJing()
+    if not os.path.isfile(LuJing):
+        return False
+    try:
+        NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(LuJing)
+    except OSError:
+        return False
+
+    # 1. 释放菜单栏与命令面板显示门控：conversation_table_of_contents -> true
+    Yuan_Lis = 'const A=ja("conversation_table_of_contents");bke(lis,A);'
+    MuBiao_Lis = 'const A=ja("conversation_table_of_contents");bke(lis,!0);'
+
+    # 2. 绕过渲染挂载特性门控
+    Yuan_Te = 'te=g_("conversation_table_of_contents",J)&&J;'
+    MuBiao_Te = 'te=J;'
+
+    # 3. 优化触发门槛：从默认 5 轮消息降低为 2 轮即可触发展示
+    Yuan_L3g = 'a3g=24,l3g=5,c3g=44'
+    MuBiao_L3g = 'a3g=24,l3g=2,c3g=44'
+
+    GaiDong = False
+    XinNeiRong = NeiRong
+
+    for Yuan_Text, MuBiao_Text in [
+        (Yuan_Lis, MuBiao_Lis),
+        (Yuan_Te, MuBiao_Te),
+        (Yuan_L3g, MuBiao_L3g),
+    ]:
+        if Yuan_Text in XinNeiRong:
+            XinNeiRong = XinNeiRong.replace(Yuan_Text, MuBiao_Text, 1)
+            GaiDong = True
+
+    if not GaiDong:
+        if MuBiao_Lis in NeiRong:
+            print("[智能体小地图] 智能体对话小地图（Minimap）已激活")
+            return True
+        print("[智能体小地图] 未匹配到小地图特性门控特征，跳过")
+        return False
+
+    try:
+        XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinNeiRong, HuanHang)
+        print("[智能体小地图] 已成功解锁智能体对话小地图（Minimap / 大纲导航栏）")
+        return True
+    except Exception as CuoWu:
+        print(f"[错误] 无法写入 workbench.glass.main.js: {CuoWu}")
+        return False
+
+
+def HuiFu_Glass_DuiHua_XiaoDiTu():
+    """还原智能体对话小地图（Minimap）开关。"""
+    LuJing = HuoQu_Glass_Main_JS_LuJing()
+    if not os.path.isfile(LuJing):
+        return False
+    try:
+        NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(LuJing)
+    except OSError:
+        return False
+
+    XinNeiRong = NeiRong
+    GaiDong = False
+
+    for MuBiao_Text, Yuan_Text in [
+        ('const A=ja("conversation_table_of_contents");bke(lis,A);', 'const A=ja("conversation_table_of_contents");bke(lis,!0);'),
+        ('te=g_("conversation_table_of_contents",J)&&J;', 'te=J;'),
+        ('a3g=24,l3g=5,c3g=44', 'a3g=24,l3g=2,c3g=44'),
+    ]:
+        if Yuan_Text in XinNeiRong:
+            XinNeiRong = XinNeiRong.replace(Yuan_Text, MuBiao_Text, 1)
+            GaiDong = True
+
+    if not GaiDong:
+        return False
+    try:
+        XieRu_WenBen_BaoLiu_HuanHang(LuJing, XinNeiRong, HuanHang)
+        print("[智能体小地图] 已还原智能体对话小地图门控")
         return True
     except OSError:
         return False
@@ -1712,6 +1802,7 @@ def HuiFu_YuanShi():
 
     HuiFu_TuoPan_HanHua()
     HuiFu_Glass_YongLiang_ZhuangTai()
+    HuiFu_Glass_DuiHua_XiaoDiTu()
 
     HuiFu_JiaoYan_Zhi()
 
@@ -1775,6 +1866,7 @@ def ZhuChengXu():
         ShanChu_JiuBan_JS()
         ZhuRu_TuoPan_HanHua()
         ZhuRu_Glass_YongLiang_ZhuangTai()
+        ZhuRu_Glass_DuiHua_XiaoDiTu()
         GengXin_JiaoYan_Zhi()
         print("\n[完成] 语言包与脚本已更新！请完全退出并重启 Cursor 生效。")
         return
@@ -1788,6 +1880,7 @@ def ZhuChengXu():
     ZhuRu_HTML()
     ZhuRu_TuoPan_HanHua()
     ZhuRu_Glass_YongLiang_ZhuangTai()
+    ZhuRu_Glass_DuiHua_XiaoDiTu()
 
     print("\n" + "=" * 60)
     print("  [完成] 语言包安装与汉化注入成功！")
