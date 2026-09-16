@@ -18,7 +18,7 @@
             'Open Project', 'Clone Repository', 'Connect via SSH',
             'Remote Machines', 'Publish to GitHub', 'Report Issue', 'Send Feedback', 'Code Intelligence',
             'Click to import all local VS Code extensions', "don't show again", 'Log in to use Cursor AI features',
-            'Repositories', 'Message Cursor', 'Browse Files', 'No workspace folder open',
+            'Repositories', 'Projects', 'New Project', 'Pinned', 'Unpinned', 'Message Cursor', 'Browse Files', 'No workspace folder open',
             'Close Pane', 'Unable to load automations', "Let's kick something off",
             'Getting Started', 'Teach Cursor New Skills', 'have moved to Customize'
         ],

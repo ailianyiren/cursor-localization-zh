@@ -145,6 +145,62 @@
         [
           "Pro Plan",
           "专业版计划"
+        ],
+        [
+          "Projects",
+          "项目"
+        ],
+        [
+          "New Project",
+          "新建项目"
+        ],
+        [
+          "Pinned",
+          "已固定"
+        ],
+        [
+          "Unpinned",
+          "取消固定"
+        ],
+        [
+          "All Chats",
+          "所有对话"
+        ],
+        [
+          "No pinned chats",
+          "暂无置顶对话"
+        ],
+        [
+          "Recent Projects",
+          "最近项目"
+        ],
+        [
+          "Edit Workspace",
+          "编辑工作区"
+        ],
+        [
+          "Open in IDE",
+          "在 IDE 中打开"
+        ],
+        [
+          "Add Folders",
+          "添加文件夹"
+        ],
+        [
+          "Workspace actions",
+          "工作区操作"
+        ],
+        [
+          "Workspace name",
+          "工作区名称"
+        ],
+        [
+          "Name this workspace and choose folders to include",
+          "命名此工作区并选择要包含的文件夹"
+        ],
+        [
+          "Name this workspace and choose folders on this remote",
+          "命名此工作区并选择此远程上的文件夹"
         ]
       ]
     },
@@ -5873,7 +5929,7 @@
           "不保存"
         ],
         [
-          "Don\u2019t Save",
+          "Don’t Save",
           "不保存"
         ],
         [
@@ -9355,7 +9411,7 @@
           "不再询问"
         ],
         [
-          "Don\u2019t Ask Again",
+          "Don’t Ask Again",
           "不再询问"
         ],
         [

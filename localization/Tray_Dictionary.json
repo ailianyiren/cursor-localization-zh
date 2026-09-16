@@ -1,6 +1,6 @@
 {
   "description": "系统托盘右键菜单。主进程 out/main.js 中的唯一标签替换，注入脚本无法覆盖原生菜单。",
-  "updatedAt": "2026-08-13",
+  "updatedAt": "2026-09-16",
   "replacements": [
     ["label:\"Recent Agents\"", "label:\"最近智能体\""],
     ["label:\"No recent agents\"", "label:\"暂无最近智能体\""],
@@ -8,9 +8,13 @@
     ["label:\"Clear All Notifications\"", "label:\"清除所有通知\""],
     ["label:\"New Agent\"", "label:\"新建智能体\""],
     ["label:\"Open Cursor\"", "label:\"打开 Cursor\""],
-    ["label:\"Settings\",click:()=>{this.trackEvent(\"tray.settings_opened\")", "label:\"设置\",click:()=>{this.trackEvent(\"tray.settings_opened\")"],
-    ["label:\"Quit\",click:()=>{iS.quit()}", "label:\"退出\",click:()=>{iS.quit()}"],
-    ["case\"in_progress\":return\"Running\"", "case\"in_progress\":return\"运行中\""],
-    ["case\"needs_attention\":return\"Needs attention\"", "case\"needs_attention\":return\"需要关注\""]
+    ["label:\"Settings\",click:", "label:\"设置\",click:"],
+    ["label:\"Quit\",click:", "label:\"退出\",click:"],
+    ["label:\"Log In\",click:", "label:\"登录\",click:"],
+    ["label:\"Sign Up\",click:", "label:\"注册\",click:"],
+    ["label:e.newComposerActionLabel,click:", "label:e.newComposerActionLabel===\"New Chat\"?\"新对话\":e.newComposerActionLabel===\"New Agent\"?\"新建智能体\":e.newComposerActionLabel,click:"],
+    ["label:r.label,enabled:!1", "label:r.label===\"Pinned\"?\"已固定\":r.label===\"Recent Agents\"?\"最近智能体\":r.label,enabled:!1"],
+    ["`Agent ${i+1}`", "`智能体 ${i+1}`"],
+    ["toolTip:r?\"Running\":e.status===\"error\"?\"Needs attention\":void 0", "toolTip:r?\"运行中\":e.status===\"error\"?\"需要关注\":void 0"]
   ]
 }
