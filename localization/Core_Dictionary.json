@@ -10419,6 +10419,14 @@
         [
           "Selector",
           "选择器"
+        ],
+        [
+          "Build Plan in Parallel",
+          "并行构建计划"
+        ],
+        [
+          "Build Plan",
+          "构建计划"
         ]
       ]
     },

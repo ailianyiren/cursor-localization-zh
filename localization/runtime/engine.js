@@ -868,6 +868,18 @@
                 if (comboStop && /send\s+right\s+away/i.test(comboStop.textContent || '')) return;
             } catch (e) {}
         }
+        if (trimmed === 'IDE') {
+            try {
+                var ctaBtn = node.parentElement && node.parentElement.closest('[data-component="open-editor-window-cta"], button[aria-label="IDE"]');
+                if (ctaBtn) {
+                    node.textContent = '编辑器';
+                    if (ctaBtn.getAttribute('aria-label') === 'IDE') {
+                        ctaBtn.setAttribute('aria-label', '打开代码编辑器');
+                    }
+                    return;
+                }
+            } catch (e) {}
+        }
 
         if (Shi_QuickInput_QuYu(node.parentElement)) {
             if (YiFanYi_ZhuTi_Ming(trimmed)) return;
@@ -916,6 +928,11 @@
 
     function FanYi_ShuXing(el) {
         if (!el || !el.getAttribute) return;
+        if (el.getAttribute('data-component') === 'open-editor-window-cta' || (el.tagName === 'BUTTON' && el.getAttribute('aria-label') === 'IDE')) {
+            if (el.getAttribute('aria-label') === 'IDE') el.setAttribute('aria-label', '打开代码编辑器');
+            var ctaSpan = el.querySelector && el.querySelector('span');
+            if (ctaSpan && ctaSpan.textContent === 'IDE') ctaSpan.textContent = '编辑器';
+        }
         var attrs = ['title', 'aria-label', 'alt', 'placeholder', 'aria-placeholder', 'data-tooltip', 'data-title'];
         for (var i = 0; i < attrs.length; i++) {
             var val = el.getAttribute(attrs[i]);
@@ -1424,7 +1441,20 @@
             XiuZheng_XiaLaKuang_MianBan();
         });
         run(QX_HOVER, function() {
-            FanYi_Monaco_Hover_Content(document.body);
+            try {
+            var ctaBtns = document.querySelectorAll('[data-component="open-editor-window-cta"], button[aria-label="IDE"]');
+            for (var cb = 0; cb < ctaBtns.length; cb++) {
+                var cbtn = ctaBtns[cb];
+                if (cbtn.getAttribute('aria-label') === 'IDE') {
+                    cbtn.setAttribute('aria-label', '打开代码编辑器');
+                }
+                var cspan = cbtn.querySelector('span');
+                if (cspan && cspan.textContent === 'IDE') {
+                    cspan.textContent = '编辑器';
+                }
+            }
+        } catch (e) {}
+        FanYi_Monaco_Hover_Content(document.body);
             FanYi_Cursor_Hover_Widget(document.body);
             XiuZheng_TiJiao_PingFen();
         });
@@ -2595,7 +2625,19 @@
             '[class*="review-control"] button, [class*="changes-header"] button, ' +
             '.context-view button, .monaco-menu .action-label'
         );
-        for (var b = 0; b < btns.length; b++) GengXin_Shuxing_Hints(btns[b], attrHints);
+        try {
+            var ctaBtns = document.querySelectorAll('[data-component="open-editor-window-cta"], button[aria-label="IDE"]');
+            for (var cb = 0; cb < ctaBtns.length; cb++) {
+                var cbtn = ctaBtns[cb];
+                if (cbtn.getAttribute('aria-label') === 'IDE') {
+                    cbtn.setAttribute('aria-label', '打开代码编辑器');
+                }
+                var cspan = cbtn.querySelector('span');
+                if (cspan && cspan.textContent === 'IDE') {
+                    cspan.textContent = '编辑器';
+                }
+            }
+        } catch (e) {}
         FanYi_Monaco_Hover_Content(document.body);
         var scopes = document.querySelectorAll(
             '[class*="context-usage"], [class*="contextUsage"], [class*="composer"] div, ' +
