@@ -1196,6 +1196,11 @@
       "regex": "^([\\d,.]+(?:K|M)?)\\s+out of\\s+([\\d,.]+(?:K|M)?)\\s+tokens$",
       "flags": "i",
       "replacement": "$1 / $2 token"
+    },
+    {
+      "regex": "^New Agent \\(preserve editor panel\\)$",
+      "flags": "i",
+      "replacement": "新建智能体（保留编辑器面板）"
     }
   ]
 }

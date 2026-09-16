@@ -9827,6 +9827,598 @@
         [
           "View",
           "视图"
+        ],
+        [
+          "Search keybindings...",
+          "搜索键盘快捷键..."
+        ],
+        [
+          "No matching keyboard shortcuts.",
+          "没有匹配的键盘快捷键。"
+        ],
+        [
+          "Apps Panel",
+          "应用面板"
+        ],
+        [
+          "Hide Apps Panel",
+          "隐藏应用面板"
+        ],
+        [
+          "Queued Message",
+          "排队消息"
+        ],
+        [
+          "Questionnaire",
+          "调查问卷"
+        ],
+        [
+          "for cloud agents",
+          "用于云端智能体"
+        ],
+        [
+          "from switch mode card",
+          "来自模式切换卡片"
+        ],
+        [
+          "when agent workspace focused",
+          "当智能体工作区聚焦时"
+        ],
+        [
+          "from plan tab",
+          "来自计划标签页"
+        ],
+        [
+          "in committed scope",
+          "在已提交范围内"
+        ],
+        [
+          "in staged scope",
+          "在已暂存范围内"
+        ],
+        [
+          "in unstaged scope",
+          "在未暂存范围内"
+        ],
+        [
+          "from pull request tab",
+          "来自拉取请求标签页"
+        ],
+        [
+          "from plan tray",
+          "来自计划托盘"
+        ],
+        [
+          "from error tray",
+          "来自错误托盘"
+        ],
+        [
+          "Cycle Instance Selector",
+          "轮换实例选择器"
+        ],
+        [
+          "Open Branch Selector",
+          "打开分支选择器"
+        ],
+        [
+          "Open Instance Selector",
+          "打开实例选择器"
+        ],
+        [
+          "Cycle Model Parameter",
+          "轮换模型参数"
+        ],
+        [
+          "Focus Customize Search",
+          "聚焦自定义搜索框"
+        ],
+        [
+          "Next Palette Filter",
+          "下一个面板筛选器"
+        ],
+        [
+          "Previous Palette Filter",
+          "上一个面板筛选器"
+        ],
+        [
+          "Toggle Fullscreen",
+          "切换全屏"
+        ],
+        [
+          "New Agent (preserve editor panel)",
+          "新建智能体（保留编辑器面板）"
+        ],
+        [
+          "Approve Pending Shell Tool",
+          "批准待处理的 Shell 工具"
+        ],
+        [
+          "Approve Pending Shell Tool and Allowlist",
+          "批准待处理的 Shell 工具并加入白名单"
+        ],
+        [
+          "Cycle Mode",
+          "轮换模式"
+        ],
+        [
+          "Edit Nearest User Message",
+          "编辑最近的用户消息"
+        ],
+        [
+          "Find in Chat",
+          "在对话中查找"
+        ],
+        [
+          "Focus Adjacent Tile",
+          "聚焦相邻磁贴"
+        ],
+        [
+          "Hold to Talk",
+          "按住说话"
+        ],
+        [
+          "Jump to Next User Message",
+          "跳转到下一条用户消息"
+        ],
+        [
+          "Jump to Previous User Message",
+          "跳转到上一条用户消息"
+        ],
+        [
+          "New Side Chat",
+          "新建侧边对话"
+        ],
+        [
+          "Next Agent",
+          "下一个智能体"
+        ],
+        [
+          "Previous Agent",
+          "上一个智能体"
+        ],
+        [
+          "Next Chat (Direct)",
+          "下一个对话（直接切换）"
+        ],
+        [
+          "Previous Chat (Direct)",
+          "上一个对话（直接切换）"
+        ],
+        [
+          "Open in New Window",
+          "在新窗口中打开"
+        ],
+        [
+          "Open Least Recent Agent",
+          "打开最早使用的智能体"
+        ],
+        [
+          "Open Least Recent Agents",
+          "打开最早使用的智能体"
+        ],
+        [
+          "Open Recent Agent",
+          "打开最近使用的智能体"
+        ],
+        [
+          "Open Recent Agents",
+          "打开最近使用的智能体"
+        ],
+        [
+          "Scroll Agent Panel Down",
+          "向下滚动智能体面板"
+        ],
+        [
+          "Scroll Agent Panel Up",
+          "向上滚动智能体面板"
+        ],
+        [
+          "Skip Pending Shell Tool",
+          "跳过待处理的 Shell 工具"
+        ],
+        [
+          "Use Current Branch",
+          "使用当前分支"
+        ],
+        [
+          "Go to Chat 1",
+          "转到对话 1"
+        ],
+        [
+          "Go to Chat 2",
+          "转到对话 2"
+        ],
+        [
+          "Go to Chat 3",
+          "转到对话 3"
+        ],
+        [
+          "Go to Chat 4",
+          "转到对话 4"
+        ],
+        [
+          "Go to Chat 5",
+          "转到对话 5"
+        ],
+        [
+          "Go to Chat 6",
+          "转到对话 6"
+        ],
+        [
+          "Go to Chat 7",
+          "转到对话 7"
+        ],
+        [
+          "Go to Chat 8",
+          "转到对话 8"
+        ],
+        [
+          "Go to Chat 9",
+          "转到对话 9"
+        ],
+        [
+          "Agent Exec: Toggle Simulate Temporary Unavailable",
+          "智能体执行：切换模拟临时不可用"
+        ],
+        [
+          "Apply IDE Workspace Handoff",
+          "应用 IDE 工作区交接"
+        ],
+        [
+          "Cancel Branch Mismatch",
+          "取消分支不匹配"
+        ],
+        [
+          "Clear Queued Message Focus",
+          "清除排队消息焦点"
+        ],
+        [
+          "Close All Open Files",
+          "关闭所有打开的文件"
+        ],
+        [
+          "Close Chat Tab",
+          "关闭对话标签页"
+        ],
+        [
+          "Close Customize",
+          "关闭自定义"
+        ],
+        [
+          "Close Find in Chat",
+          "关闭在对话中查找"
+        ],
+        [
+          "Close Find in Preview",
+          "关闭在预览中查找"
+        ],
+        [
+          "Close Go to Line",
+          "关闭转到行"
+        ],
+        [
+          "Close Plan Find",
+          "关闭计划查找"
+        ],
+        [
+          "Close this window?",
+          "是否关闭此窗口？"
+        ],
+        [
+          "Collapse / Expand All Files",
+          "折叠 / 展开所有文件"
+        ],
+        [
+          "Continue / Submit",
+          "继续 / 提交"
+        ],
+        [
+          "Developer: Reset Design Mode Quick Action Pill",
+          "开发者：重置设计模式快捷药丸按钮"
+        ],
+        [
+          "Edit Pull Request Title",
+          "编辑拉取请求标题"
+        ],
+        [
+          "Edit Queued Message",
+          "编辑排队消息"
+        ],
+        [
+          "Find Next in Browser Page",
+          "在浏览器页面中查找下一个"
+        ],
+        [
+          "Find Next in Chat",
+          "在对话中查找下一个"
+        ],
+        [
+          "Find Next in Plan",
+          "在计划中查找下一个"
+        ],
+        [
+          "Find Next in Preview",
+          "在预览中查找下一个"
+        ],
+        [
+          "Find Previous in Browser Page",
+          "在浏览器页面中查找上一个"
+        ],
+        [
+          "Find Previous in Chat",
+          "在对话中查找上一个"
+        ],
+        [
+          "Find Previous in Plan",
+          "在计划中查找上一个"
+        ],
+        [
+          "Find Previous in Preview",
+          "在预览中查找上一个"
+        ],
+        [
+          "Find in Browser Page",
+          "在浏览器页面中查找"
+        ],
+        [
+          "Find in File",
+          "在文件中查找"
+        ],
+        [
+          "Find in Output",
+          "在输出中查找"
+        ],
+        [
+          "Find in Plan",
+          "在计划中查找"
+        ],
+        [
+          "Find in Terminal",
+          "在终端中查找"
+        ],
+        [
+          "Focus Browser Location Bar",
+          "聚焦浏览器地址栏"
+        ],
+        [
+          "Focus Next Queued Message",
+          "聚焦下一条排队消息"
+        ],
+        [
+          "Focus Next Tile",
+          "聚焦下一个磁贴"
+        ],
+        [
+          "Focus Previous Queued Message",
+          "聚焦上一条排队消息"
+        ],
+        [
+          "Focus Previous Tile",
+          "聚焦上一个磁贴"
+        ],
+        [
+          "Focus in Code Editor",
+          "聚焦在代码编辑器中"
+        ],
+        [
+          "Focus in Terminal",
+          "聚焦在终端中"
+        ],
+        [
+          "Format Document",
+          "格式化文档"
+        ],
+        [
+          "Get Active File Tab URI",
+          "获取活动文件标签页 URI"
+        ],
+        [
+          "Glass Commands",
+          "Glass 命令"
+        ],
+        [
+          "Glass Image Preview: Reset Zoom",
+          "Glass 图像预览：重置缩放"
+        ],
+        [
+          "Glass Image Preview: Zoom In",
+          "Glass 图像预览：放大"
+        ],
+        [
+          "Glass Image Preview: Zoom Out",
+          "Glass 图像预览：缩小"
+        ],
+        [
+          "Go Back in Files",
+          "在文件中后退"
+        ],
+        [
+          "Go Forward in Files",
+          "在文件中前进"
+        ],
+        [
+          "Go to Line",
+          "转到行"
+        ],
+        [
+          "Hard Reload Browser Tab",
+          "强制重新加载浏览器标签页"
+        ],
+        [
+          "Insert Selection into Glass Composer",
+          "将所选内容插入 Glass 编辑器"
+        ],
+        [
+          "Jump to Next File",
+          "跳转到下一个文件"
+        ],
+        [
+          "Jump to Previous File",
+          "跳转到上一个文件"
+        ],
+        [
+          "Mark as Fixed",
+          "标记为已修复"
+        ],
+        [
+          "New Agent from Fork",
+          "从分支新建智能体"
+        ],
+        [
+          "New Agent with Context",
+          "附带上下文新建智能体"
+        ],
+        [
+          "New Agent with Query",
+          "附带查询新建智能体"
+        ],
+        [
+          "Next Search Result",
+          "下一个搜索结果"
+        ],
+        [
+          "Open Build Menu",
+          "打开构建菜单"
+        ],
+        [
+          "Open Gallery",
+          "打开图库"
+        ],
+        [
+          "Open Plan",
+          "打开计划"
+        ],
+        [
+          "Open Project Notes Page",
+          "打开项目笔记页面"
+        ],
+        [
+          "Open diff menu",
+          "打开差异菜单"
+        ],
+        [
+          "Plugin Tray Cancel",
+          "插件托盘取消"
+        ],
+        [
+          "Plugin Tray Primary Action",
+          "插件托盘主要操作"
+        ],
+        [
+          "Previous Search Result",
+          "上一个搜索结果"
+        ],
+        [
+          "Remove Queued Message",
+          "移除排队消息"
+        ],
+        [
+          "Reopen Last Closed Chat Tab",
+          "重新打开上次关闭的对话标签页"
+        ],
+        [
+          "Reopen Last Closed Tab",
+          "重新打开上次关闭的标签页"
+        ],
+        [
+          "SSH Connect Dialog Back",
+          "SSH 连接对话框返回"
+        ],
+        [
+          "Save All Files",
+          "保存所有文件"
+        ],
+        [
+          "Save Automation",
+          "保存自动化"
+        ],
+        [
+          "Scroll Down",
+          "向下滚动"
+        ],
+        [
+          "Scroll Up",
+          "向上滚动"
+        ],
+        [
+          "Search Cursor Settings",
+          "搜索 Cursor 设置"
+        ],
+        [
+          "Select All in Diff",
+          "在差异中全选"
+        ],
+        [
+          "Select All in File",
+          "在文件中全选"
+        ],
+        [
+          "Send Queued Message Now",
+          "立即发送排队消息"
+        ],
+        [
+          "Show Notification Progress Demo",
+          "显示通知进度演示"
+        ],
+        [
+          "Skip Mode Switch",
+          "跳过模式切换"
+        ],
+        [
+          "Stage",
+          "暂存"
+        ],
+        [
+          "Switch Theme",
+          "切换主题"
+        ],
+        [
+          "Switched to Auto, which provides significantly higher usage limits.",
+          "已切换为自动模式，这可提供显著更高的使用限额。"
+        ],
+        [
+          "Toggle Expansion of File",
+          "切换文件的展开状态"
+        ],
+        [
+          "Toggle Indexed Agent Search Dev Tools",
+          "切换已索引智能体搜索开发者工具"
+        ],
+        [
+          "Toggle Local / GitHub",
+          "切换 本地 / GitHub"
+        ],
+        [
+          "Toggle Performance Debug Bar",
+          "切换性能调试栏"
+        ],
+        [
+          "Toggle Selection of File",
+          "切换文件的选中状态"
+        ],
+        [
+          "Toggle Workbench Lifecycle Metric (Performance Bar)",
+          "切换工作台生命周期指标（性能栏）"
+        ],
+        [
+          "Try Again",
+          "重试"
+        ],
+        [
+          "Try Cloud Agent",
+          "试用云端智能体"
+        ],
+        [
+          "View Uncommitted Changes",
+          "查看未提交的更改"
+        ],
+        [
+          "WSL Connect Dialog Back",
+          "WSL 连接对话框返回"
+        ],
+        [
+          "Selector",
+          "选择器"
         ]
       ]
     },

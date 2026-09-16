@@ -3550,6 +3550,13 @@
             node.textContent = tierOnly[trimmed.toLowerCase()];
             return;
         }
+        var directMatch = ChaZhao_FanYi(trimmed) || ChaZhao_FanYi(text);
+        if (directMatch && directMatch !== trimmed && directMatch !== text) {
+            var pfx = text.substring(0, text.indexOf(trimmed));
+            var sfx = text.substring(text.indexOf(trimmed) + trimmed.length);
+            node.textContent = pfx + directMatch + sfx;
+            return;
+        }
         var result = text;
         for (var i = 0; i < XiaLa_MianBan_SuiPian.length; i++) {
             result = result.split(XiaLa_MianBan_SuiPian[i][0]).join(XiaLa_MianBan_SuiPian[i][1]);
