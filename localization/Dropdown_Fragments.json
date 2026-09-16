@@ -1329,6 +1329,38 @@
     [
       "Copyright © 2026 Anysphere. All rights reserved.",
       "版权所有 © 2026 Anysphere。保留所有权利。"
+    ],
+    [
+      "Interrupt",
+      "打断"
+    ],
+    [
+      "Steer",
+      "引导"
+    ],
+    [
+      "Queue",
+      "队列"
+    ],
+    [
+      "Steer the agent without stopping it",
+      "在不停止智能体的情况下引导其工作"
+    ],
+    [
+      "Stop the agent and send the message",
+      "停止智能体并发送消息"
+    ],
+    [
+      "Send after Agent finishes",
+      "智能体执行完成后发送"
+    ],
+    [
+      "Stop and Send",
+      "停止并发送"
+    ],
+    [
+      "Stop and send",
+      "停止并发送"
     ]
   ]
 }

@@ -2745,6 +2745,194 @@
         [
           "Custom words that submit a voice prompt. Spaces and punctuation are ignored",
           "用于提交语音提示的自定义词语。忽略空格与标点"
+        ],
+        [
+          "Continue Interrupted Agents",
+          "继续中断的智能体"
+        ],
+        [
+          "Automatically resume working on agents and their subagents after a reload or restart",
+          "在重载或重启后自动恢复处理智能体及其子智能体"
+        ],
+        [
+          "Automatically resume working on agents and their subagents after a reload or restart.",
+          "在重载或重启后自动恢复处理智能体及其子智能体。"
+        ],
+        [
+          "Show notifications for less urgent issues",
+          "为较低紧急度的问题显示通知"
+        ],
+        [
+          "Show notifications for less urgent issues.",
+          "为较低紧急度的问题显示通知。"
+        ],
+        [
+          "Show notifications for less urgent issues. Errors and informational notifications are always shown.",
+          "为较低紧急度的问题显示通知。错误和信息类通知将始终显示。"
+        ],
+        [
+          "Show notifications for less urgent issues. Errors and informational notifications are always shown",
+          "为较低紧急度的问题显示通知。错误和信息类通知将始终显示"
+        ],
+        [
+          "New Messages",
+          "新消息"
+        ],
+        [
+          "Choose the default behavior of messages sent while Agent is working",
+          "选择智能体工作期间发送消息的默认行为"
+        ],
+        [
+          "Choose the default behavior of messages sent while Agent is working.",
+          "选择智能体工作期间发送消息的默认行为。"
+        ],
+        [
+          "Manually Sent Messages from Queue",
+          "从队列手动发送的消息"
+        ],
+        [
+          "Manually Sent Messages From Queue",
+          "从队列手动发送的消息"
+        ],
+        [
+          "Choose the default behavior of messages sent from the queue",
+          "选择从队列中发送消息时的默认行为"
+        ],
+        [
+          "Choose the default behavior of messages sent from the queue.",
+          "选择从队列中发送消息时的默认行为。"
+        ],
+        [
+          "Steer the agent without stopping it",
+          "在不停止智能体的情况下引导其工作"
+        ],
+        [
+          "Stop the agent and send the message",
+          "停止智能体并发送消息"
+        ],
+        [
+          "Send after Agent finishes",
+          "智能体执行完成后发送"
+        ],
+        [
+          "Interrupt",
+          "打断"
+        ],
+        [
+          "Steer",
+          "引导"
+        ],
+        [
+          "Stop and Send",
+          "停止并发送"
+        ],
+        [
+          "Stop and send",
+          "停止并发送"
+        ],
+        [
+          "Steer New Messages?",
+          "实时引导新消息？"
+        ],
+        [
+          "Steering sends new messages to the running Agent without queuing or interrupting",
+          "实时引导会在不排队或打断的情况下，直接将新消息发送给正在运行的智能体"
+        ],
+        [
+          "Keep Queuing",
+          "保持排队"
+        ],
+        [
+          "Keep New Messages Queued",
+          "保持新消息排队"
+        ],
+        [
+          "Start Steering New Messages",
+          "开始引导新消息"
+        ],
+        [
+          "Allow agent to switch to modes like Plan or Debug without asking. When off, Cursor asks first, but skips if unanswered within 15 seconds.",
+          "允许智能体在不询问的情况下自动切换到计划（Plan）或调试（Debug）等模式。关闭时 Cursor 会先询问，若 15 秒内未回应则跳过。"
+        ],
+        [
+          "Allow agent to switch to modes like Plan or Debug without asking. When off, Cursor asks first, but skips if unanswered within 15 seconds",
+          "允许智能体在不询问的情况下自动切换到计划（Plan）或调试（Debug）等模式。关闭时 Cursor 会先询问，若 15 秒内未回应则跳过"
+        ],
+        [
+          "Allow agents on this computer to be controlled remotely from mobile",
+          "允许从移动设备远程控制此电脑上的智能体"
+        ],
+        [
+          "Allow agents on this computer to be controlled remotely from mobile.",
+          "允许从移动设备远程控制此电脑上的智能体。"
+        ],
+        [
+          "Computer Name",
+          "电脑名称"
+        ],
+        [
+          "Hostname by default",
+          "默认为主机名"
+        ],
+        [
+          "How Remote Control lists this computer",
+          "远程控制中如何显示此电脑"
+        ],
+        [
+          "Remote Control and Self-Hosted Workers",
+          "远程控制与自托管工作机"
+        ],
+        [
+          "Enable local self-hosted workers",
+          "启用本地自托管工作机"
+        ],
+        [
+          "Sync Skills for Cloud Agents",
+          "同步技能到云端智能体"
+        ],
+        [
+          "Cursor syncs your local skills so they can be used with Cloud Agents. Turn this off to disable syncing.",
+          "Cursor 会同步您的本地技能，以便在云端智能体中使用。关闭此项可禁用同步。"
+        ],
+        [
+          "Cursor syncs your local skills so they can be used with Cloud Agents. Turn this off to disable syncing",
+          "Cursor 会同步您的本地技能，以便在云端智能体中使用。关闭此项可禁用同步"
+        ],
+        [
+          "Use your skills with Cloud Agents",
+          "在云端智能体中使用您的技能"
+        ],
+        [
+          "Disabled by your team admin.",
+          "已被您的团队管理员禁用。"
+        ],
+        [
+          "Disabled by your team admin",
+          "已被您的团队管理员禁用"
+        ],
+        [
+          "Unavailable under your privacy mode, which keeps your code off Cursor’s servers.",
+          "在您的隐私模式下不可用，该模式会禁止将代码上传至 Cursor 服务器。"
+        ],
+        [
+          "Unavailable under your privacy mode, which keeps your code off Cursor’s servers",
+          "在您的隐私模式下不可用，该模式会禁止将代码上传至 Cursor 服务器"
+        ],
+        [
+          "Unavailable under your privacy mode, which keeps your code off Cursor's servers.",
+          "在您的隐私模式下不可用，该模式会禁止将代码上传至 Cursor 服务器。"
+        ],
+        [
+          "Unavailable under your privacy mode, which keeps your code off Cursor's servers",
+          "在您的隐私模式下不可用，该模式会禁止将代码上传至 Cursor 服务器"
+        ],
+        [
+          "Cursor is still starting up. Try again in a moment.",
+          "Cursor 正在启动中，请稍后重试。"
+        ],
+        [
+          "Cursor is still starting up. Try again in a moment",
+          "Cursor 正在启动中，请稍后重试"
         ]
       ]
     },
