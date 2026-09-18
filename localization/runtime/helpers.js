@@ -420,6 +420,8 @@
             '/* 方案一：锁定行高避免抖动重排，0额外动效侵入与重排重绘，保障60/144Hz原生滚动丝滑 */',
             '.cursor-fun-spinner {',
             '  line-height: 1.2 !important;',
+            '  font-family: "Segoe WPC", "Segoe UI", "Segoe UI Emoji", "Microsoft YaHei", sans-serif !important;',
+            '  font-variant-emoji: emoji !important;',
             '}'
         ].join('\n');
         document.head.appendChild(style);

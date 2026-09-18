@@ -1080,6 +1080,82 @@ def HuiFu_PingHua_GunDong():
             pass
 
 
+def ZhuRu_Emoji_CaiSe_YangShi():
+    """优化 Windows 下中文/多语言界面的字体回退栈，使 Emoji 原生以全彩显示。
+    
+    原理：
+    默认 Windows 下 :lang(zh-Hans) 字体栈为:
+      Segoe WPC, Segoe UI, Microsoft YaHei, sans-serif
+    其中微软雅黑 (Microsoft YaHei) 抢先拦截了 Unicode 杂项符号（如 ✨、⚡、☕ 等），
+    导致其被渲染为黑白单色轮廓。
+    在此注入 Segoe UI Emoji 放在 Segoe UI 与 Microsoft YaHei 之间：
+      Segoe WPC, Segoe UI, "Segoe UI Emoji", Microsoft YaHei, sans-serif
+    并配合 font-variant-emoji: emoji，确保所有 Emoji 和杂项符号全部原生全彩渲染。
+    """
+    AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
+    
+    TiHuanLieBiao = [
+        (
+            '.monaco-workbench.windows:lang(zh-Hans){font-family:Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif}',
+            '.monaco-workbench.windows:lang(zh-Hans){font-family:Segoe WPC,Segoe UI,"Segoe UI Emoji",Microsoft YaHei,sans-serif;font-variant-emoji:emoji}'
+        ),
+        (
+            '.monaco-workbench.windows:lang(zh-Hant){font-family:Segoe WPC,Segoe UI,Microsoft Jhenghei,sans-serif}',
+            '.monaco-workbench.windows:lang(zh-Hant){font-family:Segoe WPC,Segoe UI,"Segoe UI Emoji",Microsoft Jhenghei,sans-serif;font-variant-emoji:emoji}'
+        ),
+    ]
+
+    for CssMing in ("workbench.glass.main.css", "workbench.desktop.main.css"):
+        CssLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", CssMing)
+        if not os.path.isfile(CssLuJing):
+            continue
+        try:
+            NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(CssLuJing)
+            GengXin = False
+            for Yuan, MuBiao in TiHuanLieBiao:
+                if Yuan in NeiRong:
+                    NeiRong = NeiRong.replace(Yuan, MuBiao, 1)
+                    GengXin = True
+            if GengXin:
+                XieRu_WenBen_BaoLiu_HuanHang(CssLuJing, NeiRong, HuanHang)
+                print(f"[彩色 Emoji] 已为 {CssMing} 注入 Segoe UI Emoji 全彩字体栈")
+        except Exception as CuoWu:
+            print(f"[警告] 注入 {CssMing} 彩色 Emoji 样式失败: {CuoWu}")
+
+
+def HuiFu_Emoji_CaiSe_YangShi():
+    """还原 Emoji 字体栈为官方默认样式。"""
+    AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
+    
+    HuanYuanLieBiao = [
+        (
+            '.monaco-workbench.windows:lang(zh-Hans){font-family:Segoe WPC,Segoe UI,"Segoe UI Emoji",Microsoft YaHei,sans-serif;font-variant-emoji:emoji}',
+            '.monaco-workbench.windows:lang(zh-Hans){font-family:Segoe WPC,Segoe UI,Microsoft YaHei,sans-serif}'
+        ),
+        (
+            '.monaco-workbench.windows:lang(zh-Hant){font-family:Segoe WPC,Segoe UI,"Segoe UI Emoji",Microsoft Jhenghei,sans-serif;font-variant-emoji:emoji}',
+            '.monaco-workbench.windows:lang(zh-Hant){font-family:Segoe WPC,Segoe UI,Microsoft Jhenghei,sans-serif}'
+        ),
+    ]
+
+    for CssMing in ("workbench.glass.main.css", "workbench.desktop.main.css"):
+        CssLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", CssMing)
+        if not os.path.isfile(CssLuJing):
+            continue
+        try:
+            NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(CssLuJing)
+            GengXin = False
+            for MuBiao, Yuan in HuanYuanLieBiao:
+                if MuBiao in NeiRong:
+                    NeiRong = NeiRong.replace(MuBiao, Yuan, 1)
+                    GengXin = True
+            if GengXin:
+                XieRu_WenBen_BaoLiu_HuanHang(CssLuJing, NeiRong, HuanHang)
+                print(f"[彩色 Emoji] 已为 {CssMing} 恢复官方默认字体栈")
+        except Exception:
+            pass
+
+
 def BiKou_WanZhengXing_JianCha():
     """屏蔽 VS Code / Cursor 内核的「安装似乎已损坏」伪告警。"""
     Yuan = 'isPure(){return this.isPurePromise}async _compute(){'
@@ -2075,6 +2151,7 @@ def HuiFu_YuanShi():
     HuiFu_Glass_YongLiang_ZhuangTai()
     HuiFu_Glass_DuiHua_XiaoDiTu()
     HuiFu_PingHua_GunDong()
+    HuiFu_Emoji_CaiSe_YangShi()
     HuiFu_WanZhengXing_JianCha()
     HuiFu_QuWei_Spinner_DongCi()
 
@@ -2141,6 +2218,7 @@ def ZhuChengXu():
         ZhuRu_TuoPan_HanHua()
         ZhuRu_Glass_YongLiang_ZhuangTai()
         ZhuRu_Glass_DuiHua_XiaoDiTu()
+        ZhuRu_Emoji_CaiSe_YangShi()
         BiKou_WanZhengXing_JianCha()
         ZhuRu_QuWei_Spinner_DongCi()
         GengXin_JiaoYan_Zhi()
@@ -2157,8 +2235,10 @@ def ZhuChengXu():
     ZhuRu_TuoPan_HanHua()
     ZhuRu_Glass_YongLiang_ZhuangTai()
     ZhuRu_Glass_DuiHua_XiaoDiTu()
+    ZhuRu_Emoji_CaiSe_YangShi()
     BiKou_WanZhengXing_JianCha()
     ZhuRu_QuWei_Spinner_DongCi()
+    GengXin_JiaoYan_Zhi()
 
     print("\n" + "=" * 60)
     print("  [完成] 语言包安装与汉化注入成功！")
