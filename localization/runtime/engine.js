@@ -4,7 +4,12 @@
 
     // __PARTIAL_FRAGMENTS_BLOCK__
 
-    var TiaoGuo_XuanZeQi = '.monaco-editor, .overflow-guard, .view-lines, .editor-scrollable, .inputarea, .rename-input, .explorer-viewlet, [id="workbench.view.explorer"]';
+    var TiaoGuo_LiaoTian_NeiRong = '[class*="ui-markdown"], [class*="ui-code-block"], [class*="composer-message-codeblock"], ' +
+        '.composer-rendered-message, .composer-human-message-content, .composer-human-message-body, ' +
+        '.virtualized-composer-messages-row-body, .composer-react-transcript-root, [data-perf-surface="composer-transcript"], ' +
+        'pre, code';
+    var TiaoGuo_XuanZeQi = '.monaco-editor, .overflow-guard, .view-lines, .editor-scrollable, .inputarea, .rename-input, .explorer-viewlet, [id="workbench.view.explorer"], ' +
+        TiaoGuo_LiaoTian_NeiRong;
     var TiaoGuo_BiaoQian = new Set(['TEXTAREA', 'INPUT', 'SCRIPT', 'STYLE', 'CODE', 'PRE', 'NOSCRIPT']);
 
     function GuiYiHua_WenBen(text) {
@@ -1236,6 +1241,7 @@
         var el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
         if (!el) return true;
         if (TiaoGuo_BiaoQian.has(el.tagName)) return true;
+        try { if (el.closest(TiaoGuo_LiaoTian_NeiRong)) return true; } catch (e) {}
         if (Shi_PromptBar_QuYu(el)) return false;
         if (Shi_ShiJianXian_KeFanYi(el)) return false;
         try { if (el.closest(TiaoGuo_XuanZeQi)) return true; } catch (e) {}
@@ -1244,6 +1250,7 @@
 
     function YingGai_TiaoGuo_BianJiQi_YuanSu(el) {
         if (!el || el.nodeType !== 1) return true;
+        try { if (el.closest(TiaoGuo_LiaoTian_NeiRong)) return true; } catch (e) {}
         if (Shi_PromptBar_QuYu(el)) return false;
         if (Shi_ShiJianXian_KeFanYi(el)) return false;
         try { if (el.closest(TiaoGuo_XuanZeQi)) return true; } catch (e) {}
@@ -1265,6 +1272,7 @@
             if (node.nodeType === Node.ELEMENT_NODE) {
                 if (TiaoGuo_BiaoQian.has(node.tagName)) continue;
                 if (YingGai_TiaoGuo_FanYi_ZiShu_YuanSu(node)) continue;
+                try { if (node.matches && node.matches(TiaoGuo_LiaoTian_NeiRong)) continue; } catch (e) {}
                 var inPromptBar = Shi_PromptBar_QuYu(node);
                 if (!inPromptBar) {
                     if (node.classList && (node.classList.contains('overflow-guard') || node.classList.contains('view-lines') || node.classList.contains('editor-scrollable'))) continue;
@@ -1688,6 +1696,12 @@
                         if (JieDian_You_DingBu_CaiDan(dingBuJieDian)) dingBuCaiDan = true;
                     }
                     if (!piLiang && (node.nodeType === Node.ELEMENT_NODE || node.nodeType === Node.TEXT_NODE)) {
+                        if (typeof _isCursorScrolling !== 'undefined' && _isCursorScrolling) {
+                            var checkEl = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+                            if (checkEl && checkEl.closest && checkEl.closest(TiaoGuo_LiaoTian_NeiRong)) {
+                                continue;
+                            }
+                        }
                         TianJia_DaiChuLi(node);
                     }
                 }
@@ -1758,7 +1772,13 @@
             if (uiDuiHua) paiDuiQiZhi &= ~QX_DUI_HUA;
             if (cursorSheZhi) paiDuiQiZhi &= ~QX_SHE_ZHI;
             if (cssInspector) paiDuiQiZhi &= ~QX_SHE_JI;
-            if (paiDuiQiZhi) PaiDui_QuanJuXiuZheng(paiDuiQiZhi);
+            if (paiDuiQiZhi) {
+                if (typeof _isCursorScrolling !== 'undefined' && _isCursorScrolling) {
+                    setTimeout(function() { PaiDui_QuanJuXiuZheng(paiDuiQiZhi); }, 220);
+                } else {
+                    PaiDui_QuanJuXiuZheng(paiDuiQiZhi);
+                }
+            }
         }
     }
 
@@ -2620,12 +2640,15 @@
         );
         try { FanYi_TiJi_CaiDan(); } catch (e) {}
         var btns = document.querySelectorAll(
-            '[class*="composer"] button, [class*="chat-input"] button, [class*="aichat"] button, ' +
-            '[class*="composer"] [role="button"], [class*="model-picker"] button, [class*="model-picker"] [role="button"], ' +
+            '[class*="composer-toolbar"] button, [class*="chat-input"] button, [class*="aichat"] button, ' +
+            '[class*="composer-toolbar"] [role="button"], [class*="model-picker"] button, [class*="model-picker"] [role="button"], ' +
             '[class*="agent-changes"] button, [class*="agent-changes"] [role="button"], [class*="pending-changes"] button, ' +
             '[class*="review-control"] button, [class*="changes-header"] button, ' +
             '.context-view button, .monaco-menu .action-label'
         );
+        for (var bi = 0; bi < btns.length; bi++) {
+            FanYi_ShuXing(btns[bi]);
+        }
         try {
             var ctaBtns = document.querySelectorAll('[data-component="open-editor-window-cta"], button[aria-label="IDE"]');
             for (var cb = 0; cb < ctaBtns.length; cb++) {
@@ -2641,18 +2664,23 @@
         } catch (e) {}
         FanYi_Monaco_Hover_Content(document.body);
         var scopes = document.querySelectorAll(
-            '[class*="context-usage"], [class*="contextUsage"], [class*="composer"] div, ' +
+            '[class*="context-usage"], [class*="contextUsage"], ' +
+            '[class*="composer-toolbar"], [class*="composer-bar"], [class*="chat-input"], [class*="composer-input"], ' +
+            '[class*="composer-title"], [class*="composer"] .title-actions, ' +
             '[class*="agent-changes"], [class*="AgentChanges"], [class*="pending-changes"], [class*="review-control"], ' +
             '[class*="changes-header"], [class*="diff-against"], ' +
             '.context-view, .monaco-menu, [role="menu"], [role="menuitem"], ' +
             '.ui-menu, .ui-slash-menu, .ui-slash-menu__content'
         );
-        var scopeList = scopes.length ? Array.prototype.slice.call(scopes) : [document.body];
-        FanYi_Scope_List_Hints(scopeList, textHints, {
-            maxLen: 80,
-            needleLen: 12,
-            selector: 'span, div, label, button, a, li'
-        });
+        var scopeList = scopes.length ? Array.prototype.slice.call(scopes) : [];
+        if (scopeList.length) {
+            FanYi_Scope_List_Hints(scopeList, textHints, {
+                maxLen: 80,
+                needleLen: 12,
+                selector: 'span, div, label, button, a, li',
+                skipDictionary: true
+            });
+        }
     }
 
     function XiuZheng_ZhuTi_XuanZe() {
@@ -2775,16 +2803,16 @@
 
     function XiuZheng_Composer_GongJuTiao() {
         var scopes = document.querySelectorAll(
-            '[class*="composer"], [class*="aichat"], [class*="chat-input"], [class*="ComposerInput"], ' +
-            '.pane-composite-part, [class*="agent-pane"], [class*="agent-changes"], [class*="pending-changes"]'
+            '[class*="composer-toolbar"], [class*="composer-bar"], [class*="chat-input"], [class*="ComposerInput"], ' +
+            '.pane-composite-part .composite.title, [class*="agent-pane"] .title, [class*="agent-changes"], [class*="pending-changes"]'
         );
         for (var r = 0; r < scopes.length; r++) {
             var scope = scopes[r];
-            if (scope.closest('.monaco-editor .view-lines')) continue;
+            if (scope.closest('.monaco-editor .view-lines, [class*="ui-markdown"], [class*="ui-code-block"], .composer-react-transcript-root')) continue;
             var nodes = scope.querySelectorAll('button, span, div, label, .monaco-keybinding, [class*="keybinding"]');
             for (var i = 0; i < nodes.length; i++) {
                 var el = nodes[i];
-                if (el.closest('.monaco-editor .view-lines')) continue;
+                if (el.closest('.monaco-editor .view-lines, [class*="ui-markdown"], [class*="ui-code-block"], .composer-react-transcript-root')) continue;
                 FanYi_ShuXing(el);
                 if (el.querySelector('button, input, textarea, [contenteditable="true"]') && el.tagName !== 'BUTTON') continue;
                 var raw = (el.textContent || '').trim();

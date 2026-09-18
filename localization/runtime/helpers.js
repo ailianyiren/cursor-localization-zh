@@ -358,6 +358,12 @@
             if (el.closest('.monaco-editor')) return true;
             if (el.closest('webview')) return true;
             if (el.closest('.menubar, [role="menubar"], .menubar-menu-title, .menubar-menu-button')) return true;
+            if (el.closest(
+                '[class*="ui-markdown"], [class*="ui-code-block"], [class*="composer-message-codeblock"], ' +
+                '.composer-rendered-message, .composer-human-message-content, .composer-human-message-body, ' +
+                '.virtualized-composer-messages-row-body, .composer-react-transcript-root, [data-perf-surface="composer-transcript"], ' +
+                'pre, code'
+            )) return true;
             if (el.matches && el.matches(
                 '.view-lines, .editor-scrollable, .overflow-guard, .inputarea, .margin, .minimap'
             )) return true;
@@ -402,13 +408,15 @@
     var _isCursorScrolling = false;
     var _cursorScrollTimer = null;
     if (typeof window !== 'undefined') {
-        window.addEventListener('scroll', function() {
+        var _onScrollTrigger = function() {
             _isCursorScrolling = true;
             clearTimeout(_cursorScrollTimer);
             _cursorScrollTimer = setTimeout(function() {
                 _isCursorScrolling = false;
-            }, 150);
-        }, { passive: true, capture: true });
+            }, 180);
+        };
+        window.addEventListener('scroll', _onScrollTrigger, { passive: true, capture: true });
+        window.addEventListener('wheel', _onScrollTrigger, { passive: true, capture: true });
     }
 
     function QueBao_QuWei_Spinner_YangShi() {
