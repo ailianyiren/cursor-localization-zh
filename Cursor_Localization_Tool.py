@@ -1031,60 +1031,37 @@ def HuiFu_Glass_DuiHua_XiaoDiTu():
         return False
 
 
-def YouHua_PingHua_GunDong():
-    """开启官方核心平滑滚动配置并为长对话流注入 GPU 硬件加速合成。"""
-    # 1. 写入 settings.json
+def HuiFu_PingHua_GunDong():
+    """还原平滑滚动注入的 CSS 样式与 settings.json 配置。"""
+    # 1. 清理 settings.json 中的平滑滚动相关配置
     UserMuLu = os.path.join(CURSOR_SHU_JU_LU_JING, "User")
-    os.makedirs(UserMuLu, exist_ok=True)
     SettingsLuJing = os.path.join(UserMuLu, "settings.json")
     try:
-        PeiZhi = {}
         if os.path.isfile(SettingsLuJing):
             with open(SettingsLuJing, "r", encoding="utf-8") as f:
                 PeiZhi = json.load(f)
-
-        GaiDong = False
-        GaoJiSheZhi = {
-            "editor.smoothScrolling": True,
-            "workbench.list.smoothScrolling": True,
-            "terminal.integrated.smoothScrolling": True,
-            "editor.cursorSmoothCaretAnimation": "on",
-            "editor.mouseWheelScrollSensitivity": 1,
-            "workbench.list.mouseWheelScrollSensitivity": 1,
-        }
-        for k, v in GaoJiSheZhi.items():
-            if PeiZhi.get(k) != v:
-                PeiZhi[k] = v
-                GaiDong = True
-        if GaiDong:
-            with open(SettingsLuJing, "w", encoding="utf-8") as f:
-                json.dump(PeiZhi, f, indent=2, ensure_ascii=False)
-                f.write("\n")
-            print("[平滑滚动] 已在用户设置中开启官方平滑滚动与呼吸光标动画")
+            ShanChuKeys = [
+                "editor.smoothScrolling",
+                "workbench.list.smoothScrolling",
+                "terminal.integrated.smoothScrolling",
+                "editor.cursorSmoothCaretAnimation",
+                "editor.mouseWheelScrollSensitivity",
+                "workbench.list.mouseWheelScrollSensitivity",
+            ]
+            GaiDong = False
+            for k in ShanChuKeys:
+                if k in PeiZhi:
+                    del PeiZhi[k]
+                    GaiDong = True
+            if GaiDong:
+                with open(SettingsLuJing, "w", encoding="utf-8") as f:
+                    json.dump(PeiZhi, f, indent=2, ensure_ascii=False)
+                    f.write("\n")
+                print("[平滑滚动] 已清理 settings.json 中的平滑滚动配置")
     except Exception as CuoWu:
-        print(f"[警告] 写入平滑滚动设置失败: {CuoWu}")
+        print(f"[警告] 清理平滑滚动设置失败: {CuoWu}")
 
-    # 2. 注入 GPU 硬件加速样式到 workbench.glass.main.css 与 workbench.desktop.main.css
-    Yuan_Css = '.virtualized-composer-messages-scroll-container{height:100%;overflow:auto;overflow-anchor:none;scrollbar-color:var(--vscode-scrollbarSlider-background) transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin}'
-    MuBiao_Css = '.virtualized-composer-messages-scroll-container{height:100%;overflow:auto;overflow-anchor:none;scrollbar-color:var(--vscode-scrollbarSlider-background) transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin;scroll-behavior:smooth;will-change:scroll-position;transform:translateZ(0)}'
-
-    AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
-    for CssMing in ("workbench.glass.main.css", "workbench.desktop.main.css"):
-        CssLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", CssMing)
-        if not os.path.isfile(CssLuJing):
-            continue
-        try:
-            NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(CssLuJing)
-            if Yuan_Css in NeiRong:
-                XinNeiRong = NeiRong.replace(Yuan_Css, MuBiao_Css, 1)
-                XieRu_WenBen_BaoLiu_HuanHang(CssLuJing, XinNeiRong, HuanHang)
-                print(f"[平滑滚动] 已为 {CssMing} 注入 GPU 硬件加速与平滑滚动图层")
-        except Exception:
-            pass
-
-
-def HuiFu_PingHua_GunDong():
-    """还原平滑滚动注入的 CSS 样式。"""
+    # 2. 还原 CSS
     Yuan_Css = '.virtualized-composer-messages-scroll-container{height:100%;overflow:auto;overflow-anchor:none;scrollbar-color:var(--vscode-scrollbarSlider-background) transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin}'
     MuBiao_Css = '.virtualized-composer-messages-scroll-container{height:100%;overflow:auto;overflow-anchor:none;scrollbar-color:var(--vscode-scrollbarSlider-background) transparent;scrollbar-gutter:stable both-edges;scrollbar-width:thin;scroll-behavior:smooth;will-change:scroll-position;transform:translateZ(0)}'
 
@@ -1098,6 +1075,7 @@ def HuiFu_PingHua_GunDong():
             if MuBiao_Css in NeiRong:
                 XinNeiRong = NeiRong.replace(MuBiao_Css, Yuan_Css, 1)
                 XieRu_WenBen_BaoLiu_HuanHang(CssLuJing, XinNeiRong, HuanHang)
+                print(f"[平滑滚动] 已从 {CssMing} 还原原始样式")
         except Exception:
             pass
 
@@ -2130,7 +2108,6 @@ def ZhuChengXu():
         ZhuRu_TuoPan_HanHua()
         ZhuRu_Glass_YongLiang_ZhuangTai()
         ZhuRu_Glass_DuiHua_XiaoDiTu()
-        YouHua_PingHua_GunDong()
         BiKou_WanZhengXing_JianCha()
         ZhuRu_QuWei_Spinner_DongCi()
         GengXin_JiaoYan_Zhi()
@@ -2147,7 +2124,6 @@ def ZhuChengXu():
     ZhuRu_TuoPan_HanHua()
     ZhuRu_Glass_YongLiang_ZhuangTai()
     ZhuRu_Glass_DuiHua_XiaoDiTu()
-    YouHua_PingHua_GunDong()
     BiKou_WanZhengXing_JianCha()
     ZhuRu_QuWei_Spinner_DongCi()
 
