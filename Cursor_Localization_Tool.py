@@ -1171,8 +1171,15 @@ def ZhuRu_QuWei_Spinner_DongCi():
             TiHuanDui = [
                 ('r=n??"Planning next moves";', 'r=n??_getFunSpinnerVerb();'),
                 ('loadingAction:"Thinking",completedAction:u,', 'loadingAction:_getFunSpinnerVerb(),completedAction:(u==="Thought"?"已思考":u),'),
+                ('action:"Thinking",expandable:', 'action:_getFunSpinnerVerb(),expandable:'),
+                ('case"thinking":return oTn("Thinking"', 'case"thinking":return oTn(_getFunSpinnerVerb()'),
+                ('return oTn(t.message??"Planning next moves"', 'return oTn(t.message??_getFunSpinnerVerb()'),
+                ('mRa="Planning next moves",T8r="Thinking"', 'mRa=_getFunSpinnerVerb(),T8r=_getFunSpinnerVerb()'),
+                ('Tdh="Planning next moves",BZo="Wrapping up"', 'Tdh=_getFunSpinnerVerb(),BZo="收尾中"'),
+                ('const Z=t.message()??"Planning next moves";', 'const Z=t.message()??_getFunSpinnerVerb();'),
+                # 旧版本 Cursor 兼容
                 ('return zCn(t.message??"Planning next moves","planning",[],{', 'return zCn(t.message??_getFunSpinnerVerb(),"planning",[],{'),
-                ('JIa="Planning next moves",hBr="Thinking"', 'JIa=_getFunSpinnerVerb(),hBr="思考中"'),
+                ('JIa="Planning next moves",hBr="Thinking"', 'JIa=_getFunSpinnerVerb(),hBr=_getFunSpinnerVerb()'),
                 ('Slh="Planning next moves",pQo="Wrapping up"', 'Slh=_getFunSpinnerVerb(),pQo="收尾中"'),
                 ('const Q=t.message()??"Planning next moves";', 'const Q=t.message()??_getFunSpinnerVerb();')
             ]
@@ -1201,6 +1208,15 @@ def ZhuRu_QuWei_Spinner_DongCi():
                 GengXin = True
 
             TiHuanDuiDesktop = [
+                ('r=n??"Planning next moves";', 'r=n??_getFunSpinnerVerb();'),
+                ('loadingAction:"Thinking",completedAction:u,', 'loadingAction:_getFunSpinnerVerb(),completedAction:(u==="Thought"?"已思考":u),'),
+                ('action:"Thinking",expandable:', 'action:_getFunSpinnerVerb(),expandable:'),
+                ('case"thinking":return mVt("Thinking"', 'case"thinking":return mVt(_getFunSpinnerVerb()'),
+                ('return mVt(e.message??"Planning next moves"', 'return mVt(e.message??_getFunSpinnerVerb()'),
+                ('FXs="Planning next moves",$bd="Thinking"', 'FXs=_getFunSpinnerVerb(),$bd=_getFunSpinnerVerb()'),
+                ('U1l="Planning next moves",$1l="Wrapping up"', 'U1l=_getFunSpinnerVerb(),$1l="收尾中"'),
+                ('const ee=e.message()??"Planning next moves";', 'const ee=e.message()??_getFunSpinnerVerb();'),
+                # 旧版本 Cursor 兼容
                 ('return eVt(e.message??"Planning next moves","planning",[],{', 'return eVt(e.message??_getFunSpinnerVerb(),"planning",[],{'),
                 ('const J=e.message()??"Planning next moves";', 'const J=e.message()??_getFunSpinnerVerb();')
             ]
@@ -1234,8 +1250,14 @@ def HuiFu_QuWei_Spinner_DongCi():
             HuanYuanDui = [
                 ('r=n??_getFunSpinnerVerb();', 'r=n??"Planning next moves";'),
                 ('loadingAction:_getFunSpinnerVerb(),completedAction:(u==="Thought"?"已思考":u),', 'loadingAction:"Thinking",completedAction:u,'),
+                ('action:_getFunSpinnerVerb(),expandable:', 'action:"Thinking",expandable:'),
+                ('case"thinking":return oTn(_getFunSpinnerVerb()', 'case"thinking":return oTn("Thinking"'),
+                ('return oTn(t.message??_getFunSpinnerVerb()', 'return oTn(t.message??"Planning next moves"'),
+                ('mRa=_getFunSpinnerVerb(),T8r=_getFunSpinnerVerb()', 'mRa="Planning next moves",T8r="Thinking"'),
+                ('Tdh=_getFunSpinnerVerb(),BZo="收尾中"', 'Tdh="Planning next moves",BZo="Wrapping up"'),
+                ('const Z=t.message()??_getFunSpinnerVerb();', 'const Z=t.message()??"Planning next moves";'),
                 ('return zCn(t.message??_getFunSpinnerVerb(),"planning",[],{', 'return zCn(t.message??"Planning next moves","planning",[],{'),
-                ('JIa=_getFunSpinnerVerb(),hBr="思考中"', 'JIa="Planning next moves",hBr="Thinking"'),
+                ('JIa=_getFunSpinnerVerb(),hBr=_getFunSpinnerVerb()', 'JIa="Planning next moves",hBr="Thinking"'),
                 ('Slh=_getFunSpinnerVerb(),pQo="收尾中"', 'Slh="Planning next moves",pQo="Wrapping up"'),
                 ('const Q=t.message()??_getFunSpinnerVerb();', 'const Q=t.message()??"Planning next moves";')
             ]
@@ -1260,6 +1282,14 @@ def HuiFu_QuWei_Spinner_DongCi():
                 GengXin = True
 
             HuanYuanDuiDesktop = [
+                ('r=n??_getFunSpinnerVerb();', 'r=n??"Planning next moves";'),
+                ('loadingAction:_getFunSpinnerVerb(),completedAction:(u==="Thought"?"已思考":u),', 'loadingAction:"Thinking",completedAction:u,'),
+                ('action:_getFunSpinnerVerb(),expandable:', 'action:"Thinking",expandable:'),
+                ('case"thinking":return mVt(_getFunSpinnerVerb()', 'case"thinking":return mVt("Thinking"'),
+                ('return mVt(e.message??_getFunSpinnerVerb()', 'return mVt(e.message??"Planning next moves"'),
+                ('FXs=_getFunSpinnerVerb(),$bd=_getFunSpinnerVerb()', 'FXs="Planning next moves",$bd="Thinking"'),
+                ('U1l=_getFunSpinnerVerb(),$1l="收尾中"', 'U1l="Planning next moves",$1l="Wrapping up"'),
+                ('const ee=e.message()??_getFunSpinnerVerb();', 'const ee=e.message()??"Planning next moves";'),
                 ('return eVt(e.message??_getFunSpinnerVerb(),"planning",[],{', 'return eVt(e.message??"Planning next moves","planning",[],{'),
                 ('const J=e.message()??_getFunSpinnerVerb();', 'const J=e.message()??"Planning next moves";')
             ]

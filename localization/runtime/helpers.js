@@ -474,9 +474,9 @@
         el.classList.add('cursor-fun-spinner');
         el.setAttribute('data-cursor-spinner', 'true');
 
-        var parts = FenGe_Emoji_WenBen(newText);
-        if (parts.emoji) {
-            el.innerHTML = '<span class="cursor-fun-emoji">' + parts.emoji + '</span>' + parts.text;
+        // SolidJS 兼容安全写入：绝不使用 innerHTML，直接更新 text node data 保证响应式绑定完好
+        if (el.firstChild && el.firstChild.nodeType === 3) {
+            el.firstChild.data = newText;
         } else {
             el.textContent = newText;
         }
