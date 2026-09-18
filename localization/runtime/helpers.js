@@ -399,45 +399,100 @@
     // Claude Code 风格 187 个趣味 Spinner 动词动态轮转（配生动 Emoji + 平滑垂直翻转动效）
     // ================================================================
 
+    var _isCursorScrolling = false;
+    var _cursorScrollTimer = null;
+    if (typeof window !== 'undefined') {
+        window.addEventListener('scroll', function() {
+            _isCursorScrolling = true;
+            clearTimeout(_cursorScrollTimer);
+            _cursorScrollTimer = setTimeout(function() {
+                _isCursorScrolling = false;
+            }, 150);
+        }, { passive: true, capture: true });
+    }
+
     function QueBao_QuWei_Spinner_YangShi() {
         if (typeof document === 'undefined' || !document.head) return;
         if (document.getElementById('cursor-fun-spinner-style')) return;
         var style = document.createElement('style');
         style.id = 'cursor-fun-spinner-style';
         style.textContent = [
-            '@keyframes cursorSpinnerSlideUp {',
-            '  0% { opacity: 0; transform: translateY(4px) scale(0.97); }',
-            '  100% { opacity: 1; transform: translateY(0) scale(1); }',
+            '/* 强制所有趣味动词药丸、折叠标题、底部状态栏优先使用彩色 Emoji 字体栈与 emoji presentation */',
+            '.cursor-fun-spinner,',
+            '[data-cursor-spinner="true"],',
+            '.ui-collapsible-action,',
+            '[data-component="collapsible-header"] .ui-collapsible-action,',
+            '.agent-transcript-tail-status,',
+            '.agent-transcript-tail-status span,',
+            '.agent-transcript-tail-status [clipping="fade"] {',
+            '  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif !important;',
+            '  font-variant-emoji: emoji !important;',
             '}',
-            '.cursor-fun-spinner-flip {',
-            '  display: inline-flex !important;',
-            '  align-items: center !important;',
-            '  animation: cursorSpinnerSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;',
+            '.cursor-fun-spinner {',
+            '  display: inline-block !important;',
+            '  vertical-align: middle !important;',
+            '}',
+            '.cursor-fun-emoji {',
+            '  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif !important;',
+            '  font-variant-emoji: emoji !important;',
+            '  display: inline-block !important;',
+            '  vertical-align: -0.1em !important;',
+            '  margin-right: 5px !important;',
+            '  font-style: normal !important;',
+            '  line-height: 1 !important;',
+            '}',
+            '@keyframes cursorSpinnerSlideFade {',
+            '  0% { opacity: 0.35; transform: translateY(2px); }',
+            '  100% { opacity: 1; transform: translateY(0); }',
+            '}',
+            '.cursor-fun-spinner-anim {',
+            '  animation: cursorSpinnerSlideFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;',
+            '  will-change: opacity, transform;',
             '}'
         ].join('\n');
         document.head.appendChild(style);
     }
 
+    function FenGe_Emoji_WenBen(str) {
+        if (!str) return { emoji: '', text: '' };
+        var idx = str.indexOf(' ');
+        if (idx > 0) {
+            return {
+                emoji: str.slice(0, idx).trim(),
+                text: str.slice(idx + 1).trim()
+            };
+        }
+        return { emoji: '', text: str };
+    }
+
     function HuanSuan_WenBen_DaiDongHua(el, newText) {
-        if (!el || el.textContent === newText) return;
+        if (!el) return;
+        var cur = (el.textContent || '').trim();
+        if (cur === newText.trim()) return;
         QueBao_QuWei_Spinner_YangShi();
-        el.style.transition = 'opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(-3px)';
-        setTimeout(function() {
+
+        el.classList.add('cursor-fun-spinner');
+        el.setAttribute('data-cursor-spinner', 'true');
+
+        var parts = FenGe_Emoji_WenBen(newText);
+        if (parts.emoji) {
+            el.innerHTML = '<span class="cursor-fun-emoji">' + parts.emoji + '</span>' + parts.text;
+        } else {
             el.textContent = newText;
-            el.classList.add('cursor-fun-spinner-flip');
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-            setTimeout(function() {
-                if (el.classList) el.classList.remove('cursor-fun-spinner-flip');
-            }, 320);
-        }, 150);
+        }
+
+        el.classList.remove('cursor-fun-spinner-anim');
+        if (typeof requestAnimationFrame !== 'undefined') {
+            requestAnimationFrame(function() {
+                el.classList.add('cursor-fun-spinner-anim');
+            });
+        }
     }
 
     function AnZhuang_QuWei_Spinner_GuanCha() {
+        QueBao_QuWei_Spinner_YangShi();
         var verbs = (typeof globalThis !== 'undefined' && globalThis.__cursorVerbs) || [
-            "✨ 搞定中", "🚀 行动中", "💰 变现中", "📐 架构中", "🥐 烘焙中", "💡 发光中", "🎸 即兴中", "😵 犯晕中", "🍃 飘荡中", "🍲 焯水中",
+            "✨️ 搞定中", "🚀 行动中", "💰 变现中", "📐 架构中", "🥐 烘焙中", "💡 发光中", "🎸 即兴中", "😵 犯晕中", "🍃 飘荡中", "🍲 焯水中",
             "🐂 吹牛中", "🪩 蹦迪中", "🏃 瞎忙活中", "👉 戳一戳", "🔌 引导启动中", "🍵 沏茶中", "🥟 蒸包子中", "⛏️ 掘进中", "🧮 计算中", "🍧 腻歪中",
             "🍮 焦糖化中", "🌊 级联中", "🏹 弹射中", "🧘 冥想中", "🔮 通灵中", "📡 感应中", "💃 编舞中", "🥣 翻搅中", "🤖 克劳丁中", "🧊 凝聚中",
             "🧐 琢磨中", "🧩 拼凑中", "🎼 谱曲中", "⚙️ 运算中", "🧪 调配中", "💭 盘算中", "🤔 沉思中", "🍳 烹饪中", "🔨 锻造中", "🎨 创造中",
@@ -446,14 +501,14 @@
             "🎩 忽悠中", "🔥 火焰烹饪中", "🗣️ 叽里呱啦中", "💫 流转中", "😵‍💫 懵圈中", "🦋 扑棱中", "⚔️ 淬炼中", "🏺 塑形中", "🎉 撒欢中", "❄️ 挂霜中",
             "🚶 到处溜达中", "🏎️ 飞驰中", "🍱 摆盘中", "🪄 生成中", "✌️ 比划中", "🌿 发芽中", "🦀 Git化中", "🎶 律动中", "🌪️ 狂风中", "🍵 调和中",
             "🔑 哈希中", "🐣 破壳中", "🐈 赶猫中", "📯 按喇叭中", "📢 吵吵嚷嚷中", "🚀 超空间跳跃中", "💭 构思中", "🌌 想象中", "🎷 即兴发挥中", "🥚 孵化中",
-            "💡 推断中", "🫖 浸泡中", "⚡ 电离中", "🕺 跳吉特巴中", "🥒 切丝中", "🥖 揉面中", "🍞 发面中", "🛸 悬浮中", "🐮 反刍思考中", "✨ 显化中",
+            "💡 推断中", "🫖 浸泡中", "⚡️ 电离中", "🕺 跳吉特巴中", "🥒 切丝中", "🥖 揉面中", "🍞 发面中", "🛸 悬浮中", "🐮 反刍思考中", "✨️ 显化中",
             "🥒 腌制中", "🐍 蜿蜒中", "🦋 蜕变中", "🌫️ 起雾中", "🕺 太空步中", "🚶 溜溜达达中", "🧐 沉吟中", "📣 召集中", "💭 遐想中", "💨 雾化中",
-            "🪹 筑巢中", "📰 看报纸中", "🤔 瞎琢磨中", "⚛️ 成核中", "🪐 公转中", "🎼 编排中", "💧 渗透中", "🚶 闲庭信步中", "☕ 渗滤中", "📚 翻阅中",
+            "🪹 筑巢中", "📰 看报纸中", "🤔 瞎琢磨中", "⚛️ 成核中", "🪐 公转中", "🎼 编排中", "💧 渗透中", "🚶 闲庭信步中", "☕️ 渗滤中", "📚 翻阅中",
             "🗣️ 思辨中", "🌻 光合作用中", "🐝 授粉中", "🧐 考究中", "🎙️ 高谈阔论中", "🐆 猛扑中", "🧪 沉淀中", "🎩 变魔术中", "⚙️ 处理中", "📝 校对中",
-            "📡 传播中", "🐌 磨蹭中", "🧩 解谜中", "⚡ 量子化中", "🦚 花里胡哨中", "✨ 闪亮登场中", "🚩 重整旗鼓中", "🌐 联网中", "🕊️ 归巢中", "🐄 反刍中",
+            "📡 传播中", "🐌 磨蹭中", "🧩 解谜中", "⚡️ 量子化中", "🦚 花里胡哨中", "✨️ 闪亮登场中", "🚩 重整旗鼓中", "🌐 联网中", "🕊️ 归巢中", "🐄 反刍中",
             "🥘 翻炒中", "🦘 蹦跶中", "🧱 搬砖中", "🐿️ 窜来窜去中", "🧂 调味中", "🧨 搞事情中", "🕯️ 摇曳中", "🍲 慢炖中", "💨 溜之大吉中", "✏️ 速写中",
             "🐾 游走中", "🧼 揉搓中", "💃 跳摇摆舞中", "🔦 探洞中", "🌀 旋转中", "🌱 萌芽中", "🥘 焖煮中", "💨 升华中", "🌪️ 旋涡中", "🦅 俯冲中",
-            "🤝 共生中", "🧬 合成中", "🗡️ 淬火中", "🤔 思考中", "⚡ 雷鸣中", "🛠️ 鼓捣中", "🤡 胡闹中", "🙃 颠三倒四中", "🎭 变形中", "🔄 转化中",
+            "🤝 共生中", "🧬 合成中", "🗡️ 淬火中", "🤔 思考中", "⚡️ 雷鸣中", "🛠️ 鼓捣中", "🤡 胡闹中", "🙃 颠三倒四中", "🎭 变形中", "🔄 转化中",
             "🥨 扭转中", "🌊 起伏中", "📂 展开中", "🧩 拆解中", "🧘 沉浸中", "💪 抖擞中", "🎸 摇摆中", "🧭 漫游中", "🌌 扭曲时空中", "❓ 那个啥来着中",
             "🐝 嗡嗡转中", "🥛 搅打中", "🦥 磨叽中", "💼 搞事业中", "🐎 牧马中", "🍋 切柠檬皮中", "🐍 蛇行走位中"
         ];
@@ -471,9 +526,11 @@
         verbSet.add('收尾中');
 
         setInterval(function() {
+            if (_isCursorScrolling) return; // 滚动期间完全跳过 DOM 更新，保证 60/144Hz 丝滑
             try {
                 // 1. 折叠操作头部（正在加载中）
                 var loadingActions = document.querySelectorAll(
+                    '[data-cursor-spinner="true"], ' +
                     '.ui-collapsible[data-loading] .ui-collapsible-action, ' +
                     '[data-component="collapsible-header"][data-loading] .ui-collapsible-action'
                 );
