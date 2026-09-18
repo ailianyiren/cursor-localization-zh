@@ -1153,7 +1153,7 @@ def ZhuRu_QuWei_Spinner_DongCi():
         f'}}return _lastSpinnerVerb;}}typeof globalThis!=="undefined"&&'
         f'(globalThis.__cursorVerbs=_claudeVerbs,globalThis.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb);'
     )
-    Pattern = r'var _claudeVerbs=\[.*?\];var _lastSpinnerVerb=.*?;typeof globalThis!=="undefined"&&\(globalThis\.__cursorVerbs=_claudeVerbs,globalThis\.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb\);'
+    Pattern = r'(?:var _claudeVerbs=\[[\s\S]*?\];var _lastSpinnerVerb=[\s\S]*?globalThis\.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb\);)+'
 
     # 1. 注入 workbench.glass.main.js
     GlassLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", "workbench.glass.main.js")
@@ -1162,7 +1162,7 @@ def ZhuRu_QuWei_Spinner_DongCi():
             NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(GlassLuJing)
             GengXin = False
             if re.search(Pattern, NeiRong):
-                NeiRong = re.sub(Pattern, HelperJs, NeiRong, count=1)
+                NeiRong = re.sub(Pattern, HelperJs, NeiRong)
                 GengXin = True
             elif 'function xEr(t){' in NeiRong:
                 NeiRong = NeiRong.replace('function xEr(t){', HelperJs + 'function xEr(t){', 1)
@@ -1194,7 +1194,7 @@ def ZhuRu_QuWei_Spinner_DongCi():
             NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(DesktopLuJing)
             GengXin = False
             if re.search(Pattern, NeiRong):
-                NeiRong = re.sub(Pattern, HelperJs, NeiRong, count=1)
+                NeiRong = re.sub(Pattern, HelperJs, NeiRong)
                 GengXin = True
             elif 'function aJi(e,t){' in NeiRong:
                 NeiRong = NeiRong.replace('function aJi(e,t){', HelperJs + 'function aJi(e,t){', 1)
@@ -1219,7 +1219,7 @@ def ZhuRu_QuWei_Spinner_DongCi():
 def HuiFu_QuWei_Spinner_DongCi():
     """还原趣味动词，恢复官方默认英文状态。"""
     AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
-    Pattern = r'var _claudeVerbs=\[.*?\];var _lastSpinnerVerb=.*?;typeof globalThis!=="undefined"&&\(globalThis\.__cursorVerbs=_claudeVerbs,globalThis\.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb\);'
+    Pattern = r'(?:var _claudeVerbs=\[[\s\S]*?\];var _lastSpinnerVerb=[\s\S]*?globalThis\.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb\);)+'
 
     # 1. 恢复 workbench.glass.main.js
     GlassLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", "workbench.glass.main.js")
@@ -1228,7 +1228,7 @@ def HuiFu_QuWei_Spinner_DongCi():
             NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(GlassLuJing)
             GengXin = False
             if re.search(Pattern, NeiRong):
-                NeiRong = re.sub(Pattern, '', NeiRong, count=1)
+                NeiRong = re.sub(Pattern, '', NeiRong)
                 GengXin = True
 
             HuanYuanDui = [
@@ -1256,7 +1256,7 @@ def HuiFu_QuWei_Spinner_DongCi():
             NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(DesktopLuJing)
             GengXin = False
             if re.search(Pattern, NeiRong):
-                NeiRong = re.sub(Pattern, '', NeiRong, count=1)
+                NeiRong = re.sub(Pattern, '', NeiRong)
                 GengXin = True
 
             HuanYuanDuiDesktop = [
