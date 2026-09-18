@@ -396,37 +396,79 @@
     }
 
     // ================================================================
-    // Claude Code 风格 187 个趣味 Spinner 动词动态轮转
+    // Claude Code 风格 187 个趣味 Spinner 动词动态轮转（配生动 Emoji + 平滑垂直翻转动效）
     // ================================================================
+
+    function QueBao_QuWei_Spinner_YangShi() {
+        if (typeof document === 'undefined' || !document.head) return;
+        if (document.getElementById('cursor-fun-spinner-style')) return;
+        var style = document.createElement('style');
+        style.id = 'cursor-fun-spinner-style';
+        style.textContent = [
+            '@keyframes cursorSpinnerSlideUp {',
+            '  0% { opacity: 0; transform: translateY(4px) scale(0.97); }',
+            '  100% { opacity: 1; transform: translateY(0) scale(1); }',
+            '}',
+            '.cursor-fun-spinner-flip {',
+            '  display: inline-flex !important;',
+            '  align-items: center !important;',
+            '  animation: cursorSpinnerSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;',
+            '}'
+        ].join('\n');
+        document.head.appendChild(style);
+    }
+
+    function HuanSuan_WenBen_DaiDongHua(el, newText) {
+        if (!el || el.textContent === newText) return;
+        QueBao_QuWei_Spinner_YangShi();
+        el.style.transition = 'opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(-3px)';
+        setTimeout(function() {
+            el.textContent = newText;
+            el.classList.add('cursor-fun-spinner-flip');
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+            setTimeout(function() {
+                if (el.classList) el.classList.remove('cursor-fun-spinner-flip');
+            }, 320);
+        }, 150);
+    }
 
     function AnZhuang_QuWei_Spinner_GuanCha() {
         var verbs = (typeof globalThis !== 'undefined' && globalThis.__cursorVerbs) || [
-            "搞定中","行动中","变现中","架构中","烘焙中","发光中","即兴中","犯晕中","飘荡中","焯水中",
-            "吹牛中","蹦迪中","瞎忙活中","戳一戳","引导启动中","沏茶中","蒸包子中","掘进中","计算中","腻歪中",
-            "焦糖化中","级联中","弹射中","冥想中","通灵中","感应中","编舞中","翻搅中","克劳丁中","凝聚中",
-            "琢磨中","拼凑中","谱曲中","运算中","调配中","盘算中","沉思中","烹饪中","锻造中","创造中",
-            "嚼数据中","结晶中","培育中","破译中","推敲中","定夺中","磨磨唧唧中","七荤八素中","干活中","涂鸦中",
-            "淋酱中","退潮中","施行中","阐释中","润色中","施法中","构想中","蒸发中","发酵中","磨洋工中",
-            "忽悠中","火焰烹饪中","叽里呱啦中","流转中","懵圈中","扑棱中","淬炼中","塑形中","撒欢中","挂霜中",
-            "到处溜达中","飞驰中","摆盘中","生成中","比划中","发芽中","Git化中","律动中","狂风中","调和中",
-            "哈希中","破壳中","赶猫中","按喇叭中","吵吵嚷嚷中","超空间跳跃中","构思中","想象中","即兴发挥中","孵化中",
-            "推断中","浸泡中","电离中","跳吉特巴中","切丝中","揉面中","发面中","悬浮中","反刍思考中","显化中",
-            "腌制中","蜿蜒中","蜕变中","起雾中","太空步中","溜溜达达中","沉吟中","召集中","遐想中","雾化中",
-            "筑巢中","看报纸中","瞎琢磨中","成核中","公转中","编排中","渗透中","闲庭信步中","渗滤中","翻阅中",
-            "思辨中","光合作用中","授粉中","考究中","高谈阔论中","猛扑中","沉淀中","变魔术中","处理中","校对中",
-            "传播中","磨蹭中","解谜中","量子化中","花里胡哨中","闪亮登场中","重整旗鼓中","联网中","归巢中","反刍中",
-            "翻炒中","蹦跶中","搬砖中","窜来窜去中","调味中","搞事情中","摇曳中","慢炖中","溜之大吉中","速写中",
-            "游走中","揉搓中","跳摇摆舞中","探洞中","旋转中","萌芽中","焖煮中","升华中","旋涡中","俯冲中",
-            "共生中","合成中","淬火中","思考中","雷鸣中","鼓捣中","胡闹中","颠三倒四中","变形中","转化中",
-            "扭转中","起伏中","展开中","拆解中","沉浸中","抖擞中","摇摆中","漫游中","扭曲时空中","那个啥来着中",
-            "嗡嗡转中","搅打中","磨叽中","搞事业中","牧马中","切柠檬皮中","蛇行走位中"
+            "✨ 搞定中", "🚀 行动中", "💰 变现中", "📐 架构中", "🥐 烘焙中", "💡 发光中", "🎸 即兴中", "😵 犯晕中", "🍃 飘荡中", "🍲 焯水中",
+            "🐂 吹牛中", "🪩 蹦迪中", "🏃 瞎忙活中", "👉 戳一戳", "🔌 引导启动中", "🍵 沏茶中", "🥟 蒸包子中", "⛏️ 掘进中", "🧮 计算中", "🍧 腻歪中",
+            "🍮 焦糖化中", "🌊 级联中", "🏹 弹射中", "🧘 冥想中", "🔮 通灵中", "📡 感应中", "💃 编舞中", "🥣 翻搅中", "🤖 克劳丁中", "🧊 凝聚中",
+            "🧐 琢磨中", "🧩 拼凑中", "🎼 谱曲中", "⚙️ 运算中", "🧪 调配中", "💭 盘算中", "🤔 沉思中", "🍳 烹饪中", "🔨 锻造中", "🎨 创造中",
+            "📊 嚼数据中", "💎 结晶中", "🌱 培育中", "🔍 破译中", "⚖️ 推敲中", "🎯 定夺中", "⏳ 磨磨唧唧中", "🌀 七荤八素中", "👷 干活中", "🖍️ 涂鸦中",
+            "🍯 淋酱中", "🌊 退潮中", "📜 施行中", "📖 阐释中", "💅 润色中", "🪄 施法中", "🧠 构想中", "💨 蒸发中", "🍺 发酵中", "🦥 磨洋工中",
+            "🎩 忽悠中", "🔥 火焰烹饪中", "🗣️ 叽里呱啦中", "💫 流转中", "😵‍💫 懵圈中", "🦋 扑棱中", "⚔️ 淬炼中", "🏺 塑形中", "🎉 撒欢中", "❄️ 挂霜中",
+            "🚶 到处溜达中", "🏎️ 飞驰中", "🍱 摆盘中", "🪄 生成中", "✌️ 比划中", "🌿 发芽中", "🦀 Git化中", "🎶 律动中", "🌪️ 狂风中", "🍵 调和中",
+            "🔑 哈希中", "🐣 破壳中", "🐈 赶猫中", "📯 按喇叭中", "📢 吵吵嚷嚷中", "🚀 超空间跳跃中", "💭 构思中", "🌌 想象中", "🎷 即兴发挥中", "🥚 孵化中",
+            "💡 推断中", "🫖 浸泡中", "⚡ 电离中", "🕺 跳吉特巴中", "🥒 切丝中", "🥖 揉面中", "🍞 发面中", "🛸 悬浮中", "🐮 反刍思考中", "✨ 显化中",
+            "🥒 腌制中", "🐍 蜿蜒中", "🦋 蜕变中", "🌫️ 起雾中", "🕺 太空步中", "🚶 溜溜达达中", "🧐 沉吟中", "📣 召集中", "💭 遐想中", "💨 雾化中",
+            "🪹 筑巢中", "📰 看报纸中", "🤔 瞎琢磨中", "⚛️ 成核中", "🪐 公转中", "🎼 编排中", "💧 渗透中", "🚶 闲庭信步中", "☕ 渗滤中", "📚 翻阅中",
+            "🗣️ 思辨中", "🌻 光合作用中", "🐝 授粉中", "🧐 考究中", "🎙️ 高谈阔论中", "🐆 猛扑中", "🧪 沉淀中", "🎩 变魔术中", "⚙️ 处理中", "📝 校对中",
+            "📡 传播中", "🐌 磨蹭中", "🧩 解谜中", "⚡ 量子化中", "🦚 花里胡哨中", "✨ 闪亮登场中", "🚩 重整旗鼓中", "🌐 联网中", "🕊️ 归巢中", "🐄 反刍中",
+            "🥘 翻炒中", "🦘 蹦跶中", "🧱 搬砖中", "🐿️ 窜来窜去中", "🧂 调味中", "🧨 搞事情中", "🕯️ 摇曳中", "🍲 慢炖中", "💨 溜之大吉中", "✏️ 速写中",
+            "🐾 游走中", "🧼 揉搓中", "💃 跳摇摆舞中", "🔦 探洞中", "🌀 旋转中", "🌱 萌芽中", "🥘 焖煮中", "💨 升华中", "🌪️ 旋涡中", "🦅 俯冲中",
+            "🤝 共生中", "🧬 合成中", "🗡️ 淬火中", "🤔 思考中", "⚡ 雷鸣中", "🛠️ 鼓捣中", "🤡 胡闹中", "🙃 颠三倒四中", "🎭 变形中", "🔄 转化中",
+            "🥨 扭转中", "🌊 起伏中", "📂 展开中", "🧩 拆解中", "🧘 沉浸中", "💪 抖擞中", "🎸 摇摆中", "🧭 漫游中", "🌌 扭曲时空中", "❓ 那个啥来着中",
+            "🐝 嗡嗡转中", "🥛 搅打中", "🦥 磨叽中", "💼 搞事业中", "🐎 牧马中", "🍋 切柠檬皮中", "🐍 蛇行走位中"
         ];
         if (!verbs || !verbs.length) return;
         var verbSet = new Set(verbs);
+        for (var vi = 0; vi < verbs.length; vi++) {
+            var raw = verbs[vi].replace(/^[^\w\u4e00-\u9fa5]+\s*/, '');
+            if (raw) verbSet.add(raw);
+        }
         verbSet.add('Thinking');
         verbSet.add('思考中');
         verbSet.add('Planning next moves');
         verbSet.add('规划下一步行动');
+        verbSet.add('Wrapping up');
+        verbSet.add('收尾中');
 
         setInterval(function() {
             try {
@@ -440,7 +482,7 @@
                     var txt = (el.textContent || '').trim();
                     if (verbSet.has(txt)) {
                         var next = verbs[Math.floor(Math.random() * verbs.length)];
-                        if (next !== txt) el.textContent = next;
+                        if (next !== txt) HuanSuan_WenBen_DaiDongHua(el, next);
                     }
                 }
                 // 2. Composer 底部尾随状态栏
@@ -453,7 +495,7 @@
                     var ttxt = (tel.textContent || '').trim();
                     if (verbSet.has(ttxt)) {
                         var tnext = verbs[Math.floor(Math.random() * verbs.length)];
-                        if (tnext !== ttxt) tel.textContent = tnext;
+                        if (tnext !== ttxt) HuanSuan_WenBen_DaiDongHua(tel, tnext);
                     }
                 }
             } catch (e) {}

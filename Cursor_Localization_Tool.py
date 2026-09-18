@@ -1120,39 +1120,40 @@ def HuiFu_WanZhengXing_JianCha():
 
 
 QU_WEI_SPINNER_VERBS = [
-    "搞定中", "行动中", "变现中", "架构中", "烘焙中", "发光中", "即兴中", "犯晕中", "飘荡中", "焯水中",
-    "吹牛中", "蹦迪中", "瞎忙活中", "戳一戳", "引导启动中", "沏茶中", "蒸包子中", "掘进中", "计算中", "腻歪中",
-    "焦糖化中", "级联中", "弹射中", "冥想中", "通灵中", "感应中", "编舞中", "翻搅中", "克劳丁中", "凝聚中",
-    "琢磨中", "拼凑中", "谱曲中", "运算中", "调配中", "盘算中", "沉思中", "烹饪中", "锻造中", "创造中",
-    "嚼数据中", "结晶中", "培育中", "破译中", "推敲中", "定夺中", "磨磨唧唧中", "七荤八素中", "干活中", "涂鸦中",
-    "淋酱中", "退潮中", "施行中", "阐释中", "润色中", "施法中", "构想中", "蒸发中", "发酵中", "磨洋工中",
-    "忽悠中", "火焰烹饪中", "叽里呱啦中", "流转中", "懵圈中", "扑棱中", "淬炼中", "塑形中", "撒欢中", "挂霜中",
-    "到处溜达中", "飞驰中", "摆盘中", "生成中", "比划中", "发芽中", "Git化中", "律动中", "狂风中", "调和中",
-    "哈希中", "破壳中", "赶猫中", "按喇叭中", "吵吵嚷嚷中", "超空间跳跃中", "构思中", "想象中", "即兴发挥中", "孵化中",
-    "推断中", "浸泡中", "电离中", "跳吉特巴中", "切丝中", "揉面中", "发面中", "悬浮中", "反刍思考中", "显化中",
-    "腌制中", "蜿蜒中", "蜕变中", "起雾中", "太空步中", "溜溜达达中", "沉吟中", "召集中", "遐想中", "雾化中",
-    "筑巢中", "看报纸中", "瞎琢磨中", "成核中", "公转中", "编排中", "渗透中", "闲庭信步中", "渗滤中", "翻阅中",
-    "思辨中", "光合作用中", "授粉中", "考究中", "高谈阔论中", "猛扑中", "沉淀中", "变魔术中", "处理中", "校对中",
-    "传播中", "磨蹭中", "解谜中", "量子化中", "花里胡哨中", "闪亮登场中", "重整旗鼓中", "联网中", "归巢中", "反刍中",
-    "翻炒中", "蹦跶中", "搬砖中", "窜来窜去中", "调味中", "搞事情中", "摇曳中", "慢炖中", "溜之大吉中", "速写中",
-    "游走中", "揉搓中", "跳摇摆舞中", "探洞中", "旋转中", "萌芽中", "焖煮中", "升华中", "旋涡中", "俯冲中",
-    "共生中", "合成中", "淬火中", "思考中", "雷鸣中", "鼓捣中", "胡闹中", "颠三倒四中", "变形中", "转化中",
-    "扭转中", "起伏中", "展开中", "拆解中", "沉浸中", "抖擞中", "摇摆中", "漫游中", "扭曲时空中", "那个啥来着中",
-    "嗡嗡转中", "搅打中", "磨叽中", "搞事业中", "牧马中", "切柠檬皮中", "蛇行走位中"
+    "✨ 搞定中", "🚀 行动中", "💰 变现中", "📐 架构中", "🥐 烘焙中", "💡 发光中", "🎸 即兴中", "😵 犯晕中", "🍃 飘荡中", "🍲 焯水中",
+    "🐂 吹牛中", "🪩 蹦迪中", "🏃 瞎忙活中", "👉 戳一戳", "🔌 引导启动中", "🍵 沏茶中", "🥟 蒸包子中", "⛏️ 掘进中", "🧮 计算中", "🍧 腻歪中",
+    "🍮 焦糖化中", "🌊 级联中", "🏹 弹射中", "🧘 冥想中", "🔮 通灵中", "📡 感应中", "💃 编舞中", "🥣 翻搅中", "🤖 克劳丁中", "🧊 凝聚中",
+    "🧐 琢磨中", "🧩 拼凑中", "🎼 谱曲中", "⚙️ 运算中", "🧪 调配中", "💭 盘算中", "🤔 沉思中", "🍳 烹饪中", "🔨 锻造中", "🎨 创造中",
+    "📊 嚼数据中", "💎 结晶中", "🌱 培育中", "🔍 破译中", "⚖️ 推敲中", "🎯 定夺中", "⏳ 磨磨唧唧中", "🌀 七荤八素中", "👷 干活中", "🖍️ 涂鸦中",
+    "🍯 淋酱中", "🌊 退潮中", "📜 施行中", "📖 阐释中", "💅 润色中", "🪄 施法中", "🧠 构想中", "💨 蒸发中", "🍺 发酵中", "🦥 磨洋工中",
+    "🎩 忽悠中", "🔥 火焰烹饪中", "🗣️ 叽里呱啦中", "💫 流转中", "😵‍💫 懵圈中", "🦋 扑棱中", "⚔️ 淬炼中", "🏺 塑形中", "🎉 撒欢中", "❄️ 挂霜中",
+    "🚶 到处溜达中", "🏎️ 飞驰中", "🍱 摆盘中", "🪄 生成中", "✌️ 比划中", "🌿 发芽中", "🦀 Git化中", "🎶 律动中", "🌪️ 狂风中", "🍵 调和中",
+    "🔑 哈希中", "🐣 破壳中", "🐈 赶猫中", "📯 按喇叭中", "📢 吵吵嚷嚷中", "🚀 超空间跳跃中", "💭 构思中", "🌌 想象中", "🎷 即兴发挥中", "🥚 孵化中",
+    "💡 推断中", "🫖 浸泡中", "⚡ 电离中", "🕺 跳吉特巴中", "🥒 切丝中", "🥖 揉面中", "🍞 发面中", "🛸 悬浮中", "🐮 反刍思考中", "✨ 显化中",
+    "🥒 腌制中", "🐍 蜿蜒中", "🦋 蜕变中", "🌫️ 起雾中", "🕺 太空步中", "🚶 溜溜达达中", "🧐 沉吟中", "📣 召集中", "💭 遐想中", "💨 雾化中",
+    "🪹 筑巢中", "📰 看报纸中", "🤔 瞎琢磨中", "⚛️ 成核中", "🪐 公转中", "🎼 编排中", "💧 渗透中", "🚶 闲庭信步中", "☕ 渗滤中", "📚 翻阅中",
+    "🗣️ 思辨中", "🌻 光合作用中", "🐝 授粉中", "🧐 考究中", "🎙️ 高谈阔论中", "🐆 猛扑中", "🧪 沉淀中", "🎩 变魔术中", "⚙️ 处理中", "📝 校对中",
+    "📡 传播中", "🐌 磨蹭中", "🧩 解谜中", "⚡ 量子化中", "🦚 花里胡哨中", "✨ 闪亮登场中", "🚩 重整旗鼓中", "🌐 联网中", "🕊️ 归巢中", "🐄 反刍中",
+    "🥘 翻炒中", "🦘 蹦跶中", "🧱 搬砖中", "🐿️ 窜来窜去中", "🧂 调味中", "🧨 搞事情中", "🕯️ 摇曳中", "🍲 慢炖中", "💨 溜之大吉中", "✏️ 速写中",
+    "🐾 游走中", "🧼 揉搓中", "💃 跳摇摆舞中", "🔦 探洞中", "🌀 旋转中", "🌱 萌芽中", "🥘 焖煮中", "💨 升华中", "🌪️ 旋涡中", "🦅 俯冲中",
+    "🤝 共生中", "🧬 合成中", "🗡️ 淬火中", "🤔 思考中", "⚡ 雷鸣中", "🛠️ 鼓捣中", "🤡 胡闹中", "🙃 颠三倒四中", "🎭 变形中", "🔄 转化中",
+    "🥨 扭转中", "🌊 起伏中", "📂 展开中", "🧩 拆解中", "🧘 沉浸中", "💪 抖擞中", "🎸 摇摆中", "🧭 漫游中", "🌌 扭曲时空中", "❓ 那个啥来着中",
+    "🐝 嗡嗡转中", "🥛 搅打中", "🦥 磨叽中", "💼 搞事业中", "🐎 牧马中", "🍋 切柠檬皮中", "🐍 蛇行走位中"
 ]
 
 
 def ZhuRu_QuWei_Spinner_DongCi():
-    """注入 Claude Code 风格的 187 个趣味 Spinner 动词词库，支持动态随机轮转。"""
+    """注入 Claude Code 风格的 187 个趣味 Spinner 动词词库，支持生动 Emoji 与动态随机轮转。"""
     AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
     JsArray = json.dumps(QU_WEI_SPINNER_VERBS, ensure_ascii=False)
     HelperJs = (
-        f'var _claudeVerbs={JsArray};var _lastSpinnerVerb="思考中",_lastSpinnerTime=0;'
+        f'var _claudeVerbs={JsArray};var _lastSpinnerVerb="✨ 思考中",_lastSpinnerTime=0;'
         f'function _getFunSpinnerVerb(){{var now=Date.now();if(now-_lastSpinnerTime>2500){{'
         f'_lastSpinnerTime=now;_lastSpinnerVerb=_claudeVerbs[Math.floor(Math.random()*_claudeVerbs.length)];'
         f'}}return _lastSpinnerVerb;}}typeof globalThis!=="undefined"&&'
         f'(globalThis.__cursorVerbs=_claudeVerbs,globalThis.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb);'
     )
+    Pattern = r'var _claudeVerbs=\[.*?\];var _lastSpinnerVerb=.*?;typeof globalThis!=="undefined"&&\(globalThis\.__cursorVerbs=_claudeVerbs,globalThis\.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb\);'
 
     # 1. 注入 workbench.glass.main.js
     GlassLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", "workbench.glass.main.js")
@@ -1160,7 +1161,10 @@ def ZhuRu_QuWei_Spinner_DongCi():
         try:
             NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(GlassLuJing)
             GengXin = False
-            if 'function _getFunSpinnerVerb()' not in NeiRong and 'function xEr(t){' in NeiRong:
+            if re.search(Pattern, NeiRong):
+                NeiRong = re.sub(Pattern, HelperJs, NeiRong, count=1)
+                GengXin = True
+            elif 'function xEr(t){' in NeiRong:
                 NeiRong = NeiRong.replace('function xEr(t){', HelperJs + 'function xEr(t){', 1)
                 GengXin = True
 
@@ -1179,7 +1183,7 @@ def ZhuRu_QuWei_Spinner_DongCi():
 
             if GengXin:
                 XieRu_WenBen_BaoLiu_HuanHang(GlassLuJing, NeiRong, HuanHang)
-                print("[趣味动词] 已为 workbench.glass.main.js 注入 187 个趣味 Spinner 动词")
+                print("[趣味动词] 已为 workbench.glass.main.js 注入 187 个带 Emoji 趣味 Spinner 动词")
         except Exception as e:
             print(f"[警告] 注入 glass 趣味动词失败: {e}")
 
@@ -1189,7 +1193,10 @@ def ZhuRu_QuWei_Spinner_DongCi():
         try:
             NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(DesktopLuJing)
             GengXin = False
-            if 'function _getFunSpinnerVerb()' not in NeiRong and 'function aJi(e,t){' in NeiRong:
+            if re.search(Pattern, NeiRong):
+                NeiRong = re.sub(Pattern, HelperJs, NeiRong, count=1)
+                GengXin = True
+            elif 'function aJi(e,t){' in NeiRong:
                 NeiRong = NeiRong.replace('function aJi(e,t){', HelperJs + 'function aJi(e,t){', 1)
                 GengXin = True
 
@@ -1204,7 +1211,7 @@ def ZhuRu_QuWei_Spinner_DongCi():
 
             if GengXin:
                 XieRu_WenBen_BaoLiu_HuanHang(DesktopLuJing, NeiRong, HuanHang)
-                print("[趣味动词] 已为 workbench.desktop.main.js 注入 187 个趣味 Spinner 动词")
+                print("[趣味动词] 已为 workbench.desktop.main.js 注入 187 个带 Emoji 趣味 Spinner 动词")
         except Exception as e:
             print(f"[警告] 注入 desktop 趣味动词失败: {e}")
 
@@ -1212,14 +1219,7 @@ def ZhuRu_QuWei_Spinner_DongCi():
 def HuiFu_QuWei_Spinner_DongCi():
     """还原趣味动词，恢复官方默认英文状态。"""
     AppMuLu = HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING)
-    JsArray = json.dumps(QU_WEI_SPINNER_VERBS, ensure_ascii=False)
-    HelperJs = (
-        f'var _claudeVerbs={JsArray};var _lastSpinnerVerb="思考中",_lastSpinnerTime=0;'
-        f'function _getFunSpinnerVerb(){{var now=Date.now();if(now-_lastSpinnerTime>2500){{'
-        f'_lastSpinnerTime=now;_lastSpinnerVerb=_claudeVerbs[Math.floor(Math.random()*_claudeVerbs.length)];'
-        f'}}return _lastSpinnerVerb;}}typeof globalThis!=="undefined"&&'
-        f'(globalThis.__cursorVerbs=_claudeVerbs,globalThis.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb);'
-    )
+    Pattern = r'var _claudeVerbs=\[.*?\];var _lastSpinnerVerb=.*?;typeof globalThis!=="undefined"&&\(globalThis\.__cursorVerbs=_claudeVerbs,globalThis\.__cursorGetFunSpinnerVerb=_getFunSpinnerVerb\);'
 
     # 1. 恢复 workbench.glass.main.js
     GlassLuJing = os.path.join(AppMuLu, "out", "vs", "workbench", "workbench.glass.main.js")
@@ -1227,8 +1227,8 @@ def HuiFu_QuWei_Spinner_DongCi():
         try:
             NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(GlassLuJing)
             GengXin = False
-            if HelperJs + 'function xEr(t){' in NeiRong:
-                NeiRong = NeiRong.replace(HelperJs + 'function xEr(t){', 'function xEr(t){', 1)
+            if re.search(Pattern, NeiRong):
+                NeiRong = re.sub(Pattern, '', NeiRong, count=1)
                 GengXin = True
 
             HuanYuanDui = [
@@ -1255,8 +1255,8 @@ def HuiFu_QuWei_Spinner_DongCi():
         try:
             NeiRong, HuanHang = DuQu_WenBen_BaoLiu_HuanHang(DesktopLuJing)
             GengXin = False
-            if HelperJs + 'function aJi(e,t){' in NeiRong:
-                NeiRong = NeiRong.replace(HelperJs + 'function aJi(e,t){', 'function aJi(e,t){', 1)
+            if re.search(Pattern, NeiRong):
+                NeiRong = re.sub(Pattern, '', NeiRong, count=1)
                 GengXin = True
 
             HuanYuanDuiDesktop = [
