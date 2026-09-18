@@ -46,7 +46,7 @@ if /i not "%CONFIRM%"=="Y" if /i not "%CONFIRM%"=="YES" goto :UserCancelled
 
 echo.
 echo [执行] 正在恢复原始文件...
-python "!HANHUA_SCRIPT!" --restore
+"!PYTHON_EXE!" "!HANHUA_SCRIPT!" --restore
 if errorlevel 1 goto :RestoreFailed
 
 echo.
@@ -111,24 +111,19 @@ if not defined CURSOR_INSTALL_DIR if exist "!PFX86!\Cursor\Cursor.exe" if exist 
 exit /b 0
 
 :CheckPython
-where python >nul 2>&1
-if errorlevel 1 (
-    echo [错误] 未找到 python 命令，恢复脚本需要 Python 3 环境。
+set "PYTHON_EXE="
+for /f "delims=" %%P in ('where python 2^>nul') do (
+    echo %%P | findstr /i /c:"Microsoft\WindowsApps" /c:"microsoft\windowsapps" >nul 2>&1
+    if errorlevel 1 (
+        if not defined PYTHON_EXE set "PYTHON_EXE=%%P"
+    )
+)
+if not defined PYTHON_EXE (
+    echo [错误] 未找到有效的 Python 3 环境。
     call :ShowPythonInstallTip
     exit /b 1
 )
-for /f "delims=" %%P in ('where python 2^>nul') do (
-    echo %%P | findstr /i /c:"Microsoft\WindowsApps" /c:"microsoft\windowsapps" >nul 2>&1
-    if not errorlevel 1 (
-        echo [错误] 检测到 Windows Store 的 Python 占位程序，无法运行恢复脚本。
-        echo [路径] %%P
-        call :ShowPythonInstallTip
-        exit /b 1
-    )
-    goto :PythonPathOk
-)
-:PythonPathOk
-python --version >nul 2>&1
+"!PYTHON_EXE!" --version >nul 2>&1
 if errorlevel 1 (
     echo [错误] python 命令无法正常运行，请安装真正的 Python 3。
     call :ShowPythonInstallTip

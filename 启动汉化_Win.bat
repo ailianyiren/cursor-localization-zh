@@ -50,7 +50,7 @@ if errorlevel 1 findstr /c:"%INJECTION_MARKER_OLD%" "!WORKBENCH_HTML!" >nul 2>&1
 if errorlevel 1 goto :DoInject
 
 echo [检查] 已注入，正在更新汉化脚本...
-python "!HANHUA_SCRIPT!"
+"!PYTHON_EXE!" "!HANHUA_SCRIPT!"
 if errorlevel 1 (
     echo.
     echo [警告] 更新过程有报错
@@ -62,7 +62,7 @@ goto :AfterInject
 
 :DoInject
 echo [检查] 未注入，正在执行汉化...
-python "!HANHUA_SCRIPT!"
+"!PYTHON_EXE!" "!HANHUA_SCRIPT!"
 if errorlevel 1 (
     echo.
     echo [警告] 汉化过程有报错
@@ -139,24 +139,19 @@ if not defined CURSOR_INSTALL_DIR if exist "!PFX86!\Cursor\Cursor.exe" if exist 
 exit /b 0
 
 :CheckPython
-where python >nul 2>&1
-if errorlevel 1 (
-    echo [错误] 未找到 python 命令，汉化脚本需要 Python 3 环境。
+set "PYTHON_EXE="
+for /f "delims=" %%P in ('where python 2^>nul') do (
+    echo %%P | findstr /i /c:"Microsoft\WindowsApps" /c:"microsoft\windowsapps" >nul 2>&1
+    if errorlevel 1 (
+        if not defined PYTHON_EXE set "PYTHON_EXE=%%P"
+    )
+)
+if not defined PYTHON_EXE (
+    echo [错误] 未找到有效的 Python 3 环境。
     call :ShowPythonInstallTip
     exit /b 1
 )
-for /f "delims=" %%P in ('where python 2^>nul') do (
-    echo %%P | findstr /i /c:"Microsoft\WindowsApps" /c:"microsoft\windowsapps" >nul 2>&1
-    if not errorlevel 1 (
-        echo [错误] 检测到 Windows Store 的 Python 占位程序，无法运行汉化脚本。
-        echo [路径] %%P
-        call :ShowPythonInstallTip
-        exit /b 1
-    )
-    goto :PythonPathOk
-)
-:PythonPathOk
-python --version >nul 2>&1
+"!PYTHON_EXE!" --version >nul 2>&1
 if errorlevel 1 (
     echo [错误] python 命令无法正常运行，请安装真正的 Python 3。
     call :ShowPythonInstallTip

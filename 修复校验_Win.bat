@@ -11,7 +11,7 @@ if not exist "%HANHUA_SCRIPT%" goto :NoScript
 call :CheckPython
 if errorlevel 1 goto :End
 
-python "%HANHUA_SCRIPT%" --fix-checksum
+"!PYTHON_EXE!" "%HANHUA_SCRIPT%" --fix-checksum
 set "EXIT_CODE=!ERRORLEVEL!"
 goto :End
 
@@ -28,21 +28,18 @@ pause >nul
 exit /b !EXIT_CODE!
 
 :CheckPython
-where python >nul 2>&1
-if errorlevel 1 goto :NoPython
+set "PYTHON_EXE="
 for /f "delims=" %%P in ('where python 2^>nul') do (
     echo %%P | findstr /i /c:"Microsoft\WindowsApps" /c:"microsoft\windowsapps" >nul 2>&1
-    if not errorlevel 1 goto :StorePython
-    goto :PythonOk
+    if errorlevel 1 (
+        if not defined PYTHON_EXE set "PYTHON_EXE=%%P"
+    )
 )
-:NoPython
-echo [ERROR] python not found
-exit /b 1
-:StorePython
-echo [ERROR] Windows Store python placeholder detected
-exit /b 1
-:PythonOk
-python --version >nul 2>&1
+if not defined PYTHON_EXE (
+    echo [ERROR] python not found
+    exit /b 1
+)
+"!PYTHON_EXE!" --version >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] python cannot run
     exit /b 1
