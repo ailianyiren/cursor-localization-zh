@@ -435,6 +435,30 @@
         document.head.appendChild(style);
     }
 
+    function QueBao_PingHua_GunDong_YangShi() {
+        if (typeof document === 'undefined' || !document.head) return;
+        if (document.getElementById('cursor-smooth-scroll-style')) return;
+        var style = document.createElement('style');
+        style.id = 'cursor-smooth-scroll-style';
+        style.textContent = [
+            '/* 对话回复面板及虚拟滚动容器原生平滑滚动动画 */',
+            '.composer-react-virtual-plane,',
+            '.virtualized-composer-messages-layout,',
+            '.virtualized-composer-messages-content-shell,',
+            '.composer-react-transcript-root {',
+            '  scroll-behavior: smooth !important;',
+            '}'
+        ].join('\n');
+        document.head.appendChild(style);
+    }
+    if (typeof document !== 'undefined') {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', QueBao_PingHua_GunDong_YangShi);
+        } else {
+            QueBao_PingHua_GunDong_YangShi();
+        }
+    }
+
     function HuanSuan_WenBen_DaiDongHua(el, newText) {
         if (!el) return;
         var cur = (el.textContent || '').trim();

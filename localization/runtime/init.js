@@ -22,6 +22,7 @@
         try { AnZhuang_DingBu_CaiDan_GuanCha(); } catch (e) {}
         try { AnZhuang_FuZhu_ChuangKou_FanYi(); } catch (e) {}
         try { AnZhuang_QuWei_Spinner_GuanCha(); } catch (e) {}
+        try { QueBao_PingHua_GunDong_YangShi(); } catch (e) {}
 
         setTimeout(function() {
             if (document.body) {
